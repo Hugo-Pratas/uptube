@@ -1,0 +1,19 @@
+<div id="main">
+  <div id="main_view">
+    <div id="header">
+      <span>
+        <h1>{{data.title}}</h1>
+        <app-tags [tags]="data.tags"></app-tags>
+      </span>
+      <span>
+
+      </span>
+    </div>
+    <iframe width="854" height="480"
+            [src]="data.video">
+    </iframe>
+  </div>
+  <div id="sideBar">
+
+  </div>
+</div>
