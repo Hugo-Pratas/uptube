@@ -1,0 +1,30 @@
+<div class="navbarLogo">
+  <a (click)="toggle()"><img alt="imgLogo" src="./assets/a66b90079e68641a9fd75d08b615662d.png"></a>
+</div>
+<div class="container">
+  <div class="navbarMenu" *ngIf="!hideRuleContent">
+    <div class="navmenuLinks">
+      <div class="links">
+        <fa-icon [icon]="faHouseSolid"></fa-icon>
+        <p>Início</p>
+      </div>
+      <div class="links">
+        <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
+        <p>Canais</p>
+      </div>
+      <div class="links">
+        <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+        <p>Temáticas</p>
+      </div>
+      <div class="links">
+        <fa-icon [icon]="faPlaySolid"></fa-icon>
+        <p>Playlists</p>
+      </div>
+    </div>
+    <div class="containerTags">
+      <div class="navbarTags">
+        <p>Tags</p><!--{{taxonomia}}-->
+      </div>
+    </div>
+  </div>
+</div>
