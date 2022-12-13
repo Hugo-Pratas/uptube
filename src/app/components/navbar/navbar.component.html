@@ -1,8 +1,8 @@
-<div class="navbarLogo">
-  <a (click)="toggle()"><img alt="imgLogo" src="./assets/images/upload.svg"></a>
-</div>
-<div class="container">
-  <div class="navbarMenu" *ngIf="!hideRuleContent">
+<div class="navbarTotal">
+  <div class="navbarLogo">
+    <a><img alt="imgLogo" src="./assets/images/upload.svg"></a>
+  </div>
+  <div class="navbarMenu">
     <div class="navmenuLinks">
       <div class="links">
         <fa-icon [icon]="faHouseSolid"></fa-icon>
@@ -22,9 +22,12 @@
       </div>
     </div>
     <div class="containerTags">
-      <div class="navbarTags">
-        <p>Tags</p><!--{{taxonomia}}-->
+      <p class="headerTags">TAGS</p>
+      <div *ngFor="let tag of tags" class="navbarTags">
+        <p>{{tag}}</p>
       </div>
     </div>
+    <div>
   </div>
+</div>
 </div>
