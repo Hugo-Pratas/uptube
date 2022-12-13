@@ -26,7 +26,6 @@ export class NavbarComponent implements OnInit {
 
   public hideRuleContent= false;
 
-
   toggle() {
     this.hideRuleContent = !this.hideRuleContent;
   }
@@ -36,6 +35,7 @@ export class NavbarComponent implements OnInit {
     this.getScreenHeight = window.innerHeight;
     this.tags = this._service.getTags();
   }
+
 
   @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
   onWindowResize() {
