@@ -20,9 +20,7 @@ export class VideoPageComponent implements OnInit {
   ngOnInit(): void {
     let id_video = this.route.snapshot.params['id_video']
     this.data = this._service.getVideo(id_video);
-    this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video);
-    console.log(this.video_url);
-    console.log(this.data);
+    this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video.replace("watch?v=","embed/"));
   }
-
 }
+
