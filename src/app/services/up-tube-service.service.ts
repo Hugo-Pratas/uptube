@@ -26,7 +26,18 @@ export class UpTubeServiceService {
       "title": "Norway",
       "tags": ["natureza", "países", "beleza", "paisagem"],
       "video": "https://youtube.com/watch?v=5kJFSSP53mU",
-      "user_id":3
+      "user_id":1
+    }
+  ]
+
+  user=[
+    {
+      "id": 1,
+      "logo": "../../assets/images/user_logos/unnamed.jpg"
+    },
+    {
+      "id":2,
+      "logo": "../../assets/images/user_logos/índice.jpg"
     }
   ]
 
@@ -38,6 +49,10 @@ export class UpTubeServiceService {
 
   getTags() {
     return this.tags
+  }
+
+  getUser(id: number){
+    return this.user.find(obj => obj.id == id)
   }
 
   constructor() {

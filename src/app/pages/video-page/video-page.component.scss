@@ -6,3 +6,18 @@ iframe{
 #header{
   margin-bottom: 20px;
 }
+
+#user_view{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  img{
+    border-radius: 50%;
+    height: 75px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: 2px solid #FFFFFF;
+  }
+}

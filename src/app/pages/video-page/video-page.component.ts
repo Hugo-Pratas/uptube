@@ -13,6 +13,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 export class VideoPageComponent implements OnInit {
   video_url: SafeUrl | undefined;
   data: any;
+  user: any;
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
   }
@@ -21,6 +22,7 @@ export class VideoPageComponent implements OnInit {
     let id_video = this.route.snapshot.params['id_video']
     this.data = this._service.getVideo(id_video);
     this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video.replace("watch?v=","embed/"));
+    this.user = this._service.getUser(this.data.user_id)
   }
 }
 
