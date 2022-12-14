@@ -1,19 +1,38 @@
-iframe{
+iframe {
   border-radius: 25px;
   border: 2px;
 }
 
-#header{
-  margin-bottom: 20px;
+#main_view {
+  width: 100%;
 }
 
-#user_view{
+#header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    margin-block-end: 0.25em
+  }
+
+  #report {
+    align-self: end;
+
+    fa-icon {
+      font-size: 25px;
+      color: #92929D;
+    }
+  }
+}
+
+#user_view {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
   margin-top: 15px;
 
-  img{
+  img {
     border-radius: 50%;
     height: 75px;
     aspect-ratio: 1/1;

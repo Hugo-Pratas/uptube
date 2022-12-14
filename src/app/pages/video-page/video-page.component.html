@@ -1,22 +1,24 @@
-<div id="main">
-  <div id="main_view">
-    <div id="header">
-      <span>
-        <h1>{{data.title}}</h1>
-        <app-tags [tags]="data.tags"></app-tags>
-      </span>
+<div id="main_view">
+  <div id="header">
+    <div>
+      <h1>{{data.title}}</h1>
+      <app-tags [tags]="data.tags"></app-tags>
     </div>
-    <iframe width="854" height="480"
-            [src]="video_url">
-    </iframe>
+    <div id="report">
+      <fa-icon [icon]="flag"></fa-icon>
+    </div>
   </div>
-  <div id="user_view">
+  <iframe
+    [src]="video_url">
+  </iframe>
+</div>
+<div id="user_view">
     <span>
       <img [src]="user.logo">
     </span>
-    <span>sadsada</span>
-  </div>
-  <div id="sideBar">
-
-  </div>
+  <span>sadsada</span>
 </div>
+<div id="sideBar">
+
+</div>
+

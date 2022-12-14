@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
-.navbarTotal{
+.navbarTotal {
   background-color: #1c1c24;
   height: 100vh;
   width: 240px;
   margin-right: 25px;
   position: sticky;
   font-family: 'Poppins', serif;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbarLogo {
@@ -16,6 +18,7 @@
   align-items: center;
   background-color: #1c1c24;
   height: 10%;
+
   img {
     width: 130px;
     height: auto;
@@ -23,23 +26,26 @@
   }
 }
 
-.navbarMenu{
-  border: 1px solid #3e3d3f;
-  height: 89.8%;
+.navbarMenu {
+  border-top: 1px solid #3e3d3f;
+  border-right: 1px solid #3e3d3f;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .navmenuLinks {
-    margin-top: 10px;
-    margin-bottom: 25px;
-    min-height: 150px;
-    width: 170px;
-    height: 20%;
-    p {
-      font-size: 12px;
-      color: darkgray;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  min-height: 150px;
+  width: 170px;
+  height: 20%;
+
+  p {
+    font-size: 12px;
+    color: darkgray;
   }
+
   .links {
     align-items: center;
     height: 15%;
@@ -53,12 +59,14 @@
 
 .containerTags {
   height: 40%;
-  .headerTags{
+
+  .headerTags {
     font-size: 12px;
     color: darkgray;
     margin-left: 10px;
   }
-  .navbarTags{
+
+  .navbarTags {
     overflow: hidden;
     display: inline-flex;
     width: auto;
@@ -72,6 +80,7 @@
     padding: 5px 5px 5px 5px;
     font-family: 'Roboto', serif;
   }
+
   a {
     margin: 0;
     font-size: 0.9em;
@@ -80,23 +89,27 @@
 }
 
 fa-icon {
-    margin-right: 18px;
-    margin-left: 10px;
-    color: darkgray;
+  margin-right: 18px;
+  margin-left: 10px;
+  color: darkgray;
 }
 
 #link1:hover {
   color: white;
 }
+
 #link2:hover {
   color: white;
 }
+
 #link3:hover {
   color: white;
 }
+
 #link4:hover {
   color: white;
 }
+
 a:link {
   text-decoration: none;
 }
