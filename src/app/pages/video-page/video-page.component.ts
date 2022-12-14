@@ -21,10 +21,16 @@ export class VideoPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id_video = this.route.snapshot.params['id_video']
-    this.data = this._service.getVideo(id_video);
-    this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video.replace("watch?v=", "embed/"));
-    this.user = this._service.getUser(this.data.user_id)
+    this.route.params.subscribe(q => {
+      let id_video = q['id_video']
+      this.data = this._service.getVideo(id_video);
+      this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video.replace("watch?v=", "embed/"));
+      this.user = this._service.getUser(this.data.user_id)
+    });
+  }
+
+  report(id: number) {
+    console.log("carreguei", id)
   }
 }
 
