@@ -47,7 +47,6 @@
     margin-left: 2px;
     margin-top: 10px;
     margin-bottom: 15px;
-    border-left: 2px solid white;
     border-radius: 2px;
   }
 }
@@ -73,7 +72,7 @@
     padding: 5px 5px 5px 5px;
     font-family: 'Roboto', serif;
   }
-  p {
+  a {
     margin: 0;
     font-size: 0.9em;
     color: antiquewhite;
@@ -84,10 +83,6 @@ fa-icon {
     margin-right: 18px;
     margin-left: 10px;
     color: darkgray;
-}
-
-a:link {
-  text-decoration: none;
 }
 
 #link1:hover {
@@ -101,4 +96,7 @@ a:link {
 }
 #link4:hover {
   color: white;
+}
+a:link {
+  text-decoration: none;
 }
