@@ -1,22 +1,27 @@
-<div id="main_view">
-  <div id="header">
-    <div>
-      <h1>{{data.title}}</h1>
-      <app-tags [tags]="data.tags"></app-tags>
+<div id="mainBar">
+  <div id="main_view">
+    <div id="header">
+      <div>
+        <h1>{{data.title}}</h1>
+        <app-tags [tags]="data.tags"></app-tags>
+      </div>
+      <div (click)="report(data.id)" id="report">
+        <fa-icon [icon]="flag"></fa-icon>
+      </div>
     </div>
-    <div id="report">
-      <fa-icon [icon]="flag"></fa-icon>
-    </div>
+    <iframe
+      [src]="video_url">
+    </iframe>
   </div>
-  <iframe
-    [src]="video_url">
-  </iframe>
-</div>
-<div id="user_view">
+  <div id="user_view">
     <span>
-      <img [src]="user.logo">
+      <app-user-logo
+        [src]="user.logo"
+        size="25%"
+      ></app-user-logo>
     </span>
-  <span>sadsada</span>
+    <span>sadsada</span>
+  </div>
 </div>
 <div id="sideBar">
 
