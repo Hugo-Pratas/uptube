@@ -41,6 +41,6 @@ export class NavbarComponent implements OnInit {
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
-    console.log(this.getScreenWidth);
+    //console.log(this.getScreenWidth);
   }
 }

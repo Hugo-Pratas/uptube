@@ -4,28 +4,22 @@
   </div>
   <div class="navbarMenu">
     <div class="navmenuLinks">
-      <div class="links" routerLink="/homepage" routerLinkActive="estou_aqui">
+      <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
         <fa-icon [icon]="faHouseSolid"></fa-icon>
         <p id="link1">Início</p>
       </div>
-      <a href="http://localhost:4200/homepage">
-        <div class="links">
-          <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
-          <p id="link2">Canais</p>
-        </div>
-      </a>
-      <a href="http://localhost:4200/homepage">
-        <div class="links">
-          <fa-icon [icon]="faClapperboardSolid"></fa-icon>
-          <p id="link3">Temáticas</p>
-        </div>
-      </a>
-      <a href="http://localhost:4200/homepage">
-        <div class="links">
-          <fa-icon [icon]="faPlaySolid"></fa-icon>
-          <p id="link4">Playlists</p>
-        </div>
-      </a>
+      <div class="links" routerLink="/video/1" routerLinkActive="currentPage">
+        <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
+        <p id="link2">Canais</p>
+      </div>
+      <div class="links" routerLink="/video/2" routerLinkActive="currentPage">
+        <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+        <p id="link3">Temáticas</p>
+      </div>
+      <div class="links" routerLink="/video/3" routerLinkActive="currentPage">
+        <fa-icon [icon]="faPlaySolid"></fa-icon>
+        <p id="link4">Playlists</p>
+      </div>
     </div>
     <div class="containerTags">
       <p class="headerTags">TAGS</p>
