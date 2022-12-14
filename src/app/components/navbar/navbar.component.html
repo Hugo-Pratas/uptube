@@ -4,12 +4,10 @@
   </div>
   <div class="navbarMenu">
     <div class="navmenuLinks">
-      <a href="http://localhost:4200/homepage">
-        <div class="links">
-          <fa-icon [icon]="faHouseSolid"></fa-icon>
-          <p class="link1">Início</p>
-        </div>
-      </a>
+      <div class="links" routerLink="/homepage" routerLinkActive="estou_aqui">
+        <fa-icon [icon]="faHouseSolid"></fa-icon>
+        <p id="link1">Início</p>
+      </div>
       <a href="http://localhost:4200/homepage">
         <div class="links">
           <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
