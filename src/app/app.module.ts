@@ -8,6 +8,7 @@ import {TagsComponent} from './components/tags/tags.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {HomepageComponent} from "./pages/homepage/homepage.component";
+import { ChannelComponent } from './pages/channel/channel.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {HomepageComponent} from "./pages/homepage/homepage.component";
     VideoPageComponent,
     NavbarComponent,
     HomepageComponent,
-    TagsComponent
+    TagsComponent,
+    ChannelComponent
   ],
   imports: [
     BrowserModule,
