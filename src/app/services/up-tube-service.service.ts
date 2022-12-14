@@ -41,7 +41,7 @@ export class UpTubeServiceService {
     }
   ]
 
-  tags=["pop", "rock", "metal", "natureza"]
+  tags=["pop", "rock", "metal", "natureza", "musica", "dança"]
 
   getVideo(id: number) {
     return this.videos.find(obj => obj.id == id);

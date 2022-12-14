@@ -4,30 +4,38 @@
   </div>
   <div class="navbarMenu">
     <div class="navmenuLinks">
-      <div class="links">
-        <fa-icon [icon]="faHouseSolid"></fa-icon>
-        <p>Início</p>
-      </div>
-      <div class="links">
-        <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
-        <p>Canais</p>
-      </div>
-      <div class="links">
-        <fa-icon [icon]="faClapperboardSolid"></fa-icon>
-        <p>Temáticas</p>
-      </div>
-      <div class="links">
-        <fa-icon [icon]="faPlaySolid"></fa-icon>
-        <p>Playlists</p>
-      </div>
+      <a href="http://localhost:4200/homepage">
+        <div class="links">
+          <fa-icon [icon]="faHouseSolid"></fa-icon>
+          <p class="link1">Início</p>
+        </div>
+      </a>
+      <a href="http://localhost:4200/homepage">
+        <div class="links">
+          <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
+          <p id="link2">Canais</p>
+        </div>
+      </a>
+      <a href="http://localhost:4200/homepage">
+        <div class="links">
+          <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+          <p id="link3">Temáticas</p>
+        </div>
+      </a>
+      <a href="http://localhost:4200/homepage">
+        <div class="links">
+          <fa-icon [icon]="faPlaySolid"></fa-icon>
+          <p id="link4">Playlists</p>
+        </div>
+      </a>
     </div>
     <div class="containerTags">
       <p class="headerTags">TAGS</p>
       <div *ngFor="let tag of tags" class="navbarTags">
-        <p>{{tag}}</p>
+        <a style="color: inherit;" [href]=tag>{{tag}}</a>
       </div>
     </div>
     <div>
+    </div>
   </div>
-</div>
 </div>
