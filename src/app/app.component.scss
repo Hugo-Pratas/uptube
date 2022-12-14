@@ -1,6 +1,10 @@
 .wrapper {
   max-width: 1000px;
   display: flex;
+
+  div {
+    flex: 1;
+  }
 }
 
 * {
