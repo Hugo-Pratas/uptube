@@ -1,3 +1,20 @@
-<div id="user_view">
-  <img alt="" [src]="user.logo">
+<h3>Últimos Vídeos</h3>
+<div class="totalcard">
+  <div class="thumbnail">
+    <img class="thumb" alt="thmb" src="assets/images/YouTube-thumbnail-size-guide-best-practices-top-examples.png">
+  </div>
+  <p class="channelName">NomeCanal</p>
+  <p class="title">Título</p>
+  <p class="date">7 dias atrás</p>
+  <div class="midsection">
+    <div id="user_view">
+      <app-user-logo
+      [src]="user.logo"
+      size="calc(15px + 3vw)"></app-user-logo>
+    </div>
+    <div class="duration">
+      <p>3:15</p>
+    </div>
+  </div>
 </div>
+

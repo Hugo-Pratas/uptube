@@ -8,6 +8,8 @@ import {TagsComponent} from './components/tags/tags.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {HomepageComponent} from "./pages/homepage/homepage.component";
+import { UserLogoComponent } from './components/user-logo/user-logo.component';
+import { VideoCardComponent } from './components/video-card/video-card.component';
 
 @NgModule({
   declarations: [

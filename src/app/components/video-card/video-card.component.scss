@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+h3 {
+  font-family: 'Poppins', serif;
+}
+
 #user_view {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 15px;
   margin-top: 15px;
 
@@ -11,4 +15,56 @@
     object-fit: cover;
     border: 2px solid #FFFFFF;
   }
+}
+
+.midsection{
+  display: flex;
+  flex-direction: row;
+
+  .duration {
+  background: #1c1c24;
+  width: 25px;
+  height: 20px;
+
+}
+
+
+  p {
+    margin: 0;
+    font-size: 0.7em;
+    color: antiquewhite;
+  }
+}
+
+.totalcard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  background-color: #1c1c24;
+  width: 320px;
+  height: 220px;
+  border-radius: 10px;
+
+  .thumb {
+    border-radius: 10px 10px 0 0;
+    width: 320px;
+    height: 150px;
+  }
+}
+
+
+
+.channelName {
+  font-size: 10px;
+  color: blue;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.date {
+  font-size: 10px;
+  color: darkgray;
 }
