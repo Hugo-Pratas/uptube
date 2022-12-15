@@ -1,25 +1,29 @@
 <div id="mainBar">
-  <div id="main_view">
-    <div id="header">
-      <div>
-        <h1>{{data.title}}</h1>
-        <app-tags [tags]="data.tags"></app-tags>
-      </div>
-      <div (click)="report(data.id)" id="report">
-        <fa-icon [icon]="flag"></fa-icon>
-      </div>
+  <div id="header">
+    <div>
+      <h1>{{data.title}}</h1>
+      <app-tags [tags]="data.tags"></app-tags>
     </div>
-    <iframe
-      [src]="video_url">
-    </iframe>
+    <div (click)="report(data.id)" id="report">
+      <fa-icon [icon]="flag"></fa-icon>
+    </div>
   </div>
-  <div id="user_view">
-    <span>
-      <app-user-logo
-        [src]="user.logo"
-        size="calc(20px + 3vw)"
-      ></app-user-logo>
-    </span>
+  <iframe
+    [src]="video_url">
+  </iframe>
+  <div id="video_description">
+    <div id="user">
+      <span id="img">
+        <app-user-logo
+          [src]="user.logo"
+          size="calc(20px + 3vw)"
+        ></app-user-logo>
+      </span>
+      <span id="text">
+        <h1>titulo</h1>
+        <h2>há quanto tempo</h2>
+      </span>
+    </div>
     <span>sadsada</span>
   </div>
 </div>
