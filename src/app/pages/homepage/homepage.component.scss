@@ -1,9 +1,14 @@
+h3 {
+  margin-left: 3%;
+  color: white;
+}
+
 .videoCards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 70%;
-  grid-gap: 1vh 2vw;
-
+  width: 60%;
+  grid-gap: 2vh 2vw;
+  margin-left: 3%;
   .card {
   }
 }
