@@ -19,12 +19,19 @@
           size="calc(20px + 3vw)"
         ></app-user-logo>
       </span>
-      <span id="text">
-        <h1>titulo</h1>
-        <h2>há quanto tempo</h2>
-      </span>
+      <div id="text">
+        <h1>{{user.name}}</h1>
+        <h2>há 7 dias (necessita api)</h2>
+      </div>
     </div>
-    <span>sadsada</span>
+    <div id="likeContent">
+      <!--
+            class e if mudar isto
+      -->
+      <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="thumbsUp"></fa-icon>
+      <p>&#124;</p>
+      <fa-icon class="thumbs" [ngClass]="{'active' : false}" [icon]="thumbsDown"></fa-icon>
+    </div>
   </div>
 </div>
 <div id="sideBar">

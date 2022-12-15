@@ -52,6 +52,36 @@
       }
 
       #text {
+        h1 {
+          font-size: calc(10px + 0.5vw);
+          margin-bottom: 0.5vh;
+        }
+
+        h2 {
+          font-size: calc(4px + 0.5vw);
+          color: #92929D;
+        }
+      }
+    }
+
+    #likeContent {
+      display: flex;
+      align-items: center;
+
+      * {
+        font-size: calc(25px + 1vw);
+      }
+
+      p {
+        margin: 0 2vw;
+      }
+
+      .thumbs:hover {
+        color: blue;
+      }
+
+      #active {
+        color: white;
       }
     }
   }
