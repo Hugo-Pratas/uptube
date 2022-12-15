@@ -17,7 +17,7 @@ export class VideoCardComponent implements OnInit {
   ngOnInit(): void {
     this.data = this._service.getVideo(this.id_video)
     this.user = this._service.getUser(this.data.user_id)
-    console.log(this.user)
+    console.log(this.id_video)
   }
 
 }

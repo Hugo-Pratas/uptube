@@ -1,4 +1,6 @@
-<app-video-card
-id_video = 1
-></app-video-card>
-<p>homepage works!</p>
+<h3>Últimos Vídeos</h3>
+<div class="videoCards">
+  <app-video-card *ngFor="let video of videos"
+    [id_video]="video"
+  ></app-video-card>
+</div>

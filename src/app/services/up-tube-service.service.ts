@@ -43,6 +43,10 @@ export class UpTubeServiceService {
 
   tags=["pop", "rock", "metal", "natureza", "musica", "dança"]
 
+  getIdVideos(){
+    return this.videos.map(v => v.id)
+  }
+
   getVideo(id: number) {
     return this.videos.find(obj => obj.id == id);
   }
