@@ -1,8 +1,14 @@
-span{
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+* {
+  font-family: 'Roboto', serif;
+}
+
+span {
   margin-right: 1%;
 }
 
-.navbarTags{
+.navbarTags {
   display: flex;
   flex-wrap: wrap;
 }
