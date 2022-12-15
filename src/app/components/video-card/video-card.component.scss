@@ -1,41 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-
-h3 {
-  font-family: 'Poppins', serif;
-}
-
-#user_view {
-  margin-bottom: 15px;
-  margin-top: 15px;
-
-  img {
-    border-radius: 50%;
-    height: 75px;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border: 2px solid #FFFFFF;
-  }
-}
-
-.midsection{
-  display: flex;
-  flex-direction: row;
-
-  .duration {
-  background: #1c1c24;
-  width: 25px;
-  height: 20px;
-
-}
-
-
-  p {
-    margin: 0;
-    font-size: 0.7em;
-    color: antiquewhite;
-  }
-}
-
 .totalcard {
   display: flex;
   flex-direction: row;
@@ -48,23 +10,61 @@ h3 {
 
   .thumb {
     border-radius: 10px 10px 0 0;
-    width: 320px;
-    height: 150px;
+    position: absolute;
   }
 }
 
-
-
-.channelName {
-  font-size: 10px;
-  color: blue;
+.thumbnail {
+  width: 100%;
+  height: 100%;
 }
 
-.title {
-  font-size: 20px;
+.midsection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  position: relative;
+  app-user-logo {
+    margin-right: 15px;
+  }
+  .duration {
+    position: relative;
+    background: #1c1c24;
+    border-radius: 5px;
+    bottom: 30px;
+    margin-left: 15px;
+    text-align: center;
+    padding: 3px 4px 3px 4px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.6em;
+    color: antiquewhite;
+  }
 }
 
-.date {
-  font-size: 10px;
-  color: darkgray;
+.details {
+  border: 1px solid white;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding-left: 15px;
+
+  .channelName {
+    font-size: 10px;
+    color: blue;
+    margin: 0;
+  }
+  .title {
+    font-size: 20px;
+    margin: 0;
+  }
+  .date {
+    font-size: 10px;
+    color: darkgray;
+    height: 7%;
+    margin: 0;
+  }
 }
