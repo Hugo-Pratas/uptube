@@ -6,6 +6,7 @@ import {
   faClapperboard as faClapperboardSolid
 } from "@fortawesome/free-solid-svg-icons";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
   public getScreenHeight: any;
   tags: any;
 
-  constructor(private _service: UpTubeServiceService) { }
+  constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) { }
 
   public hideRuleContent= false;
 
@@ -33,14 +34,19 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
-    this.tags = this._service.getTags();
+
+    this._service.getTags().subscribe(data => {
+      console.log(data)
+      this.tags = data;
+    })
+
   }
 
 
-  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+/*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
     //console.log(this.getScreenWidth);
-  }
+  }*/
 }

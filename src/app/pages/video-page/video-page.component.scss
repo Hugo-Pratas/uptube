@@ -38,6 +38,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 1.5vh;
+    align-items: center;
 
     #user {
       display: flex;
@@ -73,15 +74,11 @@
       }
 
       p {
-        margin: 0 2vw;
+        margin: 0 1.5vw;
       }
 
       .thumbs:hover {
         color: blue;
-      }
-
-      #active {
-        color: white;
       }
     }
   }

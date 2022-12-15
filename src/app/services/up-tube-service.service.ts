@@ -1,11 +1,17 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
+
+const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UpTubeServiceService {
 
-
+  constructor(private http: HttpClient) {
+  }
   videos = [
     {
       "id": 1,
@@ -55,13 +61,13 @@ export class UpTubeServiceService {
   }
 
   getTags() {
-    return this.tags
+    console.log(this.http.get(BASE_URL + "/api/tags"))
+    return this.http.get(BASE_URL + "/api/tags")
   }
 
   getUser(id: number) {
     return this.user.find(obj => obj.id == id)
   }
 
-  constructor() {
-  }
+
 }
