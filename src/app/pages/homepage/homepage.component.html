@@ -1,6 +1,8 @@
 <h3>Últimos Vídeos</h3>
 <div class="videoCards">
-  <app-video-card *ngFor="let video of videos"
-    [id_video]="video"
-  ></app-video-card>
+  <div class="card" *ngFor="let video of videos">
+    <app-video-card
+        [id_video]="video"
+    ></app-video-card>
+  </div>
 </div>

@@ -1,6 +1,5 @@
 <div class="totalcard">
-  <div class="thumbnail">
-    <img class="thumb" alt="thmb" src="assets/images/YouTube-thumbnail-size-guide-best-practices-top-examples.png">
+  <div class="thumbnail" [ngStyle]="{'background-image': 'url(' + 'assets/images/YouTube-thumbnail-size-guide-best-practices-top-examples.png' + ')'}">
     <div class="midsection">
       <div class="duration">
         <p>03:15</p>
@@ -8,7 +7,7 @@
       <div id="user_view">
         <app-user-logo
           [src]="user.logo"
-          size="50px"></app-user-logo>
+          size="calc(30px + 2vw)"></app-user-logo>
       </div>
     </div>
   </div>
