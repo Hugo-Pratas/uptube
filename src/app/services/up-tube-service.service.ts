@@ -65,18 +65,18 @@ export class UpTubeServiceService {
   }
 
   getTagsNamebyID(id :number[]) {
-    let data : any;
-    this.getTags().subscribe(d => {
-      data=d;
-      let tags: any[] = [];
-      for (const number of id) {
-        // @ts-ignore
-        tags.push(data.filter(obj => obj.tid==number).map(obj => obj.name).toString())
-      }
-      console.log(tags)
-      return tags
+    return new Promise((resolve, reject) =>{
+      let data : any;
+      this.getTags().subscribe(d => {
+        data=d;
+        let tags: any[] = [];
+        for (const number of id) {
+          // @ts-ignore
+          tags.push(data.filter(obj => obj.tid==number).map(obj => obj.name).toString())
+        }
+        resolve(tags);
+      })
     })
-    return "nao funcionou"
   }
 
   getUser(id: number) {

@@ -22,6 +22,7 @@ export class VideoPageComponent implements OnInit {
   user: any;
   flag = faFlag;
   tags!: number;
+  processedPage= false;
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
   }
@@ -35,6 +36,7 @@ export class VideoPageComponent implements OnInit {
         this.data.tags=this.data.tags.split(",").map(Number)
         this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url.replace("watch?v=", "embed/"));
         this.user = this._service.getUser(this.data.user_id)
+        this.processedPage=true
       });
     });
 /*

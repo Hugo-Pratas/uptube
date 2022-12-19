@@ -11,10 +11,13 @@ export class TagsComponent implements OnInit {
   constructor(private _service: UpTubeServiceService) { }
 
   @Input() tags!: number[];
+  processedPage=false;
   tagsName : any;
   ngOnInit(): void {
-    this.tagsName = this._service.getTagsNamebyID(this.tags)
-    console.log(this.tagsName)
+    this.tagsName = this._service.getTagsNamebyID(this.tags).then((obj) =>{
+      this.tagsName =obj
+      this.processedPage=true;
+    })
   }
 
 }
