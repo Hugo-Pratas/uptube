@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {VideoPageComponent} from './pages/video-page/video-page.component';
@@ -10,6 +9,7 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
 import {HomepageComponent} from "./pages/homepage/homepage.component";
 import { UserLogoComponent } from './components/user-logo/user-logo.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
+import { MenuTopRightComponent } from './components/menu-top-right/menu-top-right.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     HomepageComponent,
     TagsComponent,
     UserLogoComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    MenuTopRightComponent,
   ],
   imports: [
     BrowserModule,

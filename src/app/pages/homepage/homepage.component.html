@@ -1,16 +1,16 @@
-<h3>Últimos Vídeos</h3>
-<div class="videoCards">
-  <div class="card" *ngFor="let video of videos">
-    <app-video-card
-      [id_video]="video"
-    ></app-video-card>
+<div class="global">
+  <div class="mainColumn">
+    <h3>Últimos Vídeos</h3>
+    <div class="videoCards">
+      <div class="card" *ngFor="let video of videos">
+        <app-video-card
+          [id_video]="video"
+        ></app-video-card>
+      </div>
+    </div>
+  </div>
+  <div class="menuTopRight">
+    <app-menu-top-right></app-menu-top-right>
   </div>
 </div>
-<!--<div class="menuTopRight">
-  <h2>Canais Sugeridos</h2>
-  <div class="channelList">
-    <app-user-logo
-      [src]="user.logo"
-      size="55px"></app-user-logo>
-  </div>
-</div>-->
+
