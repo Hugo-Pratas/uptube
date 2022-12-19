@@ -2,7 +2,15 @@
 <div class="videoCards">
   <div class="card" *ngFor="let video of videos">
     <app-video-card
-        [id_video]="video"
+      [id_video]="video"
     ></app-video-card>
   </div>
 </div>
+<!--<div class="menuTopRight">
+  <h2>Canais Sugeridos</h2>
+  <div class="channelList">
+    <app-user-logo
+      [src]="user.logo"
+      size="55px"></app-user-logo>
+  </div>
+</div>-->
