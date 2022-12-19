@@ -21,6 +21,7 @@ export class VideoPageComponent implements OnInit {
   data: any;
   user: any;
   flag = faFlag;
+  tags!: number;
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
   }
@@ -28,9 +29,13 @@ export class VideoPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(q => {
       let id_video = q['id_video']
-      this.data = this._service.getVideo(id_video);
-      this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.video.replace("watch?v=", "embed/"));
-      this.user = this._service.getUser(this.data.user_id)
+      this._service.getVideo(id_video).subscribe(d =>{
+        this.data=d;
+        this.data=this.data[0]; //api retorna array
+        this.data.tags=this.data.tags.split(",").map(Number)
+        this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url.replace("watch?v=", "embed/"));
+        this.user = this._service.getUser(this.data.user_id)
+      });
     });
 /*
     localStorage.setItem(key, value);

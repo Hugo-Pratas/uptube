@@ -6,7 +6,7 @@ import {VideoPageComponent} from "./pages/video-page/video-page.component";
 
 const routes: Routes = [
   {path: 'homepage', component: HomepageComponent},
-  {path: '', redirectTo: '/video/1', pathMatch: 'full'},
+  {path: '', redirectTo: '/video/14', pathMatch: 'full'},
   {path: 'video/:id_video', component: VideoPageComponent},
 ];
 

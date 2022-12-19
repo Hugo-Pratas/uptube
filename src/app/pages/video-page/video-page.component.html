@@ -1,10 +1,10 @@
-<div id="mainBar">
+<div id="mainBar" >
   <div id="header">
     <div>
-      <h1>{{data.title}}</h1>
+      <h1>{{data.name}}</h1>
       <app-tags [tags]="data.tags"></app-tags>
     </div>
-    <div (click)="report(data.id)" id="report">
+  <!--  <div (click)="report(data.id)" id="report">
       <fa-icon [icon]="flag"></fa-icon>
     </div>
   </div>
@@ -25,15 +25,14 @@
       </div>
     </div>
     <div id="likeContent">
-      <!--
             class e if mudar isto
-      -->
       <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="icone_favorito(true)"></fa-icon>
       <p>&#124;</p>
       <fa-icon class="thumbs" [ngClass]="{'active' : false}" [icon]="icone_favorito(false)"></fa-icon>
-    </div>
+    </div>-->
   </div>
 </div>
+
 <div id="sideBar">
 
 </div>

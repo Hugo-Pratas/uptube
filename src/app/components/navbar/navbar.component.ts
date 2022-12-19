@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit {
     this.getScreenHeight = window.innerHeight;
 
     this._service.getTags().subscribe(data => {
-      console.log(data)
       this.tags = data;
     })
 

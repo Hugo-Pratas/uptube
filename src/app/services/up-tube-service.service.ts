@@ -57,12 +57,26 @@ export class UpTubeServiceService {
   tags = ["pop", "rock", "metal", "natureza", "musica", "dança"]
 
   getVideo(id: number) {
-    return this.videos.find(obj => obj.id == id);
+    return this.http.get(BASE_URL + "/api/video/" + id)
   }
 
   getTags() {
-    console.log(this.http.get(BASE_URL + "/api/tags"))
     return this.http.get(BASE_URL + "/api/tags")
+  }
+
+  getTagsNamebyID(id :number[]) {
+    let data : any;
+    this.getTags().subscribe(d => {
+      data=d;
+      let tags: any[] = [];
+      for (const number of id) {
+        // @ts-ignore
+        tags.push(data.filter(obj => obj.tid==number).map(obj => obj.name).toString())
+      }
+      console.log(tags)
+      return tags
+    })
+    return "nao funcionou"
   }
 
   getUser(id: number) {
