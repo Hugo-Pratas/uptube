@@ -1,15 +1,15 @@
 <div id="mainBar" *ngIf="processedPage">
   <div id="header">
     <div id="title">
-      <h1 >{{data.name}}</h1>
-      <app-tags [tags]="data.tags"></app-tags>
+      <h1 >{{videoData.name}}</h1>
+      <app-tags [tags]="videoData.tags"></app-tags>
     </div>
-    <div (click)="report(data.id)" id="report">
+    <div (click)="report(videoData.id)" id="report">
       <fa-icon [icon]="flag"></fa-icon>
     </div>
   </div>
   <iframe
-    [src]="video_url">
+    [src]="videoData.url">
   </iframe>
   <div id="video_description">
     <div id="user">
@@ -20,8 +20,8 @@
         ></app-user-logo> <!--falta arranjar drupal para retornar uma coisa com pés e cabeça no logo-->
       </span>
       <div id="text">
-        <h1>{{user.title}}</h1>
-        <h2>há 7 dias (necessita api)</h2>
+        <h1>{{userData.title}}</h1>
+        <h2>{{videoData.date}}</h2>
       </div>
     </div>
     <div id="likeContent">

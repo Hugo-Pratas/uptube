@@ -17,37 +17,72 @@ import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons
 
 
 export class VideoPageComponent implements OnInit {
-  video_url: SafeUrl | undefined;
-  data: any;
-  user: any;
-  flag = faFlag;
-  tags!: number;
-  logo="https://dev-testeuptube.pantheonsite.io/sites/default/files/2022-12/logo.png"
+  videoData: any;
+  userData: any;
+  id_video: number = -1;
   processedPage= false;
+
+  logo="https://dev-testeuptube.pantheonsite.io/sites/default/files/2022-12/logo.png"
+  flag = faFlag;
+
+
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(q => {
-      let id_video = q['id_video']
-      this._service.getVideo(id_video).subscribe(d =>{
-        this.data=d;
-        this.data=this.data[0]; //api retorna array
-        this.data.tags=this.data.tags.split(",").map(Number) //as tags vêm em string da api....
-        this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url.replace("watch?v=", "embed/"));
-        this.user = this._service.getUser(this.data.channel).subscribe(d =>{
-          this.user=d;
-          this.user=this.user[0]
-          this.processedPage=true
-        })
-      });
-    });
+
+this.getRouteID().then((id) =>{
+  // @ts-ignore
+  this.id_video=id
+  this.getVideoData(this.id_video).then((video) =>{
+    this.videoData=video
+    this.getUserData(this.videoData.channel).then((user)=>{
+      this.userData=user
+      this.processedPage=true
+    })
+  })
+})
+
 /*
     localStorage.setItem(key, value);
 */
-
   }
+
+  getRouteID(){
+    return new Promise((resolve) =>{
+      let id_video: number= -1;
+      this.route.params.subscribe(q => {
+        id_video = q['id_video']
+        resolve(id_video)
+      });
+    })
+  }
+
+  getVideoData(id_video: number){
+    return new Promise((resolve) =>{
+      let data: any;
+      this._service.getVideo(id_video).subscribe(d =>{
+        data=d;
+        data=data[0]; //api retorna array
+        data.tags=data.tags.split(",").map(Number) //as tags vêm em string da api....
+        data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
+        resolve(data);
+      });
+    })
+  }
+
+  getUserData(id_user: number){
+    return new Promise((resolve) =>{
+      let user: any
+      user = this._service.getUser(id_user).subscribe(d =>{
+        user=d;
+        user=user[0]
+        resolve(user);
+      })
+    })
+  }
+
   report(id: number) {
     console.log("carreguei", id)
   }
