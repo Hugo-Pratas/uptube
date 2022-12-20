@@ -1,10 +1,10 @@
 <div id="mainBar" *ngIf="processedPage">
   <div id="header">
-    <div>
-      <h1>{{data.name}}</h1>
+    <div id="title">
+      <h1 >{{data.name}}</h1>
       <app-tags [tags]="data.tags"></app-tags>
     </div>
-  <!--  <div (click)="report(data.id)" id="report">
+    <div (click)="report(data.id)" id="report">
       <fa-icon [icon]="flag"></fa-icon>
     </div>
   </div>
@@ -15,21 +15,20 @@
     <div id="user">
       <span id="img">
         <app-user-logo
-          [src]="user.logo"
+          [src]="logo"
           size="calc(20px + 3vw)"
-        ></app-user-logo>
+        ></app-user-logo> <!--falta arranjar drupal para retornar uma coisa com pés e cabeça no logo-->
       </span>
       <div id="text">
-        <h1>{{user.name}}</h1>
+        <h1>{{user.title}}</h1>
         <h2>há 7 dias (necessita api)</h2>
       </div>
     </div>
     <div id="likeContent">
-            class e if mudar isto
       <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="icone_favorito(true)"></fa-icon>
       <p>&#124;</p>
-      <fa-icon class="thumbs" [ngClass]="{'active' : false}" [icon]="icone_favorito(false)"></fa-icon>
-    </div>-->
+      <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="icone_favorito(false)"></fa-icon>
+    </div>
   </div>
 </div>
 

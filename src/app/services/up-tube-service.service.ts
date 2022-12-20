@@ -64,6 +64,19 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/tags")
   }
 
+  getTagsNames(){
+    return new Promise((resolve, reject) =>{
+      this.getTags().subscribe(data => {
+        let tags: string[] = [];
+        // @ts-ignore
+        for (const d of data) {
+          tags.push(d.name)
+        }
+        resolve(tags);
+      })
+    })
+  }
+
   getTagsNamebyID(id :number[]) {
     return new Promise((resolve, reject) =>{
       let data : any;
@@ -80,7 +93,7 @@ export class UpTubeServiceService {
   }
 
   getUser(id: number) {
-    return this.user.find(obj => obj.id == id)
+    return this.http.get(BASE_URL + "/api/channel/" + id)
   }
 
 

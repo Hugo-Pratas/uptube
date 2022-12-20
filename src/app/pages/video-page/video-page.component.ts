@@ -22,6 +22,7 @@ export class VideoPageComponent implements OnInit {
   user: any;
   flag = faFlag;
   tags!: number;
+  logo="https://dev-testeuptube.pantheonsite.io/sites/default/files/2022-12/logo.png"
   processedPage= false;
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
@@ -33,10 +34,13 @@ export class VideoPageComponent implements OnInit {
       this._service.getVideo(id_video).subscribe(d =>{
         this.data=d;
         this.data=this.data[0]; //api retorna array
-        this.data.tags=this.data.tags.split(",").map(Number)
+        this.data.tags=this.data.tags.split(",").map(Number) //as tags vêm em string da api....
         this.video_url = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.url.replace("watch?v=", "embed/"));
-        this.user = this._service.getUser(this.data.user_id)
-        this.processedPage=true
+        this.user = this._service.getUser(this.data.channel).subscribe(d =>{
+          this.user=d;
+          this.user=this.user[0]
+          this.processedPage=true
+        })
       });
     });
 /*
