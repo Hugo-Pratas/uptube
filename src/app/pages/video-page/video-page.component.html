@@ -4,8 +4,8 @@
       <h1 >{{videoData.name}}</h1>
       <app-tags [tags]="videoData.tags"></app-tags>
     </div>
-    <div (click)="report(videoData.id)" id="report">
-      <fa-icon [icon]="flag"></fa-icon>
+    <div (click)="report(id_video)" id="favourite">
+      <fa-icon [icon]="bookmark"></fa-icon>
     </div>
   </div>
   <iframe
@@ -25,9 +25,9 @@
       </div>
     </div>
     <div id="likeContent">
-      <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="icone_favorito(true)"></fa-icon>
+      <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
       <p>&#124;</p>
-      <fa-icon class="thumbs" [ngClass]="{'active' : true}" [icon]="icone_favorito(false)"></fa-icon>
+      <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
     </div>
   </div>
 </div>
