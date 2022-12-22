@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
 @Component({
@@ -8,13 +8,17 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 })
 export class HomepageComponent implements OnInit {
 
-  videos!: number[];
+  videos: any;
 
-  constructor(private _service: UpTubeServiceService) { }
+  constructor(private _service: UpTubeServiceService) {
+  }
 
   ngOnInit(): void {
-    this.videos = this._service.getIdVideos()
-    console.log(this.videos)
+    this._service.getVideos().subscribe(d => {
+      this.videos = d
+      console.log(this.videos)
+
+    })
   }
 
 }
