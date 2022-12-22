@@ -13,9 +13,14 @@ export class UpTubeServiceService {
   constructor(private http: HttpClient) {
   }
 
+  getIdVideos(){
+    return this.videos.map(v => v.id)
+  }
+
   getVideo(id: number) {
     return this.http.get(BASE_URL + "/api/video/" + id)
   }
+
 
   getTags() {
     return this.http.get(BASE_URL + "/api/tags")

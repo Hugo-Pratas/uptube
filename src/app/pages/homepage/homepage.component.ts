@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  videos!: number[];
+
+  constructor(private _service: UpTubeServiceService) { }
 
   ngOnInit(): void {
+    this.videos = this._service.getIdVideos()
+    console.log(this.videos)
   }
 
 }

@@ -1,0 +1,32 @@
+h3 {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  color: white;
+}
+
+.global {
+  display: flex;
+}
+
+.mainColumn {
+  width: 80%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.videoCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5vh 2vw;
+}
+
+.menuTopRight {
+  width: 25%;
+  margin-right: 2%;
+  margin-top: 2%;
+  min-width: 20%;
+}
+
+
+
+
