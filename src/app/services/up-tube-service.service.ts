@@ -62,6 +62,10 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/channel/" + id)
   }
 
+  getUsers() {
+    return this.http.get(BASE_URL + "/api/channels")
+  }
+
   getFavouritesFromLocal() {
     let favourites = localStorage.getItem("Favourites")
     if (favourites !== null) {

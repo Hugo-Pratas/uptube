@@ -11,17 +11,19 @@ import {HomepageComponent} from "./pages/homepage/homepage.component";
 import {UserLogoComponent} from './components/user-logo/user-logo.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MenuTopRightComponent} from "./components/menu-top-right/menu-top-right.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    VideoPageComponent,
-    NavbarComponent,
-    HomepageComponent,
-    TagsComponent,
-    UserLogoComponent,
-    VideoCardComponent,
-  ],
+    declarations: [
+        AppComponent,
+        VideoPageComponent,
+        NavbarComponent,
+        HomepageComponent,
+        TagsComponent,
+        UserLogoComponent,
+        VideoCardComponent,
+        MenuTopRightComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
