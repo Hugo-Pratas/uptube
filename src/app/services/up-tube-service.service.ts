@@ -21,8 +21,8 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/tags")
   }
 
-  getTagsNames(){
-    return new Promise((resolve, reject) =>{
+  getTagsNames() {
+    return new Promise((resolve) => {
       this.getTags().subscribe(data => {
         let tags: string[] = [];
         // @ts-ignore
@@ -34,15 +34,15 @@ export class UpTubeServiceService {
     })
   }
 
-  getTagsNamebyID(id :number[]) {
-    return new Promise((resolve, reject) =>{
-      let data : any;
+  getTagsNamebyID(id: number[]) {
+    return new Promise((resolve) => {
+      let data: any;
       this.getTags().subscribe(d => {
-        data=d;
+        data = d;
         let tags: any[] = [];
         for (const number of id) {
           // @ts-ignore
-          tags.push(data.filter(obj => obj.tid==number).map(obj => obj.name).toString())
+          tags.push(data.filter(obj => obj.tid == number).map(obj => obj.name).toString())
         }
         resolve(tags);
       })
@@ -53,5 +53,24 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/channel/" + id)
   }
 
+  getFavouritesFromLocal() {
+    let favourites = localStorage.getItem("Favourites")
+    if (favourites !== null) {
+      return JSON.parse(favourites)
+    }
+    return []
+  }
 
+  removeFavouriteFromLocal(id_video: number) {
+    let favourites = this.getFavouritesFromLocal()
+    let indice = favourites.indexOf(id_video)
+    favourites.splice(indice, 1)
+    localStorage.setItem("Favourites", JSON.stringify(favourites))
+  }
+
+  addFavouriteToLocal(id_video: number) {
+    let favourites = this.getFavouritesFromLocal()
+    favourites.push(id_video)
+    localStorage.setItem("Favourites", JSON.stringify(favourites))
+  }
 }
