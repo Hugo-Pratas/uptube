@@ -1,4 +1,4 @@
-<div id="mainBar" *ngIf="processedPage">
+<div class="mainBar" *ngIf="processedPage">
   <div id="header">
     <div id="title">
       <h1>{{videoData.name}}</h1>
@@ -15,7 +15,7 @@
     <div id="user">
       <span id="img">
         <app-user-logo
-          [src]="logo"
+          [src]="urlSite+userData.logo"
           size="calc(20px + 3vw)"
         ></app-user-logo> <!--falta arranjar drupal para retornar uma coisa com pés e cabeça no logo-->
       </span>
@@ -34,6 +34,8 @@
 </div>
 
 <div id="sideBar">
-
+  <app-video-card *ngFor="let video of sugestedVideos"
+                  [video_data]="video"
+  ></app-video-card>
 </div>
 
