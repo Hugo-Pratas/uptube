@@ -9,21 +9,23 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {HomepageComponent} from "./pages/homepage/homepage.component";
 import {UserLogoComponent} from './components/user-logo/user-logo.component';
-import { VideoCardComponent } from './components/video-card/video-card.component';
-import { HttpClientModule } from '@angular/common/http';
+import {VideoCardComponent} from './components/video-card/video-card.component';
+import {HttpClientModule} from '@angular/common/http';
 import {MenuTopRightComponent} from "./components/menu-top-right/menu-top-right.component";
+import {TagPageComponent} from './pages/tag-page/tag-page.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        VideoPageComponent,
-        NavbarComponent,
-        HomepageComponent,
-        TagsComponent,
-        UserLogoComponent,
-        VideoCardComponent,
-        MenuTopRightComponent,
-    ],
+  declarations: [
+    AppComponent,
+    VideoPageComponent,
+    NavbarComponent,
+    HomepageComponent,
+    TagsComponent,
+    UserLogoComponent,
+    VideoCardComponent,
+    MenuTopRightComponent,
+    TagPageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,0 +1,8 @@
+<h1>{{thisTag}}</h1>
+<div class="gridContainer">
+  <div *ngFor="let video of videos_data">
+    <app-video-card
+      [video_data]="video"
+    ></app-video-card>
+  </div>
+</div>

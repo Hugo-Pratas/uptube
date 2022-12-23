@@ -24,8 +24,8 @@ export class VideoPageComponent implements OnInit {
   id_video = -1;
   bookmark = faBookmark;
   processedPage = false;
-
-  logo = "https://dev-testeuptube.pantheonsite.io/sites/default/files/2022-12/logo.png"
+  urlSite = ""
+  sugestedVideos: any
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
@@ -39,33 +39,21 @@ export class VideoPageComponent implements OnInit {
   }
 
   async getData() {
-    this.videoData = await this.getVideoData(this.id_video)
-    this.userData = await this.getUserData(this.videoData.channel)
+    this.urlSite = this._service.getApiRoute()
+    this.videoData = await this._service.getVideoData(this.id_video)
+    this.userData = await this._service.getUserData(this.videoData.channel)
     this.bookmark = this.icone_favorito
+    this.sugestedVideos = await this.getSugestedVideoData()
     this.processedPage = true
   }
 
-  getVideoData(id_video: number) {
+  getSugestedVideoData() {
     return new Promise((resolve) => {
       let data: any;
-      this._service.getVideo(id_video).subscribe(d => {
+      this._service.getSugestedVideos().subscribe(d => {
         data = d;
-        data = data[0]; //api retorna array
-        data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
-        data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
         resolve(data);
       });
-    })
-  }
-
-  getUserData(id_user: number) {
-    return new Promise((resolve) => {
-      let user: any
-      user = this._service.getUser(id_user).subscribe(d => {
-        user = d;
-        user = user[0]
-        resolve(user);
-      })
     })
   }
 

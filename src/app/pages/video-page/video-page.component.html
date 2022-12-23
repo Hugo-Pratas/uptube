@@ -1,4 +1,4 @@
-<div id="mainBar" *ngIf="processedPage">
+<div class="mainBar" *ngIf="processedPage">
   <div id="header">
     <div id="title">
       <h1>{{videoData.name}}</h1>
@@ -8,32 +8,40 @@
       <fa-icon [icon]="bookmark"></fa-icon>
     </div>
   </div>
-  <iframe
-    [src]="videoData.url">
-  </iframe>
-  <div id="video_description">
-    <div id="user">
+</div>
+<div id="container" *ngIf="processedPage">
+  <div class="mainBar">
+    <iframe
+      [src]="videoData.url">
+    </iframe>
+    <div id="video_description">
+      <div id="user">
       <span id="img">
         <app-user-logo
-          [src]="logo"
+          [src]="urlSite+userData.logo"
           size="calc(20px + 3vw)"
-        ></app-user-logo> <!--falta arranjar drupal para retornar uma coisa com pés e cabeça no logo-->
+        ></app-user-logo>
       </span>
-      <div id="text">
-        <h1>{{userData.title}}</h1>
-        <h2>{{videoData.date}}</h2>
+        <div id="text">
+          <h1>{{userData.title}}</h1>
+          <h2>{{videoData.date}}</h2>
+        </div>
+      </div>
+      <div id="likeContent">
+        <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
+        <p>&#124;</p>
+        <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
       </div>
     </div>
-    <div id="likeContent">
-      <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
-      <p>&#124;</p>
-      <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
-    </div>
+    <p id="description">{{videoData.description}}</p>
   </div>
-  <p id="description">{{videoData.description}}</p>
+  <div id="sideBar">
+    <app-video-card *ngFor="let video of sugestedVideos"
+                    [video_data]="video"
+    ></app-video-card>
+  </div>
 </div>
 
-<div id="sideBar">
 
-</div>
+
 

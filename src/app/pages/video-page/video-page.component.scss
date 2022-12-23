@@ -1,12 +1,13 @@
-#mainBar {
+.mainBar {
   min-width: 400px;
   width: 70%;
-  margin: 2.2em;
+  margin-inline: 2vw;
 
   #header {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    margin-top: 1.5em;
 
     #title {
       max-width: 90%;
@@ -98,5 +99,15 @@
     background: #1C1C24;
     border-radius: 20px;
   }
+}
+
+#container {
+  display: flex;
+}
+
+#sideBar {
+  width: 22%;
+  display: grid;
+  gap: 1em;
 }
 

@@ -10,7 +10,7 @@ export class VideoCardComponent implements OnInit {
   user: any;
   apiRoute = ""
   @Input() video_data: any;
-
+  processPage = false
 
 
   constructor(private _service: UpTubeServiceService) {
@@ -21,6 +21,7 @@ export class VideoCardComponent implements OnInit {
     this._service.getUser(this.video_data.channel).subscribe(d => {
       this.user = d
       this.user = this.user[0] //api retorna array...
+      this.processPage = true
     })
   }
 }
