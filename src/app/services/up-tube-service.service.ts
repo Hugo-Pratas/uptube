@@ -21,6 +21,10 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/videos")
   }
 
+  getSugestedVideos() {
+    return this.http.get(BASE_URL + "/api/SugestedVideos")
+  }
+
   getVideo(id: number) {
     return this.http.get(BASE_URL + "/api/video/" + id)
   }

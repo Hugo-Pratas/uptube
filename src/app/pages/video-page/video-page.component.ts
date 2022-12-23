@@ -24,8 +24,8 @@ export class VideoPageComponent implements OnInit {
   id_video = -1;
   bookmark = faBookmark;
   processedPage = false;
-
-  logo = "https://dev-testeuptube.pantheonsite.io/sites/default/files/2022-12/logo.png"
+  urlSite = ""
+  sugestedVideos: any
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
@@ -39,9 +39,11 @@ export class VideoPageComponent implements OnInit {
   }
 
   async getData() {
+    this.urlSite = this._service.getApiRoute()
     this.videoData = await this.getVideoData(this.id_video)
     this.userData = await this.getUserData(this.videoData.channel)
     this.bookmark = this.icone_favorito
+    this.sugestedVideos = await this.getSugestedVideoData()
     this.processedPage = true
   }
 
@@ -66,6 +68,16 @@ export class VideoPageComponent implements OnInit {
         user = user[0]
         resolve(user);
       })
+    })
+  }
+
+  getSugestedVideoData() {
+    return new Promise((resolve) => {
+      let data: any;
+      this._service.getSugestedVideos().subscribe(d => {
+        data = d;
+        resolve(data);
+      });
     })
   }
 
