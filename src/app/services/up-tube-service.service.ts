@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
@@ -10,7 +11,7 @@ const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
 export class UpTubeServiceService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
 
   getApiRoute() {
@@ -47,6 +48,32 @@ export class UpTubeServiceService {
     })
   }
 
+  getVideosIdbyTag(tag_id: string) {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/tag/" + tag_id).subscribe(data => {
+        let videos_id: number[] = [];
+        // @ts-ignore
+        for (const d of data) {
+          videos_id.push(d.video_id)
+        }
+        resolve(videos_id);
+      })
+    })
+  }
+
+  getVideoData(id_video: number) {
+    return new Promise((resolve) => {
+      let data: any;
+      this.getVideo(id_video).subscribe(d => {
+        data = d;
+        data = data[0]; //api retorna array
+        data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
+        data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
+        resolve(data);
+      });
+    })
+  }
+
   getTagsNamebyID(id: number[]) {
     return new Promise((resolve) => {
       let data: any;
@@ -68,6 +95,17 @@ export class UpTubeServiceService {
 
   getUsers() {
     return this.http.get(BASE_URL + "/api/channels")
+  }
+
+  getUserData(id_user: number) {
+    return new Promise((resolve) => {
+      let user: any
+      user = this.getUser(id_user).subscribe(d => {
+        user = d;
+        user = user[0]
+        resolve(user);
+      })
+    })
   }
 
   getFavouritesFromLocal() {
