@@ -53,24 +53,29 @@
   flex-direction: column;
   justify-content: center;
   height: 30%;
-  padding-left: 15px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-left: 10px;
 
-  .channelName {
-    font-size: 0.8vw;
-    color: blue;
-    margin-bottom: 2px;
+  .titleDiv {
+    height: 40%;
+    overflow: hidden;
+    font-size: 13px;
+    margin: 0 0 0 0;
+    line-height: 15px;
   }
 
   .title {
-    font-size: calc(3px + 0.6vw);
+    margin: 0 0 0 0;
+  }
+
+  .channelName {
+    font-size: 10px;
+    color: #1e75ff;
     margin: 0 0 0 0;
   }
 
   .date {
-    margin-top: 2px;
-    font-size: 0.8vw;
+    font-size: 10px;
     color: darkgray;
+    margin: 0 0 0 0;
   }
 }
