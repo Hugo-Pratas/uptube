@@ -1,1 +1,15 @@
-<p>homepage works!</p>
+<div class="global">
+  <div class="mainColumn">
+    <h3>Últimos Vídeos</h3>
+    <div class="videoCards">
+      <div class="card" *ngFor="let video of videos">
+        <app-video-card
+          [video_data]="video"
+        ></app-video-card>
+      </div>
+    </div>
+  </div>
+  <div class="menuTopRight">
+    <app-menu-top-right></app-menu-top-right>
+  </div>
+</div>

@@ -1,60 +1,131 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {DomSanitizer} from "@angular/platform-browser";
+
+
+const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UpTubeServiceService {
 
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  }
 
-  videos = [
-    {
-      "id": 1,
-      "title": "Finlandia",
-      "tags": ["natureza", "países", "beleza", "paisagem"],
-      "video": "https://www.youtube.com/watch?v=F5zg_af9b8c",
-      "user_id":1
-    },
-    {
-      "id": 2,
-      "title": "I Can Only Count to FOUR",
-      "tags": ["rock", "parody"],
-      "video": "https://www.youtube.com/watch?v=u8ccGjar4Es",
-      "user_id":2
-    },
-    {
-      "id": 3,
-      "title": "Norway",
-      "tags": ["natureza", "países", "beleza", "paisagem"],
-      "video": "https://youtube.com/watch?v=5kJFSSP53mU",
-      "user_id":1
-    }
-  ]
+  getApiRoute() {
+    return BASE_URL;
+  }
 
-  user=[
-    {
-      "id": 1,
-      "logo": "../../assets/images/user_logos/unnamed.jpg"
-    },
-    {
-      "id":2,
-      "logo": "../../assets/images/user_logos/índice.jpg"
-    }
-  ]
+  getVideos() {
+    return this.http.get(BASE_URL + "/api/videos")
+  }
 
-  tags=["pop", "rock", "metal", "natureza", "musica", "dança"]
+  getSugestedVideos() {
+    return this.http.get(BASE_URL + "/api/SugestedVideos")
+  }
 
   getVideo(id: number) {
-    return this.videos.find(obj => obj.id == id);
+    return this.http.get(BASE_URL + "/api/video/" + id)
   }
+
 
   getTags() {
-    return this.tags
+    return this.http.get(BASE_URL + "/api/tags")
   }
 
-  getUser(id: number){
-    return this.user.find(obj => obj.id == id)
+  getTagsNames() {
+    return new Promise((resolve) => {
+      this.getTags().subscribe(data => {
+        let tags: string[] = [];
+        // @ts-ignore
+        for (const d of data) {
+          tags.push(d.name)
+        }
+        resolve(tags);
+      })
+    })
   }
 
-  constructor() {
+  getVideosIdbyTag(tag_id: string) {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/tag/" + tag_id).subscribe(data => {
+        let videos_id: number[] = [];
+        // @ts-ignore
+        for (const d of data) {
+          videos_id.push(d.video_id)
+        }
+        resolve(videos_id);
+      })
+    })
+  }
+
+  getVideoData(id_video: number) {
+    return new Promise((resolve) => {
+      let data: any;
+      this.getVideo(id_video).subscribe(d => {
+        data = d;
+        data = data[0]; //api retorna array
+        data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
+        data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
+        resolve(data);
+      });
+    })
+  }
+
+  getTagsNamebyID(id: number[]) {
+    return new Promise((resolve) => {
+      let data: any;
+      this.getTags().subscribe(d => {
+        data = d;
+        let tags: any[] = [];
+        for (const number of id) {
+          // @ts-ignore
+          tags.push(data.filter(obj => obj.tid == number).map(obj => obj.name).toString())
+        }
+        resolve(tags);
+      })
+    })
+  }
+
+  getUser(id: number) {
+    return this.http.get(BASE_URL + "/api/channel/" + id)
+  }
+
+  getUsers() {
+    return this.http.get(BASE_URL + "/api/channels")
+  }
+
+  getUserData(id_user: number) {
+    return new Promise((resolve) => {
+      let user: any
+      user = this.getUser(id_user).subscribe(d => {
+        user = d;
+        user = user[0]
+        resolve(user);
+      })
+    })
+  }
+
+  getFavouritesFromLocal() {
+    let favourites = localStorage.getItem("Favourites")
+    if (favourites !== null) {
+      return JSON.parse(favourites)
+    }
+    return []
+  }
+
+  removeFavouriteFromLocal(id_video: number) {
+    let favourites = this.getFavouritesFromLocal()
+    let indice = favourites.indexOf(id_video)
+    favourites.splice(indice, 1)
+    localStorage.setItem("Favourites", JSON.stringify(favourites))
+  }
+
+  addFavouriteToLocal(id_video: number) {
+    let favourites = this.getFavouritesFromLocal()
+    favourites.push(id_video)
+    localStorage.setItem("Favourites", JSON.stringify(favourites))
   }
 }

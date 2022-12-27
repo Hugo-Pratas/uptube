@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
 @Component({
   selector: 'app-tags',
@@ -7,10 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TagsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service: UpTubeServiceService) { }
 
-  @Input() tags!: string[];
+  @Input() tags!: number[];
+  processedPage=false;
+  tagsName : any;
   ngOnInit(): void {
+    this.tagsName = this._service.getTagsNamebyID(this.tags).then((obj) =>{
+      this.tagsName =obj
+      this.processedPage=true;
+    })
   }
 
 }

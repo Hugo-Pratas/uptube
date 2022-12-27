@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+
 .wrapper {
   display: flex;
 
@@ -9,5 +13,5 @@
 * {
   color: antiquewhite;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Poppins', serif;
 }

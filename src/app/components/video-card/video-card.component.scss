@@ -1,0 +1,76 @@
+.totalcard {
+  background-color: #1c1c24;
+  border-radius: 10px;
+  height: 100%;
+  aspect-ratio: 5/4;
+  position: relative;
+  min-width: 250px;
+}
+
+.thumbnail {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.midsection {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  top: 85%;
+  align-items: flex-start;
+
+  app-user-logo {
+    bottom: 10%;
+    right: 5%;
+    position: absolute;
+  }
+
+  .duration {
+    background: #1c1c24;
+    border-radius: 5px;
+    margin-left: 15px;
+    text-align: center;
+    padding: 1px 10px 1px 10px;
+    position: relative;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.6em;
+    color: antiquewhite;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 30%;
+  padding-left: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  .channelName {
+    font-size: 0.8vw;
+    color: blue;
+    margin-bottom: 2px;
+  }
+
+  .title {
+    font-size: calc(3px + 0.6vw);
+    margin: 0 0 0 0;
+  }
+
+  .date {
+    margin-top: 2px;
+    font-size: 0.8vw;
+    color: darkgray;
+  }
+}

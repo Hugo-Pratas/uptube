@@ -1,8 +1,14 @@
-span{
+
+* {
+  font-family: 'Roboto', serif;
+  color: #1E75FF;
+}
+
+span {
   margin-right: 1%;
 }
 
-.navbarTags{
+.navbarTags {
   display: flex;
   flex-wrap: wrap;
 }

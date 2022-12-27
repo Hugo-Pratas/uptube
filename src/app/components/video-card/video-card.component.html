@@ -1,0 +1,22 @@
+<div class="totalcard" *ngIf="processPage">
+  <div class="thumbnail"
+       [ngStyle]="{'background-image': 'url(' + apiRoute + video_data.thumbnail + ')'}">
+    <div class="midsection">
+      <div class="duration">
+        <p>03:15</p>
+      </div>
+      <div id="user_view">
+        <app-user-logo
+          [src]="apiRoute + user.logo"
+          size="50px">
+        </app-user-logo>
+      </div>
+    </div>
+  </div>
+  <div class="details">
+    <p class="channelName">{{user.title}}</p>
+    <p class="title">{{video_data.name}}</p>
+    <p class="date">{{video_data.date}}</p>
+  </div>
+</div>
+
