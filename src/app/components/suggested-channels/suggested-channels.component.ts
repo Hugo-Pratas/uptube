@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
 @Component({
-  selector: 'app-menu-top-right',
-  templateUrl: './menu-top-right.component.html',
-  styleUrls: ['./menu-top-right.component.scss']
+  selector: 'app-suggested-channels',
+  templateUrl: './suggested-channels.html',
+  styleUrls: ['./suggested-channels.scss']
 })
 
 
-export class MenuTopRightComponent implements OnInit {
+export class SuggestedChannelsComponent implements OnInit {
 
   users: any;
 

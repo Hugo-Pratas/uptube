@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuTopRightComponent } from './menu-top-right.component';
+import { SuggestedChannelsComponent } from './suggested-channels.component';
 
 describe('MenuTopRightComponent', () => {
-  let component: MenuTopRightComponent;
-  let fixture: ComponentFixture<MenuTopRightComponent>;
+  let component: SuggestedChannelsComponent;
+  let fixture: ComponentFixture<SuggestedChannelsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuTopRightComponent ]
+      declarations: [ SuggestedChannelsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MenuTopRightComponent);
+    fixture = TestBed.createComponent(SuggestedChannelsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

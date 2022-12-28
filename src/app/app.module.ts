@@ -11,7 +11,7 @@ import {HomepageComponent} from "./pages/homepage/homepage.component";
 import {UserLogoComponent} from './components/user-logo/user-logo.component';
 import {VideoCardComponent} from './components/video-card/video-card.component';
 import {HttpClientModule} from '@angular/common/http';
-import {MenuTopRightComponent} from "./components/menu-top-right/menu-top-right.component";
+import {SuggestedChannelsComponent} from "./components/suggested-channels/suggested-channels.component";
 import {TagPageComponent} from './pages/tag-page/tag-page.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import {TagPageComponent} from './pages/tag-page/tag-page.component';
     TagsComponent,
     UserLogoComponent,
     VideoCardComponent,
-    MenuTopRightComponent,
+    SuggestedChannelsComponent,
     TagPageComponent,
   ],
   imports: [
