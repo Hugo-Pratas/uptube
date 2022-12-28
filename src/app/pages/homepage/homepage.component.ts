@@ -16,8 +16,6 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this._service.getVideos().subscribe(d => {
       this.videos = d
-      console.log(this.videos)
-
     })
   }
 

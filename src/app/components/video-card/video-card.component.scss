@@ -2,7 +2,7 @@
   background-color: #1c1c24;
   border-radius: 10px;
   height: 100%;
-  aspect-ratio: 16/12;
+  aspect-ratio: 10/7;
   position: relative;
   min-width: 250px;
 }
@@ -49,35 +49,30 @@
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
   height: 30%;
   padding-left: 10px;
 
   .titleDiv {
-    display: flex;
-    align-items: center;
-    height: 30%;
+    max-height: 2rem;
+    text-overflow: ellipsis;
     overflow: hidden;
-    font-size: 13px;
-    margin: 0 0 0 0;
-    flex-wrap: wrap;
-    line-height: 15px;
   }
 
   .title {
     margin: 0 0 0 0;
+    line-height: 1rem;
   }
 
   .channelName {
+    padding-top: 10px;
     font-size: 10px;
     color: #1e75ff;
     margin: 0 0 0 0;
   }
 
   .date {
-    font-size: 10px;
+    font-size: 0.5rem;
     color: darkgray;
     margin: 0 0 0 0;
   }

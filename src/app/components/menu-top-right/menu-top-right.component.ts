@@ -19,7 +19,6 @@ export class MenuTopRightComponent implements OnInit {
     this._service.getUsers().subscribe(d => {
       this.users = d
       this.users = this.users[0] //api retorna array...
-      console.log(this.users)
     })
   }
 }
