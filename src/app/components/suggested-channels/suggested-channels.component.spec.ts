@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuggestedChannelsComponent } from './suggested-channels.component';
 
-describe('MenuTopRightComponent', () => {
+describe('SuggestedChannelsComponent', () => {
   let component: SuggestedChannelsComponent;
   let fixture: ComponentFixture<SuggestedChannelsComponent>;
 
