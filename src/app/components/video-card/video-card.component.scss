@@ -1,4 +1,6 @@
-
+*{
+  margin: 0;
+}
 .totalcard {
   background-color: #1c1c24;
   border-radius: 10px;
@@ -74,9 +76,87 @@
     margin: 0 0 0 0;
   }
 
+  .footer{
+    display: flex;
+    justify-content: space-between;
+
+    .icons{
+      display: flex;
+      align-items: center;
+
+      *{
+        font-size: 1rem;
+        margin-right: 20px;
+      }
+    }
+  }
+
   .date {
     font-size: 0.7rem;
     color: darkgray;
     margin: 0 0 0 0;
+  }
+
+
+  .share{
+    color: #92929D;
+    position: absolute;
+  }
+}
+
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  animation: fadeInOut 3s linear 1 forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
