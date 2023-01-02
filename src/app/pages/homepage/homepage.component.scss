@@ -9,22 +9,25 @@ h3 {
 }
 
 .mainColumn {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
   width: 80%;
-  margin-left: 3%;
-  margin-right: 3%;
+  margin-left: 1vw;
 }
 
 .videoCards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1.5vh 2vw;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2vh 2vw;
+  margin-right: 1.5vw;
 }
+
 
 .menuTopRight {
   width: 25%;
   margin-right: 2%;
   margin-top: 2%;
-  min-width: 20%;
 }
 
 

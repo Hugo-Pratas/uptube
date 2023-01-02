@@ -1,8 +1,9 @@
+
 .totalcard {
   background-color: #1c1c24;
   border-radius: 10px;
   height: 100%;
-  aspect-ratio: 5/4;
+  aspect-ratio: 10/7;
   position: relative;
   min-width: 250px;
 }
@@ -49,28 +50,33 @@
 }
 
 .details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
   height: 30%;
-  padding-left: 15px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  margin-left: 10px;
+  align-content: center;
+  grid-gap: 5px;
 
-  .channelName {
-    font-size: 0.8vw;
-    color: blue;
-    margin-bottom: 2px;
+
+  .titleDiv {
+    max-height: 2rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .title {
-    font-size: calc(3px + 0.6vw);
+    margin: 0 0 0 0;
+    line-height: 1rem;
+  }
+
+  .channelName {
+    font-size: 0.8rem;
+    color: #1e75ff;
     margin: 0 0 0 0;
   }
 
   .date {
-    margin-top: 2px;
-    font-size: 0.8vw;
+    font-size: 0.7rem;
     color: darkgray;
+    margin: 0 0 0 0;
   }
 }

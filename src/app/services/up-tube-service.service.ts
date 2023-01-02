@@ -68,7 +68,9 @@ export class UpTubeServiceService {
         data = d;
         data = data[0]; //api retorna array
         data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
+        console.log(data.url)
         data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
+        console.log(data.url)
         resolve(data);
       });
     })
