@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
+import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
@@ -10,6 +12,7 @@ const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 })
 
 export class UpTubeServiceService {
+  bookmark = faBookmark;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
@@ -68,9 +71,7 @@ export class UpTubeServiceService {
         data = d;
         data = data[0]; //api retorna array
         data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
-        console.log(data.url)
         data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
-        console.log(data.url)
         resolve(data);
       });
     })
@@ -110,6 +111,8 @@ export class UpTubeServiceService {
     })
   }
 
+  //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
+
   getFavouritesFromLocal() {
     let favourites = localStorage.getItem("Favourites")
     if (favourites !== null) {
@@ -129,5 +132,21 @@ export class UpTubeServiceService {
     let favourites = this.getFavouritesFromLocal()
     favourites.push(id_video)
     localStorage.setItem("Favourites", JSON.stringify(favourites))
+  }
+
+  toggleFavorito(id_video: number) {
+    if (this.isFavourite(id_video)) {
+      this.removeFavouriteFromLocal(id_video)
+    } else {
+      this.addFavouriteToLocal(id_video)
+    }
+  }
+
+  icone_favorito(id_video: number) {
+    return this.isFavourite(id_video) ? solidBookmark : faBookmark;
+  }
+
+  isFavourite(id_video: number): boolean {
+    return this.getFavouritesFromLocal().includes(id_video.toString());
   }
 }
