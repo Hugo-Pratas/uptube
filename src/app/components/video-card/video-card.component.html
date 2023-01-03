@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="video-card.component.scss">
 <div class="totalcard" *ngIf="processPage">
   <div class="thumbnail"
        [ngStyle]="{'background-image': 'url(' + apiRoute + video_data.thumbnail + ')'}">
@@ -15,7 +16,18 @@
   </div>
   <div class="details">
     <p class="channelName">{{user.title}}</p>
-    <div class="titleDiv"><p class="title">{{video_data.name}}</p></div>
-    <p class="date">{{video_data.date}}</p>
+    <div class="titleDiv">
+      <p class="title">{{video_data.name}}</p>
+    </div>
+    <div class="footer">
+      <p class="date">{{video_data.date}}</p>
+      <div class="icons" *ngIf="icons">
+        <fa-icon (click)="toggleFavorito(this.video_data.id)" [icon]="bookmark"></fa-icon>
+        <div class="popup" (click)="myFunction()">
+          <fa-icon class="share" [icon]="faShareSquare"></fa-icon>
+          <span class="popuptext" [id]="video_data.id"><p>Link Copiado!</p></span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
