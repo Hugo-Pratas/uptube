@@ -5,7 +5,6 @@ import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawe
 import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 
-
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
 @Injectable({
@@ -148,6 +147,6 @@ export class UpTubeServiceService {
   }
 
   isFavourite(id_video: number): boolean {
-    return this.getFavouritesFromLocal().includes(id_video);
+    return this.getFavouritesFromLocal().includes(id_video.toString());
   }
 }
