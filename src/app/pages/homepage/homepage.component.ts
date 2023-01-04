@@ -18,5 +18,4 @@ export class HomepageComponent implements OnInit {
       this.videos = d
     })
   }
-
 }
