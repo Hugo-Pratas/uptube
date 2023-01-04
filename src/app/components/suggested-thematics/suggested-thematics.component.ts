@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {Thematic} from "../../model/thematics";
 
 @Component({
   selector: 'app-suggested-thematics',
@@ -8,7 +9,7 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 })
 export class SuggestedThematicsComponent implements OnInit {
 
-  thematics: any
+  thematic = {} as Thematic;
   apiRoute = this._service.getApiRoute()
 
   constructor(private _service: UpTubeServiceService) {
@@ -17,10 +18,8 @@ export class SuggestedThematicsComponent implements OnInit {
 
   ngOnInit(): void {
     this._service.getSuggestedThematics().subscribe(d => {
-      // @ts-ignore
-      this.thematics = d.splice(0,2)
-      console.log(this.thematics)
+      let data = <Thematic[]>d
+      this.thematic = data[0] //FOI AQUI QUE FICASTE 1 HORA À TOA, ATENÇÃO
     })
   }
-
 }
