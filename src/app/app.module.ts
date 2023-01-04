@@ -11,10 +11,10 @@ import {HomepageComponent} from "./pages/homepage/homepage.component";
 import {UserLogoComponent} from './components/user-logo/user-logo.component';
 import {VideoCardComponent} from './components/video-card/video-card.component';
 import {HttpClientModule} from '@angular/common/http';
-import {MenuTopRightComponent} from "./components/menu-top-right/menu-top-right.component";
 import {TagPageComponent} from './pages/tag-page/tag-page.component';
 import {ThematicsPageComponent} from './pages/thematics-page/thematics-page.component';
 import {SuggestedChannelsComponent} from "./components/suggested-channels/suggested-channels.component";
+import {SuggestedThematicsComponent} from './components/suggested-thematics/suggested-thematics.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +25,10 @@ import {SuggestedChannelsComponent} from "./components/suggested-channels/sugges
     TagsComponent,
     UserLogoComponent,
     VideoCardComponent,
-    MenuTopRightComponent,
     TagPageComponent,
     ThematicsPageComponent,
     SuggestedThematicsComponent,
+    SuggestedChannelsComponent
   ],
   imports: [
     BrowserModule,
