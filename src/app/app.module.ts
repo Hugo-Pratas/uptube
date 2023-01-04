@@ -13,6 +13,7 @@ import {VideoCardComponent} from './components/video-card/video-card.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MenuTopRightComponent} from "./components/menu-top-right/menu-top-right.component";
 import {TagPageComponent} from './pages/tag-page/tag-page.component';
+import {ThematicsPageComponent} from './pages/thematics-page/thematics-page.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {TagPageComponent} from './pages/tag-page/tag-page.component';
     VideoCardComponent,
     MenuTopRightComponent,
     TagPageComponent,
+    ThematicsPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {DomSanitizer} from '@angular/platform-browser';
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
@@ -26,7 +25,7 @@ export class VideoPageComponent implements OnInit {
   sugestedVideos: any
 
 
-  constructor(private route: ActivatedRoute, private _service: UpTubeServiceService, private sanitizer: DomSanitizer) {
+  constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
