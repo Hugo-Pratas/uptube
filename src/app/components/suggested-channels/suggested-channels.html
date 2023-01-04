@@ -4,12 +4,13 @@
       <h2>Canais Sugeridos</h2>
     </div>
     <div class="channelList">
-      <div class="channel">
+      <div class="channel" *ngFor="let channel of channels">
         <app-user-logo
+          [src]="apiRoute + channel.logo"
           size="30px"
         >
         </app-user-logo>
-        <p>canal</p>
+        <p>{{channel.name}}</p>
       </div>
     </div>
     <div class="bottomText">

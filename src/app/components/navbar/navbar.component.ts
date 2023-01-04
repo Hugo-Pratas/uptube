@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   public hideRuleContent= false;
 
   toggle() {
-    this.hideRuleContent = !this.hideRuleContent;
+    this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
   }
 
   ngOnInit(): void {
