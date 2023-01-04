@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {
   faHouse as faHouseSolid,
   faBarsStaggered as faBarsStaggeredSolid,
@@ -21,11 +21,12 @@ export class NavbarComponent implements OnInit {
 
   public getScreenWidth: any;
   public getScreenHeight: any;
-  tags: any;
+  tags = [] as string[];
 
-  constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) { }
+  constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
+  }
 
-  public hideRuleContent= false;
+  public hideRuleContent = false;
 
   toggle() {
     this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
@@ -35,17 +36,17 @@ export class NavbarComponent implements OnInit {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
 
-    this._service.getTagsNames().then((obj) =>{
-      this.tags =obj
+    this._service.getTagsNames().then((obj) => {
+      this.tags = <string[]>obj
     })
 
   }
 
 
-/*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
-  onWindowResize() {
-    this.getScreenWidth = window.innerWidth;
-    this.getScreenHeight = window.innerHeight;
-    //console.log(this.getScreenWidth);
-  }*/
+  /*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+    onWindowResize() {
+      this.getScreenWidth = window.innerWidth;
+      this.getScreenHeight = window.innerHeight;
+      //console.log(this.getScreenWidth);
+    }*/
 }
