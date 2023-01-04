@@ -3,6 +3,7 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {faShareAlt} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
+import {Video} from "../../model/video";
 
 @Component({
   selector: 'app-video-card',
@@ -12,7 +13,7 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
 export class VideoCardComponent implements OnInit {
   user: any;
   apiRoute = ""
-  @Input() video_data: any;
+  @Input() video_data = {} as Video;
   @Input() icons = false
   processPage = false
   faShareSquare = faShareAlt
@@ -24,8 +25,12 @@ export class VideoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiRoute = this._service.getApiRoute()
+    this.getUserdata()
+  }
+
+  getUserdata() {
     this._service.getUser(this.video_data.channel).subscribe(d => {
-      this.user = d
+      this.user = <Video[]>d
       this.user = this.user[0] //api retorna array...
       this.bookmark = this._service.icone_favorito(this.video_data.id)
       this.processPage = true
@@ -38,7 +43,7 @@ export class VideoCardComponent implements OnInit {
   }
 
   myFunction() {
-    var popup = document.getElementById(this.video_data.id);
+    var popup = document.getElementById(this.video_data.id.toString());
     navigator.clipboard.writeText(document.URL.replace("homepage", "video/") + this.video_data.id);
     // @ts-ignore
     popup.classList.toggle("show");
