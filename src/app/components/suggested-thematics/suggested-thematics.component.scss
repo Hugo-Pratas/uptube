@@ -3,6 +3,7 @@
   border-radius: 10px;
   margin-top: 2vh;
   width: 100%;
+  padding-bottom: 1vh;
 }
 
 .topText {
@@ -12,6 +13,7 @@
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
+  border-bottom: 1px solid #3e3d3f;
 
   h2 {
     font-size: 11px;
@@ -19,7 +21,6 @@
 }
 
 .details{
-  border-top: 1px solid #3e3d3f;
   padding-top: 15px;
 }
 
@@ -44,12 +45,11 @@
 
 .thematicThumbnail {
   display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
   margin-top: 10px;
-  padding-left: 15px;
-  padding-bottom: 15px;
-
-  img {
-    width: 15vw;
-    border-radius: 10px;
-  }
+  background-position: center;
+  background-size: cover;
+  aspect-ratio: 3/2;
+  border-radius: 10px;
 }
