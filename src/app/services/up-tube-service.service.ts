@@ -23,7 +23,7 @@ export class UpTubeServiceService {
 
   getSugestedChannels() {
     return this.http.get(BASE_URL + "/api/channels")
-}
+  }
 
   getVideos() {
     return this.http.get(BASE_URL + "/api/videos")
@@ -112,6 +112,10 @@ export class UpTubeServiceService {
         resolve(user);
       })
     })
+  }
+
+  getThematics() {
+    return this.http.get(BASE_URL + "/api/thematics")
   }
 
   //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
