@@ -9,8 +9,6 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 export class ThematicsPageComponent implements OnInit {
 
   thematics: any
-  video: any
-  user: any
 
   constructor(private _service: UpTubeServiceService) {
   }
@@ -20,5 +18,4 @@ export class ThematicsPageComponent implements OnInit {
       this.thematics = d
     })
   }
-
 }
