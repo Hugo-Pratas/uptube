@@ -12,7 +12,7 @@
         <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
         <p id="link2">Canais</p>
       </div>
-      <div class="links" routerLink="/video/2" routerLinkActive="currentPage">
+      <div class="links" routerLink="/thematics" routerLinkActive="currentPage">
         <fa-icon [icon]="faClapperboardSolid"></fa-icon>
         <p id="link3">Temáticas</p>
       </div>
@@ -24,10 +24,8 @@
     <div class="containerTags">
       <p class="headerTags">TAGS</p>
       <div *ngFor="let tag of tags" class="navbarTags">
-        <a style="color: inherit;" [href]=tag>{{tag}}</a>
+        <a href="tags/{{tag}}">{{tag}}</a>
       </div>
-    </div>
-    <div>
     </div>
   </div>
 </div>
