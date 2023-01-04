@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {Thematic} from "../../model/thematics";
 
 @Component({
   selector: 'app-suggested-thematics',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuggestedThematicsComponent implements OnInit {
 
-  constructor() { }
+  thematic = {} as Thematic;
+  apiRoute = this._service.getApiRoute()
 
-  ngOnInit(): void {
+  constructor(private _service: UpTubeServiceService) {
+
   }
 
+  ngOnInit(): void {
+    this._service.getSuggestedThematics().subscribe(d => {
+      let data = <Thematic[]>d
+      this.thematic = data[0] //FOI AQUI QUE FICASTE 1 HORA À TOA, ATENÇÃO
+    })
+  }
 }

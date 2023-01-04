@@ -11,6 +11,7 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 export class SuggestedChannelsComponent implements OnInit {
 
   channels: any
+  apiRoute = this._service.getApiRoute()
 
   constructor(private _service: UpTubeServiceService) {
   }

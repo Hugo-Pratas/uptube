@@ -104,6 +104,7 @@
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
+          justify-content: center;
 
           .share {
             color: #92929D;
@@ -114,7 +115,7 @@
         /* The actual popup */
         .popup .popuptext {
           visibility: hidden;
-          width: 160px;
+          width: 130px;
           background-color: #555;
           color: #fff;
           text-align: center;
@@ -128,6 +129,7 @@
 
           p {
             font-size: 15px;
+            margin-right: 0;
           }
         }
 

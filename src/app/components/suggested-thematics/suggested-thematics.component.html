@@ -7,17 +7,18 @@
     <div class="details">
       <div class="detailsTop">
         <app-user-logo
+          [src]="apiRoute + thematic.logo"
           size="30px"
         >
         </app-user-logo>
         <div class="detailsText">
-          <p style="font-size: 12px">Nome Temática</p>
-          <p style="font-size: 8px">Canal</p>
+          <p style="font-size: 12px">{{thematic.title}}</p>
+          <p style="font-size: 8px">{{thematic.teaser}}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="thematicThumbnail">
-    <img alt="img" src="./assets/images/YouTube-thumbnail-size-guide-best-practices-top-examples.png ">
+  <div class="thematicThumbnail"
+       [ngStyle]="{'background-image': 'url(' + apiRoute + thematic.thumbnail + ')'}">
   </div>
 </div>
