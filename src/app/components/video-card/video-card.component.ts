@@ -12,7 +12,7 @@ import {Video} from "../../model/video";
 })
 export class VideoCardComponent implements OnInit {
   user: any;
-  apiRoute = ""
+  apiRoute = this._service.getApiRoute()
   @Input() video_data = {} as Video;
   @Input() icons = false
   processPage = false
@@ -24,7 +24,6 @@ export class VideoCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiRoute = this._service.getApiRoute()
     this.getUserdata()
   }
 
