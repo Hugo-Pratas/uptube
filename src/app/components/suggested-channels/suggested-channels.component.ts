@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {Channel} from "../../model/channel";
+
 
 @Component({
   selector: 'app-suggested-channels',
@@ -10,7 +12,7 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
 export class SuggestedChannelsComponent implements OnInit {
 
-  channels: any
+  channels = [] as Channel[];
   apiRoute = this._service.getApiRoute()
 
   constructor(private _service: UpTubeServiceService) {
@@ -18,10 +20,8 @@ export class SuggestedChannelsComponent implements OnInit {
 
   ngOnInit(): void {
     this._service.getSugestedChannels().subscribe(d => {
-      // @ts-ignore
-      this.channels = d.splice(0,4)
-      //this.channels.length = 2
-      console.log(this.channels)
+      this.channels = <Channel[]>d
+      this.channels = this.channels.splice(0,4)
     })
   }
 }
