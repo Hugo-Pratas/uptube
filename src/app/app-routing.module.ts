@@ -1,17 +1,24 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './pages/homepage/homepage.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomepageComponent} from './pages/homepage/homepage.component';
 import {VideoPageComponent} from "./pages/video-page/video-page.component";
+import {TagPageComponent} from "./pages/tag-page/tag-page.component";
+import {ThematicsPageComponent} from "./pages/thematics-page/thematics-page.component";
+import {ThematicPageComponent} from "./pages/thematic-page/thematic-page.component";
 
 
 const routes: Routes = [
+  {path: '', redirectTo: 'homepage', pathMatch: 'full'},
   {path: 'homepage', component: HomepageComponent},
-  {path: '', redirectTo: '/video/1', pathMatch: 'full'},
   {path: 'video/:id_video', component: VideoPageComponent},
+  {path: 'thematics', component: ThematicsPageComponent},
+  {path: 'tags/:tag', component: TagPageComponent},
+  {path: 'thematic/:id_thematic', component: ThematicPageComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

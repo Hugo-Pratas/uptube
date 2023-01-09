@@ -16,8 +16,9 @@ export class TagPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(r => {
-      this.thisTag = r['tag']
+    this.route.paramMap.subscribe(r => {
+      // @ts-ignore
+      this.thisTag = r.get('tag')
       this._service.getVideosIdbyTag(this.thisTag).then(data => {
         // @ts-ignore
         this.videos_id = data

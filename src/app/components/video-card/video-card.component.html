@@ -1,29 +1,30 @@
-<link rel="stylesheet" href="video-card.component.scss">
 <div class="totalcard" *ngIf="processPage">
   <div class="thumbnail"
-       [ngStyle]="{'background-image': 'url(' + apiRoute + video_data.thumbnail + ')'}">
+       [routerLink]="routerLink"
+       [ngStyle]="{'background-image': 'url(' + apiRoute + data.thumbnail + ')'}"
+  >
     <div class="midsection">
-      <div class="duration">
-        <p>03:15</p>
+      <div class="duration" *ngIf="isVideo">
+        <p>{{video_data.duration}}</p>
       </div>
-      <div id="user_view">
+      <div id="user_view" [routerLink]="routerLink" (click)="$event.stopPropagation()">
         <app-user-logo
-          [src]="apiRoute + user.logo"
+          [src]="apiRoute + data.logo"
           size="70px">
         </app-user-logo>
       </div>
     </div>
   </div>
   <div class="details">
-    <p class="channelName">{{user.title}}</p>
+    <p class="channelName">{{data.name}}</p>
     <div class="titleDiv">
-      <p class="title">{{video_data.name}}</p>
+      <p [routerLink]="routerLink" class="title">{{data.title}}</p>
     </div>
     <div class="footer">
-      <p class="date">{{video_data.date}}</p>
+      <p class="date">{{data.date}}</p>
       <div class="icons" *ngIf="icons">
         <fa-icon (click)="toggleFavorito(this.video_data.id)" [icon]="bookmark"></fa-icon>
-        <div class="popup" (click)="myFunction()">
+        <div class="popup" (click)="CopyLink()">
           <fa-icon class="share" [icon]="faShareSquare"></fa-icon>
           <span class="popuptext" [id]="video_data.id"><p>Link Copiado!</p></span>
         </div>

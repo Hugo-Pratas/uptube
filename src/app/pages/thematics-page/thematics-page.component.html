@@ -1,0 +1,10 @@
+<div id="container">
+  <h3>Tematicas</h3>
+  <div id="gridContainer">
+    <div *ngFor="let thematic of thematics">
+      <app-video-card
+        [thematic]="thematic"
+      ></app-video-card>
+    </div>
+  </div>
+</div>
