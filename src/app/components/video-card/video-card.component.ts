@@ -19,7 +19,6 @@ export class VideoCardComponent implements OnInit {
   user: any;
   data = {} as CardData
   apiRoute = this._service.getApiRoute()
-
   processPage = false
   faShareSquare = faShareAlt
   bookmark = {} as IconProp
@@ -34,7 +33,6 @@ export class VideoCardComponent implements OnInit {
       this.getUserdata()
       this.isVideo = true
       this.routerLink = "/video/" + this.video_data.id
-      console.log(this.routerLink)
     } else if (Object.keys(this.thematic).length !== 0) {
       this.constructCardData(this.thematic.thumbnail, this.thematic.logo, this.thematic.teaser, this.thematic.title, this.thematic.date)
       this.routerLink = "/thematic/" + this.thematic.id
@@ -47,7 +45,7 @@ export class VideoCardComponent implements OnInit {
       this.user = <any>d
       this.user = this.user[0] //api retorna array...
       if (this.icons) {
-        this.bookmark = this._service.icone_favorito(this.video_data.id)
+        this.bookmark = this._service.icone_favorito(this.video_data.id_number)
       }
       this.constructCardData(this.video_data.thumbnail, this.user.logo, this.video_data.name, this.user.title, this.video_data.date)
       this.processPage = true

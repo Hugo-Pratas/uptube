@@ -158,6 +158,6 @@ export class UpTubeServiceService {
   }
 
   isFavourite(id_video: number): boolean {
-    return this.getFavouritesFromLocal().includes(id_video.toString());
+    return this.getFavouritesFromLocal().includes(id_video);
   }
 }
