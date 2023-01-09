@@ -63,8 +63,6 @@ export class VideoPageComponent implements OnInit {
     //needs fixing
     return isMarked ? solidThumbsUp : faThumbsUp;
   }
-
-
 }
 
 
