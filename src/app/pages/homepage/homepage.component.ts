@@ -17,6 +17,9 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this._service.getVideos().subscribe(d => {
       this.videos = <Video[]>d
+      for (const video of this.videos) {
+        video.id_number = parseInt(video.id) //https://gifdb.com/gif/rage-comics-table-flip-qitpumendrh5b9sl.html
+      }
     })
   }
 }

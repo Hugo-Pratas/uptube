@@ -1,5 +1,6 @@
 export interface Video {
-  id: number;
+  id: string;  //api retorna string =)
+  id_number: number;
   name: string;
   tags: string | number[];
   url: string;

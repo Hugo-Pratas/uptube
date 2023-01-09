@@ -44,6 +44,19 @@ export class UpTubeServiceService {
   getTags() {
     return this.http.get(BASE_URL + "/api/tags")
   }
+  getChannels(){
+    return this.http.get(BASE_URL+"/api/channels")
+
+  }
+
+  getChannel(id: number){
+
+    return this.http.get(BASE_URL +"/api/channel/" + id)
+
+  }
+
+
+
 
   getTagsNames() {
     return new Promise((resolve) => {
@@ -158,6 +171,19 @@ export class UpTubeServiceService {
   }
 
   isFavourite(id_video: number): boolean {
-    return this.getFavouritesFromLocal().includes(id_video.toString());
+    return this.getFavouritesFromLocal().includes(id_video);
+  }
+  getVideosChannel( id: number) {
+    return new Promise((resolve) => {
+      this.getChannel(id).subscribe(data => {
+        let videos: number[] = [];
+        let id_video= <any[]>data;
+
+        for (const d of id_video) {
+          videos.push(d.video_id)
+        }
+        resolve(videos);
+      })
+    })
   }
 }

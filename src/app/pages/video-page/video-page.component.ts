@@ -6,6 +6,7 @@ import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons";
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class VideoPageComponent implements OnInit {
   videoData: any;
   userData: any;
   id_video = -1;
-  bookmark = faBookmark;
+  bookmark = {} as IconProp
   processedPage = false;
   urlSite = ""
   sugestedVideos: any
@@ -29,17 +30,21 @@ export class VideoPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(r => {
-      this.id_video = parseInt(r['id_video'])
+    this.route.paramMap.subscribe(r => {
+      let paramsData = r.get('id_video')
+      if (paramsData === null) {
+        throw new Error("params Value is NULL")
+      }
+      this.id_video = parseInt(paramsData)
       this.getData()
     });
   }
 
   async getData() {
     this.urlSite = this._service.getApiRoute()
+    this.bookmark = this._service.icone_favorito(this.id_video)
     this.videoData = await this._service.getVideoData(this.id_video)
     this.userData = await this._service.getUserData(this.videoData.channel)
-    this.bookmark = this._service.icone_favorito(this.id_video)
     this.sugestedVideos = await this.getSugestedVideoData()
     this.processedPage = true
   }
