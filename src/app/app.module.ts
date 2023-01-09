@@ -8,6 +8,14 @@ import {TagsComponent} from './components/tags/tags.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {HomepageComponent} from "./pages/homepage/homepage.component";
+import {UserLogoComponent} from './components/user-logo/user-logo.component';
+import {VideoCardComponent} from './components/video-card/video-card.component';
+import {HttpClientModule} from '@angular/common/http';
+import {TagPageComponent} from './pages/tag-page/tag-page.component';
+import {ThematicsPageComponent} from './pages/thematics-page/thematics-page.component';
+import {SuggestedChannelsComponent} from "./components/suggested-channels/suggested-channels.component";
+import {SuggestedThematicsComponent} from './components/suggested-thematics/suggested-thematics.component';
+import {ThematicPageComponent} from './pages/thematic-page/thematic-page.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +23,20 @@ import {HomepageComponent} from "./pages/homepage/homepage.component";
     VideoPageComponent,
     NavbarComponent,
     HomepageComponent,
-    TagsComponent
+    TagsComponent,
+    UserLogoComponent,
+    VideoCardComponent,
+    TagPageComponent,
+    ThematicsPageComponent,
+    SuggestedThematicsComponent,
+    SuggestedChannelsComponent,
+    ThematicPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

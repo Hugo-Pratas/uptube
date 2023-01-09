@@ -1,0 +1,26 @@
+<div class="menuTotal">
+  <div class="main">
+    <div class="topText">
+      <h2>Temáticas Sugeridas</h2>
+      <h2 id="showAll" routerLink="/thematics">
+        VER TODAS
+      </h2>
+    </div>
+    <div class="details">
+      <div class="detailsTop">
+        <app-user-logo
+          [src]="apiRoute + thematic.logo"
+          size="30px"
+        >
+        </app-user-logo>
+        <div class="detailsText">
+          <p style="font-size: 12px">{{thematic.title}}</p>
+          <p style="font-size: 8px">{{thematic.teaser}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="thematicThumbnail"
+       [ngStyle]="{'background-image': 'url(' + apiRoute + thematic.thumbnail + ')'}">
+  </div>
+</div>
