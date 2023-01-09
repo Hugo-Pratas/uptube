@@ -19,9 +19,8 @@ export class SuggestedChannelsComponent implements OnInit {
   ngOnInit(): void {
     this._service.getSugestedChannels().subscribe(d => {
       // @ts-ignore
-      this.channels = d.splice(0,4)
+      this.channels = d.splice(0, 4)
       //this.channels.length = 2
-      console.log(this.channels)
     })
   }
 }

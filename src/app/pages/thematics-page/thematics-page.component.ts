@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {Thematic} from "../../model/thematics";
 
 @Component({
   selector: 'app-thematics-page',
@@ -8,14 +9,17 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 })
 export class ThematicsPageComponent implements OnInit {
 
-  thematics: any
+  thematics = [] as Thematic[]
 
   constructor(private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
     this._service.getThematics().subscribe(d => {
-      this.thematics = d
+      let data = <Thematic[]>d
+      for (const datum of data) {
+        this.thematics.push(new Thematic(datum.title, datum.id, datum.tags, datum.teaser, datum.header, datum.thumbnail, datum.logo))
+      }
     })
   }
 }

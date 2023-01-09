@@ -4,6 +4,8 @@ import {faShareAlt} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
+import {iThematic, Thematic} from "../../model/thematics";
+import {CardData} from 'src/app/model/card-data';
 
 @Component({
   selector: 'app-video-card',
@@ -12,9 +14,11 @@ import {Video} from "../../model/video";
 })
 export class VideoCardComponent implements OnInit {
   user: any;
-  apiRoute = ""
+  apiRoute = this._service.getApiRoute()
+  data = {} as CardData
   @Input() video_data = {} as Video;
   @Input() icons = false
+  @Input() thematics = {} as Thematic
   processPage = false
   faShareSquare = faShareAlt
   bookmark = {} as IconProp
@@ -24,8 +28,13 @@ export class VideoCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiRoute = this._service.getApiRoute()
-    this.getUserdata()
+    if (Object.keys(this.video_data).length !== 0) {
+      this.getUserdata()
+      console.log(this.data)
+    } else if (Object.keys(this.thematics).length !== 0) {
+      console.log("mandei uma tematica")
+      console.log(this.thematics)
+    }
   }
 
   getUserdata() {
