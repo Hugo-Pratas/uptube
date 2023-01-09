@@ -15,6 +15,7 @@ import {TagPageComponent} from './pages/tag-page/tag-page.component';
 import {ThematicsPageComponent} from './pages/thematics-page/thematics-page.component';
 import {SuggestedChannelsComponent} from "./components/suggested-channels/suggested-channels.component";
 import {SuggestedThematicsComponent} from './components/suggested-thematics/suggested-thematics.component';
+import {ThematicPageComponent} from './pages/thematic-page/thematic-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {SuggestedThematicsComponent} from './components/suggested-thematics/sugg
     TagPageComponent,
     ThematicsPageComponent,
     SuggestedThematicsComponent,
-    SuggestedChannelsComponent
+    SuggestedChannelsComponent,
+    ThematicPageComponent
   ],
   imports: [
     BrowserModule,

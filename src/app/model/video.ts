@@ -8,4 +8,5 @@ export interface Video {
   description: string;
   thumbnail: string;
   date: string;
+  duration: string
 }

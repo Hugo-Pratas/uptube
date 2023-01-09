@@ -4,6 +4,7 @@ import {HomepageComponent} from './pages/homepage/homepage.component';
 import {VideoPageComponent} from "./pages/video-page/video-page.component";
 import {TagPageComponent} from "./pages/tag-page/tag-page.component";
 import {ThematicsPageComponent} from "./pages/thematics-page/thematics-page.component";
+import {ThematicPageComponent} from "./pages/thematic-page/thematic-page.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'video/:id_video', component: VideoPageComponent},
   {path: 'thematics', component: ThematicsPageComponent},
   {path: 'tags/:tag', component: TagPageComponent},
+  {path: 'thematic/:id_thematic', component: ThematicPageComponent},
 ];
 
 @NgModule({
