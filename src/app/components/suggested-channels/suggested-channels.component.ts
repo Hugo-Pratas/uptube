@@ -14,6 +14,27 @@ export class SuggestedChannelsComponent implements OnInit {
 
   channels = [] as Channel[];
   apiRoute = this._service.getApiRoute()
+  showText: string = '';
+
+  showMore() {
+    if (this.showText == 'MOSTRAR MAIS') {
+      this._service.getSugestedChannels().subscribe(d => {
+        this.channels = <Channel[]>d
+        this.channels = this.channels.splice(0, 10)
+        this.showText = 'MOSTRAR MENOS'
+      })
+    } else {
+      this.showLess()
+    }
+  }
+
+  showLess() {
+    this._service.getSugestedChannels().subscribe(d => {
+      this.channels = <Channel[]>d
+      this.channels = this.channels.splice(0, 3)
+      this.showText = 'MOSTRAR MAIS'
+    })
+  }
 
   constructor(private _service: UpTubeServiceService) {
   }
@@ -21,7 +42,8 @@ export class SuggestedChannelsComponent implements OnInit {
   ngOnInit(): void {
     this._service.getSugestedChannels().subscribe(d => {
       this.channels = <Channel[]>d
-      this.channels = this.channels.splice(0,4)
-    })
-  }
+      this.channels = this.channels.splice(0, 3)
+      this.showText = 'MOSTRAR MAIS'
+  })
+}
 }
