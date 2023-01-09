@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {faShareAlt} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
+import {faClapperboard as faClapperboardSolid} from "@fortawesome/free-solid-svg-icons";
+import {faPlay as faPlaySolid,} from "@fortawesome/free-solid-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
 import {iThematic} from "../../model/thematics";
@@ -20,6 +22,8 @@ export class VideoCardComponent implements OnInit {
   data = {} as CardData
   apiRoute = this._service.getApiRoute()
   processPage = false
+  faClapperboardSolid = faClapperboardSolid;
+  faPlaySolid = faPlaySolid;
   faShareSquare = faShareAlt
   bookmark = {} as IconProp
   routerLink = ""

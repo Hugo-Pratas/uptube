@@ -5,6 +5,9 @@
   margin-top: 1.5em;
   margin-right: 2vw;
   margin-left: 2vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
 }
 
 h1 {
