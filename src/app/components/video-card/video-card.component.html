@@ -7,7 +7,7 @@
       <div class="duration" *ngIf="isVideo">
         <p>{{video_data.duration}}</p>
       </div>
-      <div id="user_view" routerLink="/channels">
+      <div id="user_view" [routerLink]="routerLink" (click)="$event.stopPropagation()">
         <app-user-logo
           [src]="apiRoute + data.logo"
           size="70px">
