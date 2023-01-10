@@ -1,8 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+
 body {
   background-color: #13131a;
   margin: 0;
 }
+
+* {
+  color: antiquewhite;
+  box-sizing: border-box;
+  font-family: 'Poppins', serif;
+}
+
 
 ::-webkit-scrollbar {
   width: 1em;
