@@ -70,7 +70,7 @@ export class UpTubeServiceService {
     })
   }
 
-  getVideosIdbyTag(tag_id: string) {
+  getVideosIdbyTag(tag_id: string): Promise<number[]> {
     return new Promise((resolve) => {
       this.http.get(BASE_URL + "/api/tag/" + tag_id).subscribe(tagsData => {
         let videos_id: number[] = [];
