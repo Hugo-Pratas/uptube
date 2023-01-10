@@ -36,6 +36,9 @@ export class UpTubeServiceService {
   getSugestedVideos() {
     return this.http.get(BASE_URL + "/api/SugestedVideos")
   }
+  getChannel(id:number){
+    return this.http.get(BASE_URL+ "/api/channel/" + id)
+}
 
   getVideo(id: number) {
     return this.http.get(BASE_URL + "/api/video/" + id)
@@ -48,14 +51,6 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL+"/api/channels")
 
   }
-
-  getChannel(id: number){
-
-    return this.http.get(BASE_URL +"/api/channel/" + id)
-
-  }
-
-
 
 
   getTagsNames() {
@@ -173,13 +168,13 @@ export class UpTubeServiceService {
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
   }
+
   getVideosChannel( id: number) {
     return new Promise((resolve) => {
       this.getChannel(id).subscribe(data => {
         let videos: number[] = [];
-        let id_video= <any[]>data;
-
-        for (const d of id_video) {
+        // @ts-ignore
+        for (const d of data) {
           videos.push(d.video_id)
         }
         resolve(videos);
