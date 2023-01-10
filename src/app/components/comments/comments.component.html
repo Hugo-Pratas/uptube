@@ -1,0 +1,24 @@
+<div class="container">
+  <h4>Comentários</h4>
+  <div class="inputTotal">
+    <div class="userLogo" *ngFor="let channel of channels">
+      <app-user-logo
+        [src]="apiRoute + channel.logo"
+        size="50px"
+      >
+      </app-user-logo>
+    </div>
+    <div class="inputFields">
+      <form>
+        <span>
+          <input placeholder="Nome" id="inputName" type="text">
+          <input placeholder="E-mail" id="inputEmail" type="text">
+        </span>
+        <textarea placeholder="Mensagem" id="inputMessage"></textarea>
+      </form>
+    </div>
+  </div>
+  <div class="submitButton">
+    <button>Submeter Comentário</button>
+  </div>
+</div>

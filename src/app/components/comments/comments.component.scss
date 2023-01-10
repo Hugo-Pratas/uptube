@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputTotal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.userLogo {
+  margin-right: 15px;
+  align-content: center;
+  align-self: center;
+}
+
+.inputFields {
+  display: flex;
+  width: 100%;
+
+  span {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 48%;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.inputFields form {
+  flex: 1;
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid gray;
+  background: none;
+  height: 25px;
+}
+
+#inputMessage {
+  width: 100%;
+  background: none;
+  border-bottom: 2px solid gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+button {
+  background: none;
+  border: 1px solid white;
+  height: 30px;
+  color: white;
+  border-radius: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-top: 15px;
+  float: right;
+}

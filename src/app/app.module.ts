@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {VideoPageComponent} from './pages/video-page/video-page.component';
@@ -17,6 +16,7 @@ import {SuggestedChannelsComponent} from "./components/suggested-channels/sugges
 import {SuggestedThematicsComponent} from './components/suggested-thematics/suggested-thematics.component';
 import {ThematicPageComponent} from './pages/thematic-page/thematic-page.component';
 import {ChannelComponent} from "./pages/channel/channel.component";
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import {ChannelComponent} from "./pages/channel/channel.component";
     SuggestedThematicsComponent,
     SuggestedChannelsComponent,
     ThematicPageComponent,
-    ChannelComponent
+    ChannelComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

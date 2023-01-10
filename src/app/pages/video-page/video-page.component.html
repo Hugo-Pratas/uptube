@@ -34,6 +34,9 @@
       </div>
     </div>
     <p id="description">{{videoData.description}}</p>
+    <div>
+      <app-comments></app-comments>
+    </div>
   </div>
   <div id="sideBar">
     <app-video-card *ngFor="let video of sugestedVideos"
