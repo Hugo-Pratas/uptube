@@ -1,10 +1,9 @@
 <div class="containerInputs">
   <h4>Comentários</h4>
   <div class="inputTotal">
-    <div class="userLogo" *ngFor="let channel of channels">
+    <div class="userLogoComment" *ngFor="let channel of channels">
       <app-user-logo
-        [src]="apiRoute + channel.logo[0]"
-        size="50px"
+        [src]="apiRoute + channel.logo"
       >
       </app-user-logo>
     </div>
@@ -22,12 +21,22 @@
     <button>Submeter Comentário</button>
   </div>
   <div class="containerPosted">
-    <div class="userLogo" *ngFor="let channel of channels">
+    <div class="userLogoCommented" *ngFor="let channel of channels">
       <app-user-logo
-        [src]="apiRoute + channel.logo[1]"
-        size="50px"
+        [src]="apiRoute + channel.logo"
       >
       </app-user-logo>
+    </div>
+    <div>
+      <div class="commentDetails">
+        <p class="commentUsername">Fábio Duarte</p> <p class="commentTime">há 5 minutos</p>
+      </div>
+      <div class="commentText">
+        <p>
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+          Lorem ipsum Lorem ipsum Lorem ipsum
+        </p>
+      </div>
     </div>
   </div>
 </div>

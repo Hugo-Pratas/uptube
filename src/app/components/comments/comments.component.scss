@@ -5,13 +5,13 @@
 
 .inputTotal {
   display: flex;
-  height: 100%;
   width: 100%;
   position: relative;
 }
 
-.userLogo {
+.userLogoComment {
   margin-right: 15px;
+  width: 70px;
 }
 
 .inputFields {
@@ -73,3 +73,40 @@ button {
   margin-top: 15px;
   float: right;
 }
+
+.containerPosted {
+  display: flex;
+  position: relative;
+  margin-top: 10px;
+
+  p {
+    margin: 0 0 0 0;
+  }
+
+  .userLogoCommented {
+    margin-right: 15px;
+    min-width: 60px;
+    width: 75px;
+  }
+
+  .commentDetails {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .commentUsername {
+      margin-right: 5px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .commentTime {
+      font-size: 10px;
+      color: gray;
+    }
+  }
+  .commentText {
+    font-size: 12px;
+  }
+}
+
