@@ -1,6 +1,6 @@
 <div class="Header" *ngIf="processedPage">
 
-  <img [src]="apiLink+channel.banner" class="faded-image">
+    <img [src]="apiLink+channel.banner" class="faded-image">
   <div class="logo">
     <app-user-logo [src]="apiLink+channel.logo" size="200px"></app-user-logo>
   </div>
@@ -11,6 +11,7 @@
   </div>
 
 </div>
+
 <div id="videoCards">
   <div class="card">
     <app-video-card *ngFor="let video of videos"

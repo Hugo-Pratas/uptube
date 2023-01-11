@@ -9,36 +9,29 @@
     object-fit: cover;
     overflow: hidden;
     aspect-ratio: 4/1;
-
   }
   .logo{
     border-radius: 50%;
     position: absolute;
     margin-left: 65%;
     margin-top: 16%;
-
     img{
-      width: 164px;
       border: 1px solid blue;
     }
-
   }
   .texto{
+    min-width: 100%;
     position: absolute;
     margin-top: 25%;
     margin-left: 2%;
+    font-size: 1vw;
     hr{
-      width: 1155px;
+      width:100%;
       margin-top: 40px;
     }
-
   }
-
 }
-
 .videoCards {
-  display: flex;
-  flex-wrap: wrap;
 }
 .card{
   display: grid;
