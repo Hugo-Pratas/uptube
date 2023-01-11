@@ -5,11 +5,12 @@
     </div>
     <div class="channelList">
       <div class="channel" *ngFor="let channel of channels">
-        <app-user-logo
-          [src]="apiRoute + channel.logo"
-          size="30px"
-        >
-        </app-user-logo>
+        <div class="logocanal">
+          <app-user-logo
+            [src]="apiRoute + channel.logo"
+          >
+          </app-user-logo>
+        </div>
         <p>{{channel.name}}</p>
       </div>
     </div>
