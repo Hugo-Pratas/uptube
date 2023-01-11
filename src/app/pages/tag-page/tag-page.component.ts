@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
+import {Video} from "../../model/video";
 
 @Component({
   selector: 'app-tag-page',
@@ -9,26 +10,23 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 })
 export class TagPageComponent implements OnInit {
   thisTag = ""
-  videos_id: number[] = []
-  videos_data: any[] = []
+  videos_data: Video[] = []
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(r => {
-      // @ts-ignore
-      this.thisTag = r.get('tag')
-      this._service.getVideosIdbyTag(this.thisTag).then(data => {
-        // @ts-ignore
-        this.videos_id = data
-        for (const id of this.videos_id) {
-          this._service.getVideoData(id).then(d => {
-            this.videos_data.push(d)
-          })
-        }
-      })
+      this.thisTag = <string>r.get('tag')
+      this.getVideosFromTag()
     });
+  }
+
+  async getVideosFromTag() {
+    let videos_id = <number[]>await this._service.getVideosIdbyTag(this.thisTag)
+    for (const id of videos_id) {
+      this.videos_data.push(<Video>await this._service.getVideoData(id))
+    }
   }
 
 }

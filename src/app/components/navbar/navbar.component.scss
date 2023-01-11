@@ -1,6 +1,6 @@
 .navbarTotal {
   background-color: #1c1c24;
-  height: 100vh;
+  height: calc(100vh - 1px);
   width: 240px;
   position: sticky;
 }
