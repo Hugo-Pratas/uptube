@@ -3,7 +3,7 @@
        [routerLink]="routerLink"
        [ngStyle]="{'background-image': 'url(' + apiRoute + data.thumbnail + ')'}"
   >
-    <div class="iconContainer">
+    <div class="iconContainer" *ngIf="!isVideo">
       <fa-icon [icon]="faClapperboardSolid"></fa-icon>
     </div>
     <div class="midsection">
