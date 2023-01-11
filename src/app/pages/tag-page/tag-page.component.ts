@@ -23,7 +23,7 @@ export class TagPageComponent implements OnInit {
   }
 
   async getVideosFromTag() {
-    let videos_id = <number[]>await this._service.getVideosIdbyTag(this.thisTag)
+    let videos_id = <number[]>await this._service.getVideosIdbyTagName(this.thisTag)
     for (const id of videos_id) {
       this.videos_data.push(<Video>await this._service.getVideoData(id))
     }

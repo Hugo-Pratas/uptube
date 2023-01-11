@@ -4,6 +4,7 @@
   margin-top: 2vh;
   width: 100%;
   padding-bottom: 1vh;
+  min-width: 190px;
 }
 
 .topText {
@@ -18,7 +19,7 @@
   h2 {
     font-size: 11px;
   }
-  
+
   #showAll {
     cursor: pointer;
   }
@@ -36,6 +37,11 @@
   p {
     margin-left: 10px;
   }
+
+  .themesLogo {
+    width: 80px;
+    min-width: 40px;
+  }
 }
 
 .detailsText {
@@ -44,6 +50,14 @@
 
   p {
     margin: 0 0 0 10px;
+  }
+
+  #thematicTitle {
+    font-size: 1rem;
+  }
+
+  #thematicTeaser {
+    font-size: 0.8rem;
   }
 }
 

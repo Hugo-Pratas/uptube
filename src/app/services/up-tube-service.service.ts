@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
+import {iThematic} from "../model/thematics";
+import {Router} from "@angular/router";
+import {Video} from '../model/video';
 
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
@@ -14,7 +17,7 @@ const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 export class UpTubeServiceService {
   bookmark = faBookmark;
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private route: Router) {
   }
 
   getApiRoute() {
@@ -23,10 +26,6 @@ export class UpTubeServiceService {
 
   getSugestedChannels() {
     return this.http.get(BASE_URL + "/api/channels")
-  }
-
-  getSuggestedThematics() {
-    return this.http.get(BASE_URL + "/api/suggestedthematics")
   }
 
   getVideos() {
@@ -70,12 +69,32 @@ export class UpTubeServiceService {
     })
   }
 
-  getVideosIdbyTag(tag_id: string): Promise<number[]> {
-    return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/tag/" + tag_id).subscribe(tagsData => {
+  getVideosIdbyTagName(tag_name: string): Promise<number[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(BASE_URL + "/api/tag/" + tag_name).subscribe(tagsData => {
         let videos_id: number[] = [];
         for (const tag of <any[]>tagsData) {
           videos_id.push(tag.video_id)
+        }
+        if (videos_id.length <= 0) {
+          this.route.navigate(['/homepage'])
+          return;
+        }
+        resolve(videos_id);
+      })
+    })
+  }
+
+  getVideosIdbyTagId(tag_id: number): Promise<number[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(BASE_URL + "/api/tagid/" + tag_id).subscribe(tagsData => {
+        let videos_id: number[] = [];
+        for (const tag of <any[]>tagsData) {
+          videos_id.push(tag.video_id)
+        }
+        if (videos_id.length <= 0) {
+          this.route.navigate(['/homepage'])
+          return;
         }
         resolve(videos_id);
       })
@@ -92,6 +111,15 @@ export class UpTubeServiceService {
         data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
         resolve(data);
       });
+    })
+  }
+
+  getVideosFromIds(ids_videos: number[]): Promise<Video[]> {
+    return new Promise((resolve) => {
+      let ids_string = ids_videos.join(",")
+      this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(d => {
+        resolve(<Video[]>d)
+      })
     })
   }
 
@@ -131,6 +159,21 @@ export class UpTubeServiceService {
 
   getThematics() {
     return this.http.get(BASE_URL + "/api/thematics")
+  }
+
+  getThematicTagsById(id: number): Promise<number[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics/" + id).subscribe(thematic => {
+        let thematicData = <iThematic[]>thematic
+        let tags = thematicData[0].tags.split(",").map(Number) //as tags vêm em string da api....
+        resolve(tags)
+      })
+    })
+
+  }
+
+  getSuggestedThematics() {
+    return this.http.get(BASE_URL + "/api/suggestedthematics")
   }
 
   //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
