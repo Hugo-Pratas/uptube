@@ -7,7 +7,6 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class UserLogoComponent implements OnInit {
   @Input() src!: string;
-  @Input() size!: string;
 
   constructor() {
   }
