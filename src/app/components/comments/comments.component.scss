@@ -1,4 +1,4 @@
-.container {
+.containerInputs {
   display: flex;
   flex-direction: column;
 }
@@ -7,12 +7,11 @@
   display: flex;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 .userLogo {
   margin-right: 15px;
-  align-content: center;
-  align-self: center;
 }
 
 .inputFields {
@@ -38,8 +37,21 @@ input[type=text] {
   border: none;
   border-bottom: 2px solid gray;
   background: none;
-  height: 25px;
+  height: 40px;
+  font-family: Poppins, serif;
+  color: white;
 }
+
+textarea {
+  color: white;
+  resize: vertical;
+  max-height: 150px;
+}
+
+textarea::placeholder {
+  font-family: Poppins, serif;
+}
+
 
 #inputMessage {
   width: 100%;
