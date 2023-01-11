@@ -1,7 +1,7 @@
 export interface iThematic {
   title: string;
   id: number;
-  tags: string | number[];
+  tags: string;
   teaser: string;
   header: string;
   thumbnail: string;

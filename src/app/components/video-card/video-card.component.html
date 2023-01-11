@@ -10,10 +10,9 @@
       <div class="duration" *ngIf="isVideo">
         <p>{{video_data.duration}}</p>
       </div>
-      <div id="user_view" [routerLink]="routerLink" (click)="$event.stopPropagation()">
+      <div class="user_view" [routerLink]="routerLink" (click)="$event.stopPropagation()">
         <app-user-logo
-          [src]="apiRoute + data.logo"
-          size="70px">
+          [src]="apiRoute + data.logo">
         </app-user-logo>
       </div>
     </div>
