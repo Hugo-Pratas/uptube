@@ -1,0 +1,25 @@
+<div class="globalContainer">
+  <div class="header">
+    <div class="banner">
+      <img [src]="apiLink+channel.banner" class="faded-image">
+      <div class="logo">
+        <app-user-logo [src]="apiLink+channel.logo"></app-user-logo>
+      </div>
+    </div>
+    <div class="texto">
+      <h2>{{channel.name}} </h2>
+      <p>{{channel.description}}</p>
+    </div>
+  </div>
+  <div id="videoCards">
+    <div class="card" *ngFor="let video of videos">
+      <app-video-card
+        [video_data]="video"
+      ></app-video-card>
+    </div>
+  </div>
+  <div class="comentario">
+    <app-comments>
+    </app-comments>
+  </div>
+</div>

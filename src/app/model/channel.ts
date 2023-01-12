@@ -4,4 +4,5 @@ export interface Channel {
   id: number;
   logo: string;
   banner: string;
+  video_id: number
 }
