@@ -6,6 +6,7 @@ import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {iThematic} from "../model/thematics";
 import {Router} from "@angular/router";
 import {Video} from '../model/video';
+import {Channel} from "../model/channel";
 
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
@@ -35,9 +36,27 @@ export class UpTubeServiceService {
   getSugestedVideos() {
     return this.http.get(BASE_URL + "/api/SugestedVideos")
   }
-  getChannel(id:number){
-    return this.http.get(BASE_URL+ "/api/channel/" + id)
-}
+
+  getChannel(id: number): Promise<Channel[]> { //retorna array de channels por causa de varios videos ids
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/channel/" + id).subscribe(channels => {
+        resolve(<Channel[]>channels);
+      })
+    })
+  }
+
+  getVideosFromChannel(id_channel: number): Promise<number[]> {
+    return new Promise((resolve) => {
+      this.getChannel(id_channel).then(channels => {
+        let videos: number[] = [];
+        console.log(channels)
+        for (const d of <Channel[]>channels) {
+          videos.push(d.video_id)
+        }
+        resolve(videos);
+      })
+    })
+  }
 
   getVideo(id: number) {
     return this.http.get(BASE_URL + "/api/video/" + id)
@@ -51,9 +70,6 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/channels")
 
   }
-
-
-
 
 
   getTagsNames() {
@@ -118,6 +134,7 @@ export class UpTubeServiceService {
     return new Promise((resolve) => {
       let ids_string = ids_videos.join(",")
       this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(d => {
+        console.log(BASE_URL + "/api/video/" + ids_string)
         resolve(<Video[]>d)
       })
     })
@@ -159,6 +176,15 @@ export class UpTubeServiceService {
 
   getThematics() {
     return this.http.get(BASE_URL + "/api/thematics")
+  }
+
+  getThematicsById(id_thematic: number): Promise<iThematic> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics/" + id_thematic).subscribe(thematic => {
+        let theme = <iThematic[]>thematic
+        resolve(theme[0])
+      })
+    })
   }
 
   getThematicTagsById(id: number): Promise<number[]> {
@@ -215,17 +241,4 @@ export class UpTubeServiceService {
     return this.getFavouritesFromLocal().includes(id_video);
   }
 
-  getVideosChannel(id: number) {
-    return new Promise((resolve) => {
-      this.getChannel(id).subscribe(data => {
-        let videos: number[] = [];
-        let id_video = <any[]>data;
-
-        for (const d of id_video) {
-          videos.push(d.video_id)
-        }
-        resolve(videos);
-      })
-    })
-  }
 }

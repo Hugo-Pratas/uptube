@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {ActivatedRoute} from "@angular/router";
 import {Video} from 'src/app/model/video';
+import {iThematic} from "../../model/thematics";
 
 @Component({
   selector: 'app-thematic-page',
@@ -10,6 +11,8 @@ import {Video} from 'src/app/model/video';
 })
 export class ThematicPageComponent implements OnInit {
   videos = [] as Video[]
+  thematic = {} as iThematic
+  processedPage = false
 
   constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
   }
@@ -21,13 +24,12 @@ export class ThematicPageComponent implements OnInit {
         throw new Error("params Value is NULL")
       }
       let id_thematic = parseInt(routeData)
-      this.getVideosFromServices(id_thematic).then(videos => {
-        this.videos = videos
-      })
+      this.getData(id_thematic)
     })
   }
 
-  async getVideosFromServices(id_thematic: number): Promise<Video[]> {
+  async getData(id_thematic: number) {
+    this.thematic = await this._service.getThematicsById(id_thematic)
     let TagsId = await this._service.getThematicTagsById(id_thematic)
     let videosId = [] as any[]
     for (const tag of TagsId) {
@@ -35,7 +37,9 @@ export class ThematicPageComponent implements OnInit {
       videosId = videosId.concat(videosIdArr)
     }
     videosId = [...new Set(videosId)]  //remover repetidos
-    return await this._service.getVideosFromIds(videosId)
+    this.videos = await this._service.getVideosFromIds(videosId)
+    this.processedPage = true
+
   }
 
 }
