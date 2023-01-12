@@ -12,9 +12,9 @@
 
 </div>
 <div id="videoCards">
-  <div class="card">
-    <app-video-card *ngFor="let video of videos"
-                    [video_data]="video"
+  <div class="card" *ngFor="let video of videos">
+    <app-video-card
+      [video_data]="video"
     ></app-video-card>
   </div>
 

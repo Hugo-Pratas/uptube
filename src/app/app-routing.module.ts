@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'thematics', component: ThematicsPageComponent},
   {path: 'tags/:tag', component: TagPageComponent},
   {path: 'thematic/:id_thematic', component: ThematicPageComponent},
-  {path: 'channels/:id_channel', component: ChannelComponent }
+  {path: 'channel/:id_channel', component: ChannelComponent}
 ];
 
 @NgModule({
