@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   public getScreenHeight: any;
   tags = [] as string[];
 
-  constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
+  constructor(private _service: UpTubeServiceService) {
   }
 
   public hideRuleContent = false;
@@ -39,8 +39,9 @@ export class NavbarComponent implements OnInit {
     this._service.getTagsNames().then((obj) => {
       this.tags = <string[]>obj
     })
-
   }
+
+
 
 
   /*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação

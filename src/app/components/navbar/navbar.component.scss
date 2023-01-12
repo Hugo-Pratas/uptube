@@ -44,6 +44,10 @@
     margin-bottom: 15px;
     border-radius: 2px;
 
+    #link4 {
+      margin-left: 5px;
+    }
+
     p {
       font-size: 12px;
       color: darkgray;
@@ -53,6 +57,11 @@
       p {
         color: white;
         cursor: pointer;
+        margin-left: -4px;
+      }
+
+      #link4 {
+        margin-left: -1px;
       }
     }
   }
@@ -86,12 +95,10 @@
       font-size: 0.8em;
       color: darkgray;
 
-      &:hover, &.currentPage{
+      &:hover, &.currentPage {
         color: white;
       }
     }
-
-
   }
 }
 
