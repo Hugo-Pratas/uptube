@@ -7,6 +7,7 @@ import {iThematic} from "../model/thematics";
 import {Router} from "@angular/router";
 import {Video} from '../model/video';
 import {Channel} from "../model/channel";
+import {Tag} from '../model/tag';
 
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
@@ -49,7 +50,6 @@ export class UpTubeServiceService {
     return new Promise((resolve) => {
       this.getChannel(id_channel).then(channels => {
         let videos: number[] = [];
-        console.log(channels)
         for (const d of <Channel[]>channels) {
           videos.push(d.video_id)
         }
@@ -134,21 +134,24 @@ export class UpTubeServiceService {
     return new Promise((resolve) => {
       let ids_string = ids_videos.join(",")
       this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(d => {
-        console.log(BASE_URL + "/api/video/" + ids_string)
-        resolve(<Video[]>d)
+        let videos = <Video[]>d
+        for (const video of videos) {
+          if (typeof video.tags === "string") {
+            video.tags = video.tags.split(",").map(Number)
+          }
+        }
+        resolve(videos)
       })
     })
   }
 
-  getTagsNamebyID(id: number[]) {
+  getTagsNamebyID(ids: number[]): Promise<string[]> {
     return new Promise((resolve) => {
-      let data: any;
       this.getTags().subscribe(d => {
-        data = d;
-        let tags: any[] = [];
-        for (const number of id) {
-          // @ts-ignore
-          tags.push(data.filter(obj => obj.tid == number).map(obj => obj.name).toString())
+        let data = <Tag[]>d;
+        let tags: string[] = [];
+        for (const id of ids) {
+          tags.push(data.filter(obj => obj.tid == id).map(obj => obj.name).toString())
         }
         resolve(tags);
       })

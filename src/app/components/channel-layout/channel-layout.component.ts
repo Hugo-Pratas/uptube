@@ -13,6 +13,7 @@ export class ChannelLayoutComponent implements OnInit {
   @Input() channel = {} as Channel;
   @Input() videos = [] as Video[];
   @Input() thematic = {} as iThematic
+  isChannelView = true
   apiLink = this._service.getApiRoute()
   processedPage = false
 
@@ -26,6 +27,7 @@ export class ChannelLayoutComponent implements OnInit {
       this.channel.logo = thematic.logo
       this.channel.name = thematic.title
       this.channel.description = thematic.teaser
+      this.isChannelView = false
     }
     this.processedPage = true
   }

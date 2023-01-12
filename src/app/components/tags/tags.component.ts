@@ -8,16 +8,16 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 })
 export class TagsComponent implements OnInit {
 
-  constructor(private _service: UpTubeServiceService) { }
+  constructor(private _service: UpTubeServiceService) {
+  }
 
   @Input() tags!: number[];
-  processedPage=false;
-  tagsName : any;
-  ngOnInit(): void {
-    this.tagsName = this._service.getTagsNamebyID(this.tags).then((obj) =>{
-      this.tagsName =obj
-      this.processedPage=true;
-    })
+  processedPage = false;
+  tagsName = [] as string[];
+
+  async ngOnInit(): Promise<void> {
+    this.tagsName = await this._service.getTagsNamebyID(this.tags)
+    this.processedPage = true
   }
 
 }

@@ -16,13 +16,13 @@
     </iframe>
     <div id="video_description">
       <div id="user">
-      <span id="img">
+      <span id="img" routerLink="/channel/{{userData.id}}">
         <app-user-logo
           [src]="urlSite+userData.logo"
         ></app-user-logo>
       </span>
         <div id="text">
-          <h1>{{userData.name}}</h1>
+          <h1 routerLink="/channel/{{userData.id}}">{{userData.name}}</h1>
           <h2>{{videoData.date}}</h2>
         </div>
       </div>

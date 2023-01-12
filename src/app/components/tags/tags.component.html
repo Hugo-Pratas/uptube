@@ -1,4 +1,9 @@
 <div *ngIf="processedPage">
-  <span *ngFor="let tag of tagsName"><a href="tags/{{tag}}">#{{tag}}</a></span>
+  <div *ngFor="let tag of tagsName">
+    <p routerLink="/tags/{{tag}}"
+       (click)="$event.stopPropagation()">
+      #{{tag}}
+    </p>
+  </div>
 </div>
 
