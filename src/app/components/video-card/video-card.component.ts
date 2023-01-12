@@ -8,6 +8,7 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
 import {iThematic} from "../../model/thematics";
 import {CardData} from 'src/app/model/card-data';
+import {Channel} from "../../model/channel";
 
 @Component({
   selector: 'app-video-card',
@@ -46,12 +47,12 @@ export class VideoCardComponent implements OnInit {
 
   getUserdata() {
     this._service.getUser(this.video_data.channel).subscribe(d => {
-      this.user = <any>d
+      this.user = <Channel>d
       this.user = this.user[0] //api retorna array...
       if (this.icons) {
         this.bookmark = this._service.icone_favorito(this.video_data.id_number)
       }
-      this.constructCardData(this.video_data.thumbnail, this.user.logo, this.video_data.name, this.user.title, this.video_data.date)
+      this.constructCardData(this.video_data.thumbnail, this.user.logo, this.video_data.name, this.user.name, this.video_data.date)
       this.processPage = true
     })
   }

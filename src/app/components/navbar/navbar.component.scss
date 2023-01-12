@@ -36,7 +36,6 @@
 
 
   .links {
-    color: darkgray;
     align-items: center;
     height: 15%;
     display: flex;
@@ -47,14 +46,18 @@
 
     p {
       font-size: 12px;
+      color: darkgray;
     }
 
     &:hover, &.currentPage {
-      color: white;
-      cursor: pointer;
+      p {
+        color: white;
+        cursor: pointer;
+      }
     }
   }
 }
+
 
 .containerTags {
   height: 40%;
@@ -75,14 +78,20 @@
     justify-content: center;
     align-content: center;
     border: 1px solid #3e3d3f;
-    border-radius: 10%;
+    border-radius: 8%;
     padding: 5px 5px 5px 5px;
 
     a, p {
       margin: 0;
-      font-size: 0.9em;
-      color: antiquewhite;
+      font-size: 0.8em;
+      color: darkgray;
+
+      &:hover, &.currentPage{
+        color: white;
+      }
     }
+
+
   }
 }
 

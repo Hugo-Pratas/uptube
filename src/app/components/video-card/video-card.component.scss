@@ -2,6 +2,10 @@
   margin: 0;
 }
 
+.totalcard:hover {
+  top: -1px;
+}
+
 .totalcard {
   background-color: #1c1c24;
   border-radius: 20px;
@@ -21,6 +25,7 @@
     position: relative;
     container-type: inline-size;
     container-name: card;
+    cursor: pointer;
 
     .iconContainer { /*USAR APENAS COM TRUE OR FALSE NAS TEMÁTICAS E PLAYLISTS*/
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 114.12%);
@@ -71,6 +76,7 @@
       margin-right: 10px;
       position: absolute;
       width: 70px;
+      cursor: pointer;
     }
   }
 }
@@ -89,7 +95,7 @@
     color: #1e75ff;
     margin: 0 0 0 0;
     flex: 1;
-
+    cursor: pointer;
   }
 
   .titleDiv {
@@ -120,6 +126,7 @@
     .icons {
       display: flex;
       margin-right: 20px;
+      cursor: pointer;
 
       * {
         font-size: 1.2rem;
@@ -221,3 +228,4 @@
     }
   }
 }
+
