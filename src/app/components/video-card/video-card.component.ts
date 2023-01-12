@@ -76,7 +76,7 @@ export class VideoCardComponent implements OnInit {
     this.bookmark = this._service.icone_favorito(id_video)
   }
 
-  CopyLink() {
+  CopyLink() { //needs fixing
     var popup = document.getElementById(this.video_data.id.toString());
     navigator.clipboard.writeText(document.URL.replace("homepage", "video/") + this.video_data.id);
     // @ts-ignore
