@@ -8,6 +8,7 @@ import {ThematicPageComponent} from "./pages/thematic-page/thematic-page.compone
 import {ChannelComponent} from "./pages/channel/channel.component";
 import {PlaylistsPageComponent} from "./pages/playlists-page/playlists-page.component";
 import {PlaylistComponent} from "./pages/playlist/playlist.component";
+import {FavouritesComponent} from "./pages/favourites/favourites.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'thematic/:id_thematic', component: ThematicPageComponent},
   {path: 'channel/:id_channel', component: ChannelComponent},
   {path: 'playlists', component: PlaylistsPageComponent},
+  {path: 'playlist/favourites', component: FavouritesComponent},
   {path: 'playlist/:id_playlist', component: PlaylistComponent}
 ];
 

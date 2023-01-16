@@ -13,7 +13,7 @@ const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 const playlist_favourite: Playlist = {
   title: 'Favourites',
   category: 'Favourites',
-  id: '',
+  id: 'favourites',
   videos: '',
   image: '../../assets/images/favourite_logo.png',
   thumbnail: '../../assets/images/thumbnail_fav.png',
