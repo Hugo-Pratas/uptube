@@ -10,16 +10,14 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 export class HomepageComponent implements OnInit {
 
   videos = [] as Video[];
+  processedPage = false
 
   constructor(private _service: UpTubeServiceService) {
   }
 
-  ngOnInit(): void {
-    this._service.getVideos().subscribe(d => {
-      this.videos = <Video[]>d
-      for (const video of this.videos) {
-        video.id_number = parseInt(video.id) //https://gifdb.com/gif/rage-comics-table-flip-qitpumendrh5b9sl.html
-      }
-    })
+  async ngOnInit(): Promise<void> {
+    this.videos = await this._service.getVideos()
+    console.log(this.videos)
+    this.processedPage = true
   }
 }

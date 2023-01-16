@@ -1,10 +1,10 @@
 <div class="totalcard" *ngIf="processPage">
   <div class="thumbnail"
        [routerLink]="routerLink"
-       [ngStyle]="{'background-image': 'url(' + apiRoute + data.thumbnail + ')'}"
+       [ngStyle]="{'background-image': 'url(' + data.thumbnail + ')'}"
   >
     <div class="iconContainer" *ngIf="!isVideo">
-      <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+      <fa-icon [icon]="sideIcon"></fa-icon>
     </div>
     <div class="midsection">
       <div class="duration" *ngIf="isVideo">
@@ -13,7 +13,7 @@
       <div class="user_view" [routerLink]="data.logo_link" (click)="$event.stopPropagation()"
            *ngIf="!ischannelView">
         <app-user-logo
-          [src]="apiRoute + data.logo">
+          [src]="data.logo">
         </app-user-logo>
       </div>
     </div>

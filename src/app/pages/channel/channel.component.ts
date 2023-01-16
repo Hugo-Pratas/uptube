@@ -26,9 +26,9 @@ export class ChannelComponent implements OnInit {
   }
 
   async getData(id_channel: number) {
-    let channels = await this._service.getChannel(id_channel)
+    let channels = await this._service.getChannelbyId(id_channel)
     this.channel = channels[0]
-    let channel_ids = await this._service.getVideosFromChannel(id_channel)
+    let channel_ids = await this._service.getVideosIdsFromChannel(id_channel)
     this.videos = await this._service.getVideosFromIds(channel_ids)
     this.processedPage = true
   }

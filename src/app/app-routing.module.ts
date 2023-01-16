@@ -6,6 +6,8 @@ import {TagPageComponent} from "./pages/tag-page/tag-page.component";
 import {ThematicsPageComponent} from "./pages/thematics-page/thematics-page.component";
 import {ThematicPageComponent} from "./pages/thematic-page/thematic-page.component";
 import {ChannelComponent} from "./pages/channel/channel.component";
+import {PlaylistsPageComponent} from "./pages/playlists-page/playlists-page.component";
+import {PlaylistComponent} from "./pages/playlist/playlist.component";
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path: 'thematics', component: ThematicsPageComponent},
   {path: 'tags/:tag', component: TagPageComponent},
   {path: 'thematic/:id_thematic', component: ThematicPageComponent},
-  {path: 'channel/:id_channel', component: ChannelComponent}
+  {path: 'channel/:id_channel', component: ChannelComponent},
+  {path: 'playlists', component: PlaylistsPageComponent},
+  {path: 'playlist/:id_playlist', component: PlaylistComponent}
 ];
 
 @NgModule({

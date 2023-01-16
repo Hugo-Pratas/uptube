@@ -18,6 +18,8 @@ import {ThematicPageComponent} from './pages/thematic-page/thematic-page.compone
 import {ChannelComponent} from "./pages/channel/channel.component";
 import {CommentsComponent} from './components/comments/comments.component';
 import {ChannelLayoutComponent} from './components/channel-layout/channel-layout.component';
+import {PlaylistsPageComponent} from './pages/playlists-page/playlists-page.component';
+import {PlaylistComponent} from './pages/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {ChannelLayoutComponent} from './components/channel-layout/channel-layout
     ThematicPageComponent,
     ChannelComponent,
     CommentsComponent,
-    ChannelLayoutComponent
+    ChannelLayoutComponent,
+    PlaylistsPageComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,

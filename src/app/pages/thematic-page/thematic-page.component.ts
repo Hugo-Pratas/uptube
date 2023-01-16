@@ -31,7 +31,7 @@ export class ThematicPageComponent implements OnInit {
   async getData(id_thematic: number) {
     this.thematic = await this._service.getThematicsById(id_thematic)
     let TagsId = await this._service.getThematicTagsById(id_thematic)
-    let videosId = [] as any[]
+    let videosId = [] as number[]
     for (const tag of TagsId) {
       let videosIdArr = await this._service.getVideosIdbyTagId(tag)
       videosId = videosId.concat(videosIdArr)
