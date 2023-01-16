@@ -17,29 +17,20 @@ export class ThematicPageComponent implements OnInit {
   constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
   }
 
-  async ngOnInit() {
-    this.route.paramMap.subscribe(d => {
-      let routeData = d.get('id_thematic')
-      if (routeData === null) {
-        throw new Error("params Value is NULL")
-      }
+  async ngOnInit(): Promise<void> {
+    this.route.paramMap.subscribe(async d => {
+      let routeData = <string>d.get('id_thematic')
       let id_thematic = parseInt(routeData)
-      this.getData(id_thematic)
+      this.thematic = await this._service.getThematicsById(id_thematic)
+      let TagsId = await this._service.getThematicTagsById(id_thematic)
+      let videosId = [] as number[]
+      for (const tag of TagsId) {
+        let videosIdArr = await this._service.getVideosIdbyTagId(tag)
+        videosId = videosId.concat(videosIdArr)
+      }
+      videosId = [...new Set(videosId)]  //remover repetidos
+      this.videos = await this._service.getVideosFromIds(videosId)
+      this.processedPage = true
     })
   }
-
-  async getData(id_thematic: number) {
-    this.thematic = await this._service.getThematicsById(id_thematic)
-    let TagsId = await this._service.getThematicTagsById(id_thematic)
-    let videosId = [] as number[]
-    for (const tag of TagsId) {
-      let videosIdArr = await this._service.getVideosIdbyTagId(tag)
-      videosId = videosId.concat(videosIdArr)
-    }
-    videosId = [...new Set(videosId)]  //remover repetidos
-    this.videos = await this._service.getVideosFromIds(videosId)
-    this.processedPage = true
-
-  }
-
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   faHouse as faHouseSolid,
   faBarsStaggered as faBarsStaggeredSolid,
@@ -6,7 +6,6 @@ import {
   faClapperboard as faClapperboardSolid
 } from "@fortawesome/free-solid-svg-icons";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +22,7 @@ export class NavbarComponent implements OnInit {
   public getScreenHeight: any;
   tags = [] as string[];
 
-  constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
+  constructor(private _service: UpTubeServiceService) {
   }
 
   public hideRuleContent = false;
@@ -32,14 +31,10 @@ export class NavbarComponent implements OnInit {
     this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getScreenWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
-
-    this._service.getTagsNames().then((obj) => {
-      this.tags = <string[]>obj
-    })
-
+    this.tags = await this._service.getTagsNames()
   }
 
 

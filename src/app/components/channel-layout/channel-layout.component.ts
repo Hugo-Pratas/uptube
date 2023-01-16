@@ -14,7 +14,6 @@ export class ChannelLayoutComponent implements OnInit {
   @Input() videos = [] as Video[];
   @Input() thematic = {} as iThematic
   isChannelView = true
-  apiLink = this._service.getApiRoute()
   processedPage = false
 
   constructor(private _service: UpTubeServiceService) {

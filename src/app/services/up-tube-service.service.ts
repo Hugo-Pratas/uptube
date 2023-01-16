@@ -4,7 +4,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {iThematic} from "../model/thematics";
-import {Router} from "@angular/router";
 import {Video} from '../model/video';
 import {Channel} from "../model/channel";
 import {Tag} from '../model/tag';
@@ -29,7 +28,7 @@ const playlist_favourite: Playlist = {
 export class UpTubeServiceService {
   bookmark = faBookmark;
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private route: Router) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
 
   addBase_Route(link: string) {
@@ -139,7 +138,7 @@ export class UpTubeServiceService {
 
   getSugestedChannels(): Promise<Channel[]> {
     return new Promise((resolve, reject) => {
-      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => {
+      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => { //api dos sugeridos não está a funcionar no drupal
         let channels = <Channel[]>jsonData
         for (let channel of channels) {
           channel = this.sanitizeChannel(channel)
@@ -160,6 +159,18 @@ export class UpTubeServiceService {
     })
   }
 
+  getChannels(): Promise<Channel[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => {
+        let channels = <Channel[]>jsonData
+        for (let channel of channels) {
+          channel = this.sanitizeChannel(channel)
+        }
+        resolve(channels)
+      })
+    })
+  }
+
   // <<<<<<<<<<<<<<<<<<<<<<<----- TAGS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -167,20 +178,17 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/tags")
   }
 
-
-  getTagsNames() {
+  getTagsNames(): Promise<string[]> {
     return new Promise((resolve) => {
       this.getTags().subscribe(data => {
         let tags: string[] = [];
-        // @ts-ignore
-        for (const d of data) {
+        for (const d of <Tag[]>data) {
           tags.push(d.name)
         }
         resolve(tags);
       })
     })
   }
-
 
   getTagsNamebyID(ids: number[]): Promise<string[]> {
     return new Promise((resolve) => {
@@ -195,19 +203,65 @@ export class UpTubeServiceService {
     })
   }
 
+  // <<<<<<<<<<<<<<<<<<<<<<<----- THEMATICS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  sanitizeThematics(thematic: iThematic): iThematic {
+    thematic.header = this.addBase_Route(thematic.header)
+    thematic.thumbnail = this.addBase_Route(thematic.thumbnail)
+    thematic.logo = this.addBase_Route(thematic.logo)
+    return thematic
+  }
 
-  getThematics() {
-    return this.http.get(BASE_URL + "/api/thematics")
+  getThematics(): Promise<iThematic[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics").subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        for (let thematic of thematics) {
+          thematic = this.sanitizeThematics(thematic)
+        }
+        resolve(thematics)
+      })
+    })
+  }
+
+  getThematicsById(id_thematic: number): Promise<iThematic> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics/" + id_thematic).subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        let theme = this.sanitizeThematics(thematics[0])
+        resolve(theme)
+      })
+    })
+  }
+
+  getSuggestedThematics() {
+    return this.http.get(BASE_URL + "/api/suggestedthematics")
+  }
+
+  getThematicTagsById(id: number): Promise<number[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics/" + id).subscribe(thematic => {
+        let thematicData = <iThematic[]>thematic
+        let tags = thematicData[0].tags.split(",").map(Number) //as tags vêm em string da api....
+        resolve(tags)
+      })
+    })
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<----- PLAYLIST ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  sanitizePlaylist(playlist: Playlist): Playlist {
+    playlist.image = this.addBase_Route(playlist.image)
+    playlist.thumbnail = this.addBase_Route(playlist.thumbnail)
+    playlist.id_number = parseInt(playlist.id)
+    playlist.videos_id = playlist.videos.split(",").map(Number)
+    return playlist
   }
 
   getPlaylists(): Promise<Playlist[]> {
     return new Promise((resolve) => {
-
       this.http.get(BASE_URL + "/api/playlists").subscribe(d => {
         let playlists = <Playlist[]>d
-        for (const playlist of playlists) {
-          playlist.id_number = parseInt(playlist.id)
-          playlist.videos_id = playlist.videos.split(",").map(Number)
+        for (let playlist of playlists) {
+          playlist = this.sanitizePlaylist(playlist)
         }
         playlists.push(playlist_favourite)
         resolve(playlists)
@@ -219,38 +273,11 @@ export class UpTubeServiceService {
     return new Promise((resolve) => {
       this.http.get(BASE_URL + "/api/playlist/" + id_playlist).subscribe(d => {
         let playlists = <Playlist[]>d
-        let playlist = playlists[0]
-        playlist.id_number = parseInt(playlist.id)
-        playlist.videos_id = playlist.videos.split(",").map(Number)
+        let playlist = this.sanitizePlaylist(playlists[0])
         resolve(playlist)
       })
     })
   }
-
-  getThematicsById(id_thematic: number): Promise<iThematic> {
-    return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/thematics/" + id_thematic).subscribe(thematic => {
-        let theme = <iThematic[]>thematic
-        resolve(theme[0])
-      })
-    })
-  }
-
-  getThematicTagsById(id: number): Promise<number[]> {
-    return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/thematics/" + id).subscribe(thematic => {
-        let thematicData = <iThematic[]>thematic
-        let tags = thematicData[0].tags.split(",").map(Number) //as tags vêm em string da api....
-        resolve(tags)
-      })
-    })
-
-  }
-
-  getSuggestedThematics() {
-    return this.http.get(BASE_URL + "/api/suggestedthematics")
-  }
-
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----COMMENTS----->>>>>>>>>>>>>>>>>>>>>>>>>>
   getSessionToken(): Promise<string> {
@@ -315,5 +342,4 @@ export class UpTubeServiceService {
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
   }
-
 }
