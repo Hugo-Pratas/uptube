@@ -22,14 +22,14 @@ export class ThematicPageComponent implements OnInit {
       let routeData = <string>d.get('id_thematic')
       let id_thematic = parseInt(routeData)
       this.thematic = await this._service.getThematicsById(id_thematic)
-      let TagsId = await this._service.getThematicTagsById(id_thematic)
+      let TagsId = await this._service.getThematicTagsById(id_thematic) //get TAGS
       let videosId = [] as number[]
       for (const tag of TagsId) {
-        let videosIdArr = await this._service.getVideosIdbyTagId(tag)
+        let videosIdArr = await this._service.getVideosIdbyTagId(tag)  //Get id_videos
         videosId = videosId.concat(videosIdArr)
       }
-      videosId = [...new Set(videosId)]  //remover repetidos
-      this.videos = await this._service.getVideosFromIds(videosId)
+      videosId = [...new Set(videosId)]  //remove repeating
+      this.videos = await this._service.getVideosFromIds(videosId) //get all videos needed
       this.processedPage = true
     })
   }

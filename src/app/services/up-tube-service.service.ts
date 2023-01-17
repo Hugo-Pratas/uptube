@@ -233,8 +233,13 @@ export class UpTubeServiceService {
     })
   }
 
-  getSuggestedThematics() {
-    return this.http.get(BASE_URL + "/api/suggestedthematics")
+  getSuggestedThematic(): Promise<iThematic> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/suggestedthematics").subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        resolve(thematics[0])
+      })
+    })
   }
 
   getThematicTagsById(id: number): Promise<number[]> {

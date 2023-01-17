@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Video} from 'src/app/model/video';
 import {Playlist} from "../../model/playlist";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
@@ -17,7 +17,7 @@ export class PlaylistComponent implements OnInit {
   constructor(private _service: UpTubeServiceService, private route: ActivatedRoute) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(async r => {
       let id_playlist = <string>r.get('id_playlist')
       this.playlist = await this._service.getPlaylistById(parseInt(id_playlist))

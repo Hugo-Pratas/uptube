@@ -23,7 +23,6 @@ export class VideoCardComponent implements OnInit {
   @Input() ischannelView = false
   channel = {} as Channel;
   data = {} as CardData
-  apiRoute = this._service.getApiRoute()
   sideIcon = {} as IconDefinition
   faShareSquare = faShareAlt
   bookmark = {} as IconProp
@@ -31,38 +30,49 @@ export class VideoCardComponent implements OnInit {
   isVideo = false
   processPage = false
 
-
   constructor(private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
-    if (Object.keys(this.video_data).length !== 0) {
-      this.getUserdata()
-      this.isVideo = true
-      this.routerLink = "/video/" + this.video_data.id
-    } else if (Object.keys(this.thematic).length !== 0) {
-      this.constructCardData(this.thematic.thumbnail, this.thematic.logo, "/thematic/" + this.thematic.id, this.thematic.teaser, this.thematic.title, this.thematic.date)
-      this.routerLink = "/thematic/" + this.thematic.id
-      this.sideIcon = faClapperboardSolid
-      this.processPage = true
-    } else if (Object.keys(this.playlist).length !== 0) {
-      this.constructCardData(this.playlist.thumbnail, this.playlist.image, "/playlist/" + this.playlist.id, this.playlist.title, this.playlist.category, this.thematic.date)
-      this.routerLink = "/playlist/" + this.playlist.id
-      this.sideIcon = faPlay
-      this.processPage = true
-    }
+    if (Object.keys(this.video_data).length !== 0)
+      this.processVideoCard()
+    else if (Object.keys(this.thematic).length !== 0)
+      this.processThematic()
+    else if (Object.keys(this.playlist).length !== 0)
+      this.processPlaylist()
   }
 
-  async getUserdata() {
+  async processVideoCard() {
     let channelArr = await this._service.getChannelbyId(this.video_data.channel)
     this.channel = channelArr[0]
-    if (this.icons) {
+    if (this.icons)
       this.bookmark = this._service.icone_favorito(this.video_data.id_number)
-    }
-    this.constructCardData(this.video_data.thumbnail, this.channel.logo, "/channel/" + this.channel.id, this.video_data.name, this.channel.name, this.video_data.date)
-    if (this.ischannelView) {
+    this.constructCardData(
+      this.video_data.thumbnail,
+      this.channel.logo,
+      "/channel/" + this.channel.id,
+      this.video_data.name,
+      this.channel.name,
+      this.video_data.date
+    )
+    if (this.ischannelView)
       this.data.tags = this.video_data.tags_arr
-    }
+    this.isVideo = true
+    this.routerLink = "/video/" + this.video_data.id
+    this.processPage = true
+  }
+
+  processThematic() {
+    this.constructCardData(this.thematic.thumbnail, this.thematic.logo, "/thematic/" + this.thematic.id, this.thematic.teaser, this.thematic.title, this.thematic.date)
+    this.routerLink = "/thematic/" + this.thematic.id
+    this.sideIcon = faClapperboardSolid
+    this.processPage = true
+  }
+
+  processPlaylist() {
+    this.constructCardData(this.playlist.thumbnail, this.playlist.image, "/playlist/" + this.playlist.id, this.playlist.title, this.playlist.category, this.thematic.date)
+    this.routerLink = "/playlist/" + this.playlist.id
+    this.sideIcon = faPlay
     this.processPage = true
   }
 
@@ -82,7 +92,8 @@ export class VideoCardComponent implements OnInit {
 
   CopyLink() { //needs fixing
     var popup = document.getElementById(this.video_data.id.toString());
-    navigator.clipboard.writeText(document.URL.replace("homepage", "video/") + this.video_data.id);
+    let siteUrl = document.URL.split("/")[2]
+    navigator.clipboard.writeText(siteUrl + this.routerLink);
     // @ts-ignore
     popup.classList.toggle("show");
   }

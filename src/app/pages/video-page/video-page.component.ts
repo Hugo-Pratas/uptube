@@ -25,7 +25,6 @@ export class VideoPageComponent implements OnInit {
   id_video = -1;
   bookmark = {} as IconProp
   processedPage = false;
-  urlSite = ""
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
