@@ -6,6 +6,7 @@ import {TagPageComponent} from "./pages/tag-page/tag-page.component";
 import {ThematicsPageComponent} from "./pages/thematics-page/thematics-page.component";
 import {ThematicPageComponent} from "./pages/thematic-page/thematic-page.component";
 import {ChannelComponent} from "./pages/channel/channel.component";
+import {AllChannelsComponent} from "./pages/all-channels/all-channels.component";
 
 
 const routes: Routes = [
@@ -15,7 +16,9 @@ const routes: Routes = [
   {path: 'thematics', component: ThematicsPageComponent},
   {path: 'tags/:tag', component: TagPageComponent},
   {path: 'thematic/:id_thematic', component: ThematicPageComponent},
-  {path: 'channel/:id_channel', component: ChannelComponent}
+  {path: 'channel/:id_channel', component: ChannelComponent },
+  {path: 'channels', component: AllChannelsComponent }
+
 ];
 
 @NgModule({

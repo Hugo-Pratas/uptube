@@ -66,9 +66,21 @@ export class UpTubeServiceService {
     return this.http.get(BASE_URL + "/api/tags")
   }
 
-  getChannels() {
-    return this.http.get(BASE_URL + "/api/channels")
-
+  getChannels(): Promise<Channel[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => {
+        let channels = <Channel[]>jsonData
+        for (let channel of channels) {
+          channel = this.sanitizeChannel(channel)
+        }
+        resolve(channels)
+      })
+    })
+  }
+  sanitizeChannel(channel: Channel): Channel {
+    channel.logo = this.addBase_Route(channel.logo)
+    channel.banner = this.addBase_Route(channel.banner)
+    return channel
   }
 
 

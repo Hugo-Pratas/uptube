@@ -1,0 +1,16 @@
+<div class="Header" *ngIf="processedPage">
+  <div *ngFor="let channels of channel">
+    <div class="main">
+      <img [src]="apiLink+channels.banner" class="faded-image">
+      <div class="logo">
+        <app-user-logo [src]="apiLink+channels.logo"></app-user-logo>
+      </div>
+    </div>
+    <div class="texto">
+      <h2> {{channels.title}} </h2>
+      <p>{{channels.description}}</p>
+    </div>
+  </div>
+
+
+</div>
