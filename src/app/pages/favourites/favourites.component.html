@@ -1,0 +1,10 @@
+<h1>Favoritos</h1>
+<div class="gridContainer" *ngIf="processedPage">
+  <div *ngFor="let video of videos">
+    <app-video-card
+      [video_data]="video"
+      [icons]="true"
+    ></app-video-card>
+  </div>
+</div>
+

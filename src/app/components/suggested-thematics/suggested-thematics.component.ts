@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {iThematic} from "../../model/thematics";
 
@@ -16,10 +16,7 @@ export class SuggestedThematicsComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this._service.getSuggestedThematics().subscribe(d => {
-      let data = <iThematic[]>d
-      this.thematic = data[0] //FOI AQUI QUE FICASTE 1 HORA À TOA, ATENÇÃO
-    })
+  async ngOnInit(): Promise<void> {
+    this.thematic = await this._service.getSuggestedThematic()
   }
 }

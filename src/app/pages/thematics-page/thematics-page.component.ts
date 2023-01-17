@@ -14,9 +14,7 @@ export class ThematicsPageComponent implements OnInit {
   constructor(private _service: UpTubeServiceService) {
   }
 
-  ngOnInit(): void {
-    this._service.getThematics().subscribe(d => {
-      this.thematics = <iThematic[]>d
-    })
+  async ngOnInit(): Promise<void> {
+    this.thematics = await this._service.getThematics()
   }
 }
