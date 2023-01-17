@@ -16,9 +16,9 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._service.getSugestedChannels().subscribe(d => {
-      this.channels = <Channel[]>d
-      this.channels = this.channels.splice(0, 1)
-    })
+    /*    this._service.getSugestedChannels().subscribe(d => {
+          this.channels = <Channel[]>d
+          this.channels = this.channels.splice(0, 1)
+        })*/
   }
 }

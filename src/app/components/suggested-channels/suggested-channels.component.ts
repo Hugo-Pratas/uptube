@@ -13,37 +13,33 @@ import {Channel} from "../../model/channel";
 export class SuggestedChannelsComponent implements OnInit {
 
   channels = [] as Channel[];
+  allChannels = [] as Channel[];
   apiRoute = this._service.getApiRoute()
   showText: string = '';
 
+  constructor(private _service: UpTubeServiceService) {
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.allChannels = await this._service.getSugestedChannels()
+    let spliceChannels = this.allChannels.slice()
+    this.channels = spliceChannels.splice(0, 3)
+    this.showText = 'MOSTRAR MAIS'
+  }
+
   showMore() {
     if (this.showText == 'MOSTRAR MAIS') {
-      this._service.getSugestedChannels().subscribe(d => {
-        this.channels = <Channel[]>d
-        this.channels = this.channels.splice(0, 10)
-        this.showText = 'MOSTRAR MENOS'
-      })
+      let spliceChannels = this.allChannels.slice()
+      this.channels = spliceChannels.splice(0, 10)
+      this.showText = 'MOSTRAR MENOS'
     } else {
       this.showLess()
     }
   }
 
   showLess() {
-    this._service.getSugestedChannels().subscribe(d => {
-      this.channels = <Channel[]>d
-      this.channels = this.channels.splice(0, 3)
-      this.showText = 'MOSTRAR MAIS'
-    })
+    let spliceChannels = this.allChannels.slice()
+    this.channels = spliceChannels.splice(0, 3)
+    this.showText = 'MOSTRAR MAIS'
   }
-
-  constructor(private _service: UpTubeServiceService) {
-  }
-
-  ngOnInit(): void {
-    this._service.getSugestedChannels().subscribe(d => {
-      this.channels = <Channel[]>d
-      this.channels = this.channels.splice(0, 3)
-      this.showText = 'MOSTRAR MAIS'
-  })
-}
 }

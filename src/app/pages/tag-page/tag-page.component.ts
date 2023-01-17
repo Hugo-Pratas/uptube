@@ -17,16 +17,10 @@ export class TagPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(r => {
+    this.route.paramMap.subscribe(async r => {
       this.thisTag = <string>r.get('tag')
-      this.getVideosFromTag()
-      this.processedPage = true
+      let videos_id = <number[]>await this._service.getVideosIdbyTagName(this.thisTag)
+      this.videos_data = await this._service.getVideosFromIds(videos_id)
     });
   }
-
-  async getVideosFromTag() {
-    let videos_id = <number[]>await this._service.getVideosIdbyTagName(this.thisTag)
-    this.videos_data = await this._service.getVideosFromIds(videos_id)
-  }
-
 }

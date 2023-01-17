@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {faShareAlt} from "@fortawesome/free-solid-svg-icons";
-import {faBookmark} from "@fortawesome/free-regular-svg-icons";
+import {faShareAlt, IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {faClapperboard as faClapperboardSolid} from "@fortawesome/free-solid-svg-icons";
-import {faPlay as faPlaySolid,} from "@fortawesome/free-solid-svg-icons";
+import {faPlay} from "@fortawesome/free-solid-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
 import {iThematic} from "../../model/thematics";
 import {CardData} from 'src/app/model/card-data';
 import {Channel} from "../../model/channel";
+import {Playlist} from "../../model/playlist";
 
 @Component({
   selector: 'app-video-card',
@@ -17,48 +17,62 @@ import {Channel} from "../../model/channel";
 })
 export class VideoCardComponent implements OnInit {
   @Input() video_data = {} as Video;
-  @Input() icons = false
   @Input() thematic = {} as iThematic
+  @Input() playlist = {} as Playlist
+  @Input() icons = false
   @Input() ischannelView = false
   channel = {} as Channel;
   data = {} as CardData
-  apiRoute = this._service.getApiRoute()
-  processPage = false
-  faClapperboardSolid = faClapperboardSolid;
+  sideIcon = {} as IconDefinition
   faShareSquare = faShareAlt
   bookmark = {} as IconProp
   routerLink = ""
   isVideo = false
+  processPage = false
 
   constructor(private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
-    if (Object.keys(this.video_data).length !== 0) {
-      this.getUserdata()
-      this.isVideo = true
-      this.routerLink = "/video/" + this.video_data.id
-    } else if (Object.keys(this.thematic).length !== 0) {
-      this.constructCardData(this.thematic.thumbnail, this.thematic.logo, "/thematic/" + this.thematic.id, this.thematic.teaser, this.thematic.title, this.thematic.date)
-      this.routerLink = "/thematic/" + this.thematic.id
-      this.processPage = true
-    }
+    if (Object.keys(this.video_data).length !== 0)
+      this.processVideoCard()
+    else if (Object.keys(this.thematic).length !== 0)
+      this.processThematic()
+    else if (Object.keys(this.playlist).length !== 0)
+      this.processPlaylist()
   }
 
-  async getUserdata() {
-    let channelArr = await this._service.getChannel(this.video_data.channel)
+  async processVideoCard() {
+    let channelArr = await this._service.getChannelbyId(this.video_data.channel)
     this.channel = channelArr[0]
-    if (this.icons) {
+    if (this.icons)
       this.bookmark = this._service.icone_favorito(this.video_data.id_number)
-    }
-    this.constructCardData(this.video_data.thumbnail, this.channel.logo, "/channel/" + this.channel.id, this.video_data.name, this.channel.name, this.video_data.date)
-    if (this.ischannelView) {
-      if (typeof this.video_data.tags !== "string") { //double type fix
-        this.data.tags = this.video_data.tags
-      } else {
-        throw new Error("video.tags is not number[]")
-      }
-    }
+    this.constructCardData(
+      this.video_data.thumbnail,
+      this.channel.logo,
+      "/channel/" + this.channel.id,
+      this.video_data.name,
+      this.channel.name,
+      this.video_data.date
+    )
+    if (this.ischannelView)
+      this.data.tags = this.video_data.tags_arr
+    this.isVideo = true
+    this.routerLink = "/video/" + this.video_data.id
+    this.processPage = true
+  }
+
+  processThematic() {
+    this.constructCardData(this.thematic.thumbnail, this.thematic.logo, "/thematic/" + this.thematic.id, this.thematic.teaser, this.thematic.title, this.thematic.date)
+    this.routerLink = "/thematic/" + this.thematic.id
+    this.sideIcon = faClapperboardSolid
+    this.processPage = true
+  }
+
+  processPlaylist() {
+    this.constructCardData(this.playlist.thumbnail, this.playlist.image, "/playlist/" + this.playlist.id, this.playlist.title, this.playlist.category, this.thematic.date)
+    this.routerLink = "/playlist/" + this.playlist.id
+    this.sideIcon = faPlay
     this.processPage = true
   }
 
@@ -78,7 +92,8 @@ export class VideoCardComponent implements OnInit {
 
   CopyLink() { //needs fixing
     var popup = document.getElementById(this.video_data.id.toString());
-    navigator.clipboard.writeText(document.URL.replace("homepage", "video/") + this.video_data.id);
+    let siteUrl = document.URL.split("/")[2]
+    navigator.clipboard.writeText(siteUrl + this.routerLink);
     // @ts-ignore
     popup.classList.toggle("show");
   }

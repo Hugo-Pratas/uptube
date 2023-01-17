@@ -1,0 +1,17 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5vw;;
+  margin-top: 1.5em;
+  margin-right: 2vw;
+  margin-left: 2vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
+h1 {
+  font-size: calc(10px + 1vw);
+  margin-block-end: 0.25em;
+  margin: 1.5em 0 0 2vw;
+}
