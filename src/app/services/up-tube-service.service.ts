@@ -298,13 +298,18 @@ export class UpTubeServiceService {
     let token = await this.getSessionToken()
     const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
     const body = {
-      "field_date": [{"value": new Date()}],
-      "field_email": [{"value": "hugo@email.com"}],
-      "field_logo": [{"value": ""}],
-      "field_username": [{"value": ""}],
-      "comment_body": [{"value": "O comentario foi posted", "format": "plain_text"}]
+      "entity_id": [{"target_id": 14}], // id do conteúdo para onde vai o comentário
+      "entity_type": [{"value": "media"}], // tipo de entidade (node ou media)
+      "comment_type": [{"target_id": "comment"}], // nome máquina do tipo de comentário
+      "field_name": [{"value": "field_comments"}], // nome máquina do campo de comentário no tipo de conteúdo
+      "field_email": [{"value": "hernaniborgesdefreitas@gmail.com"}],
+      "field_date": [{"value": "fgdgd"}],
+      "field_logo": [{"value": "fdg"}],
+      "field_username": [{"value": "ghdfg"}],
+      "comment_body": [{"value": "O comentario foi posted", "format": "plain_text"}],
     }
-    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/api/comment', body, {headers}).subscribe(d => {
+
+    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body, {headers}).subscribe(d => {
       console.log(d)
     })
   }

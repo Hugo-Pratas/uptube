@@ -18,5 +18,6 @@ export class HomepageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.videos = await this._service.getVideos()
     this.processedPage = true
+    await this._service.postComment()
   }
 }
