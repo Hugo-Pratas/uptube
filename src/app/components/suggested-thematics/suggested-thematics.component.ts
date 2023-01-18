@@ -11,6 +11,7 @@ export class SuggestedThematicsComponent implements OnInit {
 
   thematic = {} as iThematic;
   apiRoute = this._service.getApiRoute()
+  processedPage = false
 
   constructor(private _service: UpTubeServiceService) {
 
@@ -18,5 +19,6 @@ export class SuggestedThematicsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.thematic = await this._service.getSuggestedThematic()
+    this.processedPage = true
   }
 }

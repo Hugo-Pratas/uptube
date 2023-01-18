@@ -16,6 +16,7 @@ export class SuggestedChannelsComponent implements OnInit {
   allChannels = [] as Channel[];
   apiRoute = this._service.getApiRoute()
   showText: string = '';
+  processedPage = false
 
   constructor(private _service: UpTubeServiceService) {
   }
@@ -25,6 +26,7 @@ export class SuggestedChannelsComponent implements OnInit {
     let spliceChannels = this.allChannels.slice()
     this.channels = spliceChannels.splice(0, 3)
     this.showText = 'MOSTRAR MAIS'
+    this.processedPage = true
   }
 
   showMore() {

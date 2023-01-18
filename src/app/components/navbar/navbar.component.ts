@@ -3,7 +3,8 @@ import {
   faHouse as faHouseSolid,
   faBarsStaggered as faBarsStaggeredSolid,
   faPlay as faPlaySolid,
-  faClapperboard as faClapperboardSolid
+  faClapperboard as faClapperboardSolid,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
@@ -17,23 +18,25 @@ export class NavbarComponent implements OnInit {
   faBarsStaggeredSolid = faBarsStaggeredSolid;
   faPlaySolid = faPlaySolid;
   faClapperboardSolid = faClapperboardSolid;
+  faBars = faBars
 
   public getScreenWidth: any;
-  public getScreenHeight: any;
   tags = [] as string[];
+  processedPage = false
 
   constructor(private _service: UpTubeServiceService) {
   }
 
-  public hideRuleContent = false;
+  public hideRuleContent = true;
 
-  toggle() {
+  toggleHidden() {
     this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
   }
 
   async ngOnInit(): Promise<void> {
     this.getScreenWidth = window.innerWidth;
     this.tags = await this._service.getTagsNames()
+    this.processedPage = true
   }
 
 
