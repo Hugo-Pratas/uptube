@@ -309,7 +309,7 @@ export class UpTubeServiceService {
       "comment_body": [{"value": "O comentario foi posted", "format": "plain_text"}],
     }
 
-    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body, {headers}).subscribe(d => {
+    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body).subscribe(d => {
       console.log(d)
     })
   }
