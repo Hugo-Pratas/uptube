@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Video} from 'src/app/model/video';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
@@ -18,6 +18,16 @@ export class HomepageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.videos = await this._service.getVideos()
     this.processedPage = true
-    this._service.postComment()
+    //this._service.postComment()
+  }
+
+  onScroll(scrollable: HTMLDivElement) {
+    let scrollTop = scrollable.scrollTop;
+    let scrollHeight = scrollable.scrollHeight;
+    let screenHeight = window.innerHeight;
+
+    if (scrollTop >= scrollHeight - screenHeight) {
+      console.log("fim da pagina")
+    }
   }
 }

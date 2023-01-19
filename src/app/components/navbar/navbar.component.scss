@@ -6,6 +6,9 @@
   position: sticky;
 }
 
+.navbarTotal.mobile {
+  padding-top: 80px;
+}
 
 .navbarLogo {
   display: flex;
@@ -25,15 +28,22 @@
 .navbarLogo.mobile {
   width: 100%;
   height: 80px;
+  position: fixed;
+  z-index: 10;
 
   .icon {
     font-size: 30px;
-    margin-right: 5px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
   }
 
   span {
-    margin-left: auto;
-    margin-right: auto;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-right: 50px;
   }
 
   img {
@@ -48,6 +58,10 @@
   height: 89.8%;
   display: flex;
   flex-direction: column;
+}
+
+.navbarMenu.mobile {
+  position: absolute;
 }
 
 .navmenuLinks {
@@ -126,3 +140,4 @@ fa-icon {
 a:link {
   text-decoration: none;
 }
+

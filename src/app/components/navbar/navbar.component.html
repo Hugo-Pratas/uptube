@@ -30,13 +30,13 @@
       </div>
     </div>
   </div>
-  <div *ngIf="getScreenWidth<=1023">
+  <div class="mobileContainer" *ngIf="getScreenWidth<=1023">
     <div class="navbarLogo mobile">
       <fa-icon [icon]="faBars" class="icon" (click)="toggleHidden()"></fa-icon>
       <span><img alt="imgLogo" src="./assets/images/upload.svg" routerLink="/homepage"></span>
     </div>
     <div class="navbarTotal mobile" [hidden]="hideRuleContent">
-      <div class="navbarMenu">
+      <div class="navbarMenu mobile">
         <div class="navmenuLinks">
           <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
             <fa-icon [icon]="faHouseSolid"></fa-icon>
