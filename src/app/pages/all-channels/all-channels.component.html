@@ -1,16 +1,19 @@
+<div class="titulo">
+  <h1>Canais</h1>
+</div>
 <div class="Header" *ngIf="processedPage">
-  <div *ngFor="let channels of channel">
+  <div *ngFor="let channel of channels" class="mainClass">
     <div class="main">
-      <img [src]="apiLink+channels.banner" class="faded-image">
       <div class="logo">
-        <app-user-logo [src]="apiLink+channels.logo"></app-user-logo>
+        <app-user-logo [src]="channel.logo"></app-user-logo>
       </div>
     </div>
     <div class="texto">
-      <h2> {{channels.title}} </h2>
-      <p>{{channels.description}}</p>
+      <h2> {{channel.name}} </h2>
+    </div>
+    <div class="submitSub">
+      <button>Subscrever</button>
     </div>
   </div>
-
 
 </div>

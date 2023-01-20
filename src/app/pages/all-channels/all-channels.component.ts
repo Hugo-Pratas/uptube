@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {faBookmark} from "@fortawesome/free-regular-svg-icons";
+import {Channel} from "../../model/channel";
 
 @Component({
   selector: 'app-all-channels',
@@ -9,22 +8,18 @@ import {faBookmark} from "@fortawesome/free-regular-svg-icons";
   styleUrls: ['./all-channels.component.scss']
 })
 export class AllChannelsComponent implements OnInit {
-  channel: any;
-  id_channel = -1;
-  bookmark = faBookmark;
+  channels= [] as Channel[];
   processedPage = false;
-  apiLink = "";
-
-  constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
+  constructor(private _service: UpTubeServiceService) {
   }
 
-  ngOnInit(): void {
-    this.apiLink = this._service.getApiRoute();
-      this._service.getChannels().subscribe(channel => {
-        this.channel = channel
-      })
-      console.log(this.channel)
 
-  }
+    async ngOnInit(): Promise<void> {
+      this.channels = await this._service.getChannels()
+      this.processedPage = true
+    }
+
+
+
 
 }
