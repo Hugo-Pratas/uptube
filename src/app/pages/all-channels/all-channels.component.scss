@@ -1,7 +1,7 @@
 .Header{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 20px;
   flex-wrap: wrap;
   margin-left: 2vw;
@@ -10,7 +10,6 @@
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     margin-top: 1vw;
-    grid-gap: 0;
   }
   .main{
     display: flex;
@@ -47,4 +46,12 @@
   margin-left: 5%;
   font-size: 1vw;
 }
-
+@media only screen and (max-width: 1300px) {
+  .Header {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+    flex-direction: row;
+    width: fit-content;
+  }
+}
