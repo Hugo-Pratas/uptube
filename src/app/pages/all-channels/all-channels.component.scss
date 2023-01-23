@@ -48,10 +48,8 @@
 }
 @media only screen and (max-width: 1300px) {
   .Header {
-    display: flex;
-    justify-content: flex-start;
-    flex: 1;
-    flex-direction: row;
-    width: fit-content;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-top: 1vw;
   }
 }

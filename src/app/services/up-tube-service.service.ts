@@ -8,7 +8,6 @@ import {Video} from '../model/video';
 import {Channel} from "../model/channel";
 import {Tag} from '../model/tag';
 import {Playlist} from "../model/playlist";
-
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 const playlist_favourite: Playlist = {
   title: 'Favourites',
@@ -20,6 +19,8 @@ const playlist_favourite: Playlist = {
   id_number: 0,
   videos_id: []
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -352,4 +353,34 @@ export class UpTubeServiceService {
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
   }
+  toggleFavoritochannel(id_channel: number) {
+    if (this.isFavourite(id_channel)) {
+      this.removeFavouriteFromLocal(id_channel)
+    } else {
+      this.addFavouriteToLocal(id_channel)
+    }
+  }
+  addChannelToLocal(id_channel: number) {
+    let subscribe = this.getFavouritesFromLocal()
+    subscribe.push(id_channel)
+    localStorage.setItem("Subscritos", JSON.stringify(subscribe))
+  }
+  getSubscribeFromLocal() {
+    let subscribe = localStorage.getItem("Subscribe")
+    if (subscribe !== null) {
+      return JSON.parse(subscribe)
+    }
+    return []
+  }
+  removeSubscribeFromLocal(id_channel: number) {
+    let subscribe = this.getFavouritesFromLocal()
+    let indice = subscribe.indexOf(id_channel)
+    subscribe.splice(indice, 1)
+    localStorage.setItem("Subscritos", JSON.stringify(subscribe))
+  }
+  isSubscribe(id_channel: number): boolean {
+    return this.getSubscribeFromLocal().includes(id_channel);
+  }
+
 }
+
