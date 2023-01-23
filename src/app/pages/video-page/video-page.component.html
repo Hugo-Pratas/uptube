@@ -37,7 +37,7 @@
       <app-comments></app-comments>
     </div>
   </div>
-  <div id="sideBar">
+  <div id="sideBar" *ngIf="getScreenWidth>1023">
     <app-video-card *ngFor="let video of sugestedVideos"
                     [video_data]="video"
     ></app-video-card>

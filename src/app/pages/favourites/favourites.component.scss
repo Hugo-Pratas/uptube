@@ -1,17 +1,27 @@
 .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5vw;;
-  margin-top: 1.5em;
-  margin-right: 2vw;
-  margin-left: 2vw;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
+  margin-left: 1vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5vw;
+}
+
+@media only screen and (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: calc(100vh - 80px); //because of banner 80px
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 h1 {
-  font-size: calc(10px + 1vw);
-  margin-block-end: 0.25em;
-  margin: 1.5em 0 0 2vw;
+  margin: 0;
+  padding: 10px 0 0 10px;
 }

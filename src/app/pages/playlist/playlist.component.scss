@@ -10,6 +10,18 @@
   max-height: 100vh;
 }
 
+@media only screen and (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 h1 {
   font-size: calc(10px + 1vw);
   margin-block-end: 0.25em;
