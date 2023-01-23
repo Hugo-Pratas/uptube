@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {
   faHouse as faHouseSolid,
   faBarsStaggered as faBarsStaggeredSolid,
@@ -33,15 +33,13 @@ export class NavbarComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.getScreenWidth = window.innerWidth;
-    this.getScreenHeight = window.innerHeight;
     this.tags = await this._service.getTagsNames()
   }
 
 
-  /*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
-    onWindowResize() {
-      this.getScreenWidth = window.innerWidth;
-      this.getScreenHeight = window.innerHeight;
-      //console.log(this.getScreenWidth);
-    }*/
+  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    console.log(this.getScreenWidth);
+  }
 }
