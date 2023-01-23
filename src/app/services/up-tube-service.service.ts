@@ -30,9 +30,9 @@ export class UpTubeServiceService {
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<----- VIDEOS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
-  getVideos(): Promise<Video[]> {
+  getVideos(page: number): Promise<Video[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/videos").subscribe(videos => {
+      this.http.get(BASE_URL + "/api/videos?page=" + page).subscribe(videos => {
         for (let video of <Video[]>videos) {
           video = this.sanitizeVideo(video)
         }
