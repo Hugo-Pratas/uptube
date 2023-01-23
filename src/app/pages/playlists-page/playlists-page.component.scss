@@ -9,6 +9,18 @@
 
   }
 
+  @media only screen and (max-width: 1024px) {
+    #gridContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media only screen and (max-width: 530px) {
+    #gridContainer {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
   h3 {
     margin-top: 2%;
     margin-bottom: 1%;

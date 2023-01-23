@@ -1,11 +1,12 @@
 .globalContainer {
-  margin-bottom: 1.5vh;
-  min-width: 400px;
-
+  padding-bottom: 1.5vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
 
   .header {
-    margin-left: 2%;
-    margin-top: 20px;
+    padding-left: 2%;
+    padding-top: 20px;
 
     .banner {
       position: relative;
@@ -13,11 +14,28 @@
 
       .logo {
         position: absolute;
-        width: 10vw;
+        width: 150px;
         right: 0;
         bottom: 0;
         margin-right: 4%;
         margin-bottom: -5%;
+      }
+
+      @media only screen and (max-width: 1395px) {
+        .logo {
+          width: 125px;
+        }
+      }
+      @media only screen and (max-width: 1024px) {
+        .logo {
+          width: 100px;
+        }
+      }
+
+      @media only screen and (max-width: 615px) {
+        .logo {
+          width: 75px;
+        }
       }
     }
 
@@ -37,7 +55,6 @@
       }
     }
   }
-
 
   .faded-image {
     width: 100%;
@@ -68,5 +85,10 @@
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .globalContainer {
+    max-height: calc(100vh - 80px); //because of banner 80px;
+  }
+}
 
 

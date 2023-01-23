@@ -20,7 +20,7 @@ import {CommentsComponent} from './components/comments/comments.component';
 import {ChannelLayoutComponent} from './components/channel-layout/channel-layout.component';
 import {PlaylistsPageComponent} from './pages/playlists-page/playlists-page.component';
 import {PlaylistComponent} from './pages/playlist/playlist.component';
-import { FavouritesComponent } from './pages/favourites/favourites.component';
+import {FavouritesComponent} from './pages/favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { FavouritesComponent } from './pages/favourites/favourites.component';
     ChannelLayoutComponent,
     PlaylistsPageComponent,
     PlaylistComponent,
-    FavouritesComponent
+    FavouritesComponent,
   ],
   imports: [
     BrowserModule,

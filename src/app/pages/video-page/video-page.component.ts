@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
@@ -25,6 +25,7 @@ export class VideoPageComponent implements OnInit {
   id_video = -1;
   bookmark = {} as IconProp
   processedPage = false;
+  getScreenWidth = window.innerWidth;
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
@@ -51,6 +52,11 @@ export class VideoPageComponent implements OnInit {
   marked_icon(isMarked?: boolean) {
     //needs fixing
     return isMarked ? solidThumbsUp : faThumbsUp;
+  }
+
+  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
   }
 }
 

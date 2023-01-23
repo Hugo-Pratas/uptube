@@ -20,29 +20,25 @@ export class NavbarComponent implements OnInit {
   faClapperboardSolid = faClapperboardSolid;
   faBars = faBars
 
-  public getScreenWidth: any;
   tags = [] as string[];
   processedPage = false
+  hideRuleContent = true;
+  getScreenWidth = window.innerWidth;
 
   constructor(private _service: UpTubeServiceService) {
   }
 
-  public hideRuleContent = true;
+  async ngOnInit(): Promise<void> {
+    this.tags = await this._service.getTagsNames()
+    this.processedPage = true
+  }
 
   toggleHidden() {
     this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
   }
 
-  async ngOnInit(): Promise<void> {
-    this.getScreenWidth = window.innerWidth;
-    this.tags = await this._service.getTagsNames()
-    this.processedPage = true
-  }
-
-
   @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
-    console.log(this.getScreenWidth);
   }
 }

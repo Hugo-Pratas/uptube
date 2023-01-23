@@ -19,7 +19,7 @@
   .router {
     flex: 1;
     padding-top: 80px;
-    height: calc(100vh - 1px);
+    max-height: calc(100vh - 81px); //because of banner 80px
   }
 }
 

@@ -49,9 +49,7 @@
   img {
     width: 200px;
   }
-
 }
-
 
 .navbarMenu {
   border: 1px solid #3e3d3f;
@@ -62,6 +60,7 @@
 
 .navbarMenu.mobile {
   position: absolute;
+  height: calc(100vh - 80px);
 }
 
 .navmenuLinks {
