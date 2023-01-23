@@ -1,13 +1,8 @@
-.globalContainer {
-  padding-top: 0.5em;
-  padding-right: 2vw;
-  padding-left: 2vw;
+.gridContainer {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
-}
-
-.gridContainer {
+  margin-left: 1vw;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5vw;
@@ -16,13 +11,11 @@
 @media only screen and (max-width: 1024px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .globalContainer {
     max-height: calc(100vh - 80px); //because of banner 80px
   }
 }
 
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 426px) {
   .gridContainer {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -30,5 +23,5 @@
 
 h1 {
   margin: 0;
-  padding-bottom: 0.5em;
+  padding: 10px 0 0 10px;
 }

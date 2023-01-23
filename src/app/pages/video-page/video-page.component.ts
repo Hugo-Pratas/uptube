@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {faBookmark} from "@fortawesome/free-regular-svg-icons";
@@ -7,6 +7,8 @@ import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
+import {Video} from "../../model/video";
+import {Channel} from "../../model/channel";
 
 
 @Component({
@@ -17,46 +19,29 @@ import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 
 export class VideoPageComponent implements OnInit {
-  videoData: any;
-  userData: any;
+  videoData = {} as Video;
+  sugestedVideos = [] as Video[]
+  channelData = {} as Channel;
   id_video = -1;
   bookmark = {} as IconProp
   processedPage = false;
-  urlSite = ""
-  sugestedVideos: any
+  getScreenWidth = window.innerWidth;
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
   }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(r => {
-      let paramsData = r.get('id_video')
-      if (paramsData === null) {
-        throw new Error("params Value is NULL")
-      }
+  async ngOnInit(): Promise<void> {
+    this.route.paramMap.subscribe(async r => {
+      let paramsData = <string>r.get('id_video')
       this.id_video = parseInt(paramsData)
-      this.getData()
+      this.bookmark = this._service.icone_favorito(this.id_video)
+      this.videoData = await this._service.getVideo(this.id_video)
+      let channels = await this._service.getChannelbyId(this.videoData.channel) //api gives me channel[] bc of relationship with videos
+      this.channelData = channels[0]  //I only need channel data for this purpose
+      this.sugestedVideos = await this._service.getSugestedVideos()
+      this.processedPage = true
     });
-  }
-
-  async getData() {
-    this.urlSite = this._service.getApiRoute()
-    this.bookmark = this._service.icone_favorito(this.id_video)
-    this.videoData = await this._service.getVideoData(this.id_video)
-    this.userData = await this._service.getUserData(this.videoData.channel)
-    this.sugestedVideos = await this.getSugestedVideoData()
-    this.processedPage = true
-  }
-
-  getSugestedVideoData() {
-    return new Promise((resolve) => {
-      let data: any;
-      this._service.getSugestedVideos().subscribe(d => {
-        data = d;
-        resolve(data);
-      });
-    })
   }
 
   toggleFavorito(id_video: number) {
@@ -67,6 +52,11 @@ export class VideoPageComponent implements OnInit {
   marked_icon(isMarked?: boolean) {
     //needs fixing
     return isMarked ? solidThumbsUp : faThumbsUp;
+  }
+
+  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
   }
 }
 

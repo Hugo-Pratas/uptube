@@ -1,7 +1,10 @@
+.globalContainer {
+  margin-bottom: 2vh;
+}
+
 .mainBar {
-  min-width: 400px;
   width: 70%;
-  margin-inline: 2vw;
+  padding-inline: 2vw;
 
   #header {
     margin-bottom: 20px;
@@ -13,17 +16,19 @@
       max-width: 90%;
 
       h1 {
-        font-size: calc(10px + 1vw);
+        font-size: 1.5em;
         margin-top: 0;
-        margin-block-end: 0.25em
+        margin-block-end: 0.25em;
+        padding-bottom: 1em;
       }
     }
 
     #favourite {
       align-self: end;
+      cursor: pointer;
 
       fa-icon {
-        font-size: 2.5vw;
+        font-size: 2em;
         color: #92929D;
       }
 
@@ -57,18 +62,20 @@
       #img {
         margin-right: 1vw;
         width: 80px;
+        cursor: pointer;
       }
 
       #text {
         h1 {
-          font-size: calc(10px + 0.5vw);
+          font-size: 1em;
           margin-bottom: 0.5vh;
           font-family: Roboto, sans-serif;
           color: #FAFAFB;
+          cursor: pointer;
         }
 
         h2 {
-          font-size: calc(4px + 0.5vw);
+          font-size: 0.8em;
           color: #92929D;
           font-family: Roboto, sans-serif;
 
@@ -85,7 +92,7 @@
       }
 
       p {
-        margin: 0 1.5vw;
+        padding: 0 1.5vw;
       }
 
       .thumbs:hover {
@@ -95,10 +102,16 @@
   }
 
   #description {
-    font-size: calc(7px + 0.5vw);
+    font-size: 0.8em;
     padding: 1vw;
     background: #1C1C24;
     border-radius: 20px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .mainBar {
+    width: 100%;
   }
 }
 

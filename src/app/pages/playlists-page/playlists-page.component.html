@@ -1,0 +1,10 @@
+<div id="container" *ngIf="processedPage">
+  <h3>Playlists</h3>
+  <div id="gridContainer">
+    <div *ngFor="let playlist of playlists">
+      <app-video-card
+        [playlist]="playlist"
+      ></app-video-card>
+    </div>
+  </div>
+</div>

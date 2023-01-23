@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {iThematic} from "../model/thematics";
-import {Router} from "@angular/router";
 import {Video} from '../model/video';
-
+import {Channel} from "../model/channel";
+import {Tag} from '../model/tag';
+import {Playlist} from "../model/playlist";
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
@@ -17,54 +18,48 @@ const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 export class UpTubeServiceService {
   bookmark = faBookmark;
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private route: Router) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  }
+
+  addBase_Route(link: string) {
+    return BASE_URL + link
   }
 
   getApiRoute() {
     return BASE_URL;
   }
 
-  getSugestedChannels() {
-    return this.http.get(BASE_URL + "/api/channels")
-  }
-
-  getVideos() {
-    return this.http.get(BASE_URL + "/api/videos")
-  }
-
-  getSugestedVideos() {
-    return this.http.get(BASE_URL + "/api/SugestedVideos")
-  }
-  getChannel(id:number){
-    return this.http.get(BASE_URL+ "/api/channel/" + id)
-}
-
-  getVideo(id: number) {
-    return this.http.get(BASE_URL + "/api/video/" + id)
-  }
-
-  getTags() {
-    return this.http.get(BASE_URL + "/api/tags")
-  }
-
-  getChannels() {
-    return this.http.get(BASE_URL + "/api/channels")
-
-  }
-
-
-
-
-
-  getTagsNames() {
+  // <<<<<<<<<<<<<<<<<<<<<<<----- VIDEOS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  getVideos(): Promise<Video[]> {
     return new Promise((resolve) => {
-      this.getTags().subscribe(data => {
-        let tags: string[] = [];
-        // @ts-ignore
-        for (const d of data) {
-          tags.push(d.name)
+      this.http.get(BASE_URL + "/api/videos").subscribe(videos => {
+        for (let video of <Video[]>videos) {
+          video = this.sanitizeVideo(video)
         }
-        resolve(tags);
+        resolve(<Video[]>videos)
+      })
+    })
+  }
+
+  getSugestedVideos(): Promise<Video[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/SugestedVideos").subscribe(videos => {
+        for (let video of <Video[]>videos) {
+          video = this.sanitizeVideo(video)
+        }
+        resolve(<Video[]>videos)
+      })
+    })
+  }
+
+  getVideosIdsFromChannel(id_channel: number): Promise<number[]> {
+    return new Promise((resolve) => {
+      this.getChannelbyId(id_channel).then(channels => {
+        let videos_id: number[] = [];
+        for (const d of <Channel[]>channels) {
+          videos_id.push(d.video_id)
+        }
+        resolve(videos_id);
       })
     })
   }
@@ -75,10 +70,6 @@ export class UpTubeServiceService {
         let videos_id: number[] = [];
         for (const tag of <any[]>tagsData) {
           videos_id.push(tag.video_id)
-        }
-        if (videos_id.length <= 0) {
-          this.route.navigate(['/homepage'])
-          return;
         }
         resolve(videos_id);
       })
@@ -92,73 +83,153 @@ export class UpTubeServiceService {
         for (const tag of <any[]>tagsData) {
           videos_id.push(tag.video_id)
         }
-        if (videos_id.length <= 0) {
-          this.route.navigate(['/homepage'])
-          return;
-        }
         resolve(videos_id);
       })
     })
   }
 
-  getVideoData(id_video: number) {
+  getVideo(id_video: number): Promise<Video> {
     return new Promise((resolve) => {
-      let data: any;
-      this.getVideo(id_video).subscribe(d => {
-        data = d;
-        data = data[0]; //api retorna array
-        data.tags = data.tags.split(",").map(Number) //as tags vêm em string da api....
-        data.url = this.sanitizer.bypassSecurityTrustResourceUrl(data.url.replace("watch?v=", "embed/"));
-        resolve(data);
+      return this.http.get(BASE_URL + "/api/video/" + id_video).subscribe(apiJson => {
+        let data_arr = <Video[]>apiJson;
+        let video = this.sanitizeVideo(data_arr[0])
+        resolve(video);
       });
     })
   }
 
-  getVideosFromIds(ids_videos: number[]): Promise<Video[]> {
+  getVideosFromIds(ids_videos: number[]): Promise<Video[]> { //need this to get video ordered by date from db
     return new Promise((resolve) => {
       let ids_string = ids_videos.join(",")
-      this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(d => {
-        resolve(<Video[]>d)
+      this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(apiJson => {
+        let videos = <Video[]>apiJson
+        for (let video of videos) {
+          video = this.sanitizeVideo(video)
+        }
+        resolve(videos)
       })
     })
   }
 
-  getTagsNamebyID(id: number[]) {
+  sanitizeVideo(video: Video): Video {
+    video.tags_arr = video.tags.split(",").map(Number) //as tags vêm em string da api....
+    video.safe_url = this.sanitizer.bypassSecurityTrustResourceUrl(video.url.replace("watch?v=", "embed/"));
+    video.id_number = parseInt(video.id)
+    video.thumbnail = this.addBase_Route(video.thumbnail)
+    return video
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<----- CHANNELS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  sanitizeChannel(channel: Channel): Channel {
+    channel.logo = this.addBase_Route(channel.logo)
+    channel.banner = this.addBase_Route(channel.banner)
+    return channel
+  }
+
+  getSugestedChannels(): Promise<Channel[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => { //api dos sugeridos não está a funcionar no drupal
+        let channels = <Channel[]>jsonData
+        for (let channel of channels) {
+          channel = this.sanitizeChannel(channel)
+        }
+        resolve(channels)
+      })
+    })
+  }
+
+  getChannelbyId(id: number): Promise<Channel[]> { //retorna array de channels por causa de varios videos ids
     return new Promise((resolve) => {
-      let data: any;
-      this.getTags().subscribe(d => {
-        data = d;
-        let tags: any[] = [];
-        for (const number of id) {
-          // @ts-ignore
-          tags.push(data.filter(obj => obj.tid == number).map(obj => obj.name).toString())
+      this.http.get(BASE_URL + "/api/channel/" + id).subscribe(channels => {
+        for (let channel of <Channel[]>channels) {
+          channel = this.sanitizeChannel(channel)
+        }
+        resolve(<Channel[]>channels);
+      })
+    })
+  }
+
+  getChannels(): Promise<Channel[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => {
+        let channels = <Channel[]>jsonData
+        for (let channel of channels) {
+          channel = this.sanitizeChannel(channel)
+        }
+        resolve(channels)
+      })
+    })
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<----- TAGS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+  getTags() {
+    return this.http.get(BASE_URL + "/api/tags")
+  }
+
+  getTagsNames(): Promise<string[]> {
+    return new Promise((resolve) => {
+      this.getTags().subscribe(data => {
+        let tags: string[] = [];
+        for (const d of <Tag[]>data) {
+          tags.push(d.name)
         }
         resolve(tags);
       })
     })
   }
 
-  getUser(id: number) {
-    return this.http.get(BASE_URL + "/api/channel/" + id)
-  }
-
-  getUsers() {
-    return this.http.get(BASE_URL + "/api/channels")
-  }
-
-  getUserData(id_user: number) {
+  getTagsNamebyID(ids: number[]): Promise<string[]> {
     return new Promise((resolve) => {
-      let user: any
-      user = this.getUser(id_user).subscribe(d => {
-        user = d;
-        user = user[0]
-        resolve(user);
+      this.getTags().subscribe(d => {
+        let data = <Tag[]>d;
+        let tags: string[] = [];
+        for (const id of ids) {
+          tags.push(data.filter(obj => obj.tid == id).map(obj => obj.name).toString())
+        }
+        resolve(tags);
       })
     })
   }
 
-  getThematics() {
-    return this.http.get(BASE_URL + "/api/thematics")
+  // <<<<<<<<<<<<<<<<<<<<<<<----- THEMATICS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  sanitizeThematics(thematic: iThematic): iThematic {
+    thematic.header = this.addBase_Route(thematic.header)
+    thematic.thumbnail = this.addBase_Route(thematic.thumbnail)
+    thematic.logo = this.addBase_Route(thematic.logo)
+    return thematic
+  }
+
+  getThematics(): Promise<iThematic[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics").subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        for (let thematic of thematics) {
+          thematic = this.sanitizeThematics(thematic)
+        }
+        resolve(thematics)
+      })
+    })
+  }
+
+  getThematicsById(id_thematic: number): Promise<iThematic> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/thematics/" + id_thematic).subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        let theme = this.sanitizeThematics(thematics[0])
+        resolve(theme)
+      })
+    })
+  }
+
+  getSuggestedThematic(): Promise<iThematic> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/suggestedthematics").subscribe(apiJson => {
+        let thematics = <iThematic[]>apiJson
+        resolve(thematics[0])
+      })
+    })
   }
 
   getThematicTagsById(id: number): Promise<number[]> {
@@ -169,15 +240,81 @@ export class UpTubeServiceService {
         resolve(tags)
       })
     })
-
   }
 
-  getSuggestedThematics() {
-    return this.http.get(BASE_URL + "/api/suggestedthematics")
+  // <<<<<<<<<<<<<<<<<<<<<<<----- PLAYLIST ----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  sanitizePlaylist(playlist: Playlist): Playlist {
+    playlist.image = this.addBase_Route(playlist.image)
+    playlist.thumbnail = this.addBase_Route(playlist.thumbnail)
+    playlist.id_number = parseInt(playlist.id)
+    playlist.videos_id = playlist.videos.split(",").map(Number)
+    return playlist
+  }
+
+  getPlaylists(): Promise<Playlist[]> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/playlists").subscribe(d => {
+        let playlists = <Playlist[]>d
+        for (let playlist of playlists) {
+          playlist = this.sanitizePlaylist(playlist)
+        }
+        const playlist_favourite: Playlist = { //just a mockup to get the visuals for Favourites in playlist
+          title: 'Favourites',
+          category: 'Favourites',
+          id: 'favourites',
+          videos: '',
+          image: '../../assets/images/favourite_logo.png',
+          thumbnail: '../../assets/images/thumbnail_fav.png',
+          id_number: 0,
+          videos_id: []
+        }
+        playlists.push(playlist_favourite)
+        resolve(playlists)
+      })
+    })
+  }
+
+  getPlaylistById(id_playlist: number): Promise<Playlist> {
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/playlist/" + id_playlist).subscribe(d => {
+        let playlists = <Playlist[]>d
+        let playlist = this.sanitizePlaylist(playlists[0])
+        resolve(playlist)
+      })
+    })
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<-----COMMENTS----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  getSessionToken(): Promise<string> {
+    return new Promise((resolve) => {
+      return this.http.get(BASE_URL + "/session/token", {responseType: 'text'}).subscribe(d => {
+        resolve(d)
+      })
+
+    })
+  }
+
+  async postComment() {
+    let token = await this.getSessionToken()
+    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+    const body = {
+      "entity_id": [{"target_id": 14}], // id do conteúdo para onde vai o comentário
+      "entity_type": [{"value": "media"}], // tipo de entidade (node ou media)
+      "comment_type": [{"target_id": "comment"}], // nome máquina do tipo de comentário
+      "field_name": [{"value": "field_comments"}], // nome máquina do campo de comentário no tipo de conteúdo
+      "field_email": [{"value": "hernaniborgesdefreitas@gmail.com"}],
+      "field_date": [{"value": "fgdgd"}],
+      "field_logo": [{"value": "fdg"}],
+      "field_username": [{"value": "ghdfg"}],
+      "comment_body": [{"value": "O comentario foi posted", "format": "plain_text"}],
+    }
+
+    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body).subscribe(d => {
+      console.log(d)
+    })
   }
 
   //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
-
   getFavouritesFromLocal() {
     let favourites = localStorage.getItem("Favourites")
     if (favourites !== null) {
@@ -213,19 +350,5 @@ export class UpTubeServiceService {
 
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
-  }
-
-  getVideosChannel(id: number) {
-    return new Promise((resolve) => {
-      this.getChannel(id).subscribe(data => {
-        let videos: number[] = [];
-        let id_video = <any[]>data;
-
-        for (const d of id_video) {
-          videos.push(d.video_id)
-        }
-        resolve(videos);
-      })
-    })
   }
 }

@@ -2,7 +2,7 @@
   <div id="header">
     <div id="title">
       <h1>{{videoData.name}}</h1>
-      <app-tags [tags]="videoData.tags"></app-tags>
+      <app-tags [tags]="videoData.tags_arr"></app-tags>
     </div>
     <div (click)="toggleFavorito(id_video)" id="favourite">
       <fa-icon [icon]="bookmark"></fa-icon>
@@ -12,17 +12,17 @@
 <div id="container" *ngIf="processedPage">
   <div class="mainBar">
     <iframe
-      [src]="videoData.url">
+      [src]="videoData.safe_url">
     </iframe>
     <div id="video_description">
       <div id="user">
-      <span id="img">
+      <span id="img" routerLink="/channel/{{channelData.id}}">
         <app-user-logo
-          [src]="urlSite+userData.logo"
+          [src]="channelData.logo"
         ></app-user-logo>
       </span>
         <div id="text">
-          <h1>{{userData.name}}</h1>
+          <h1 routerLink="/channel/{{channelData.id}}">{{channelData.name}}</h1>
           <h2>{{videoData.date}}</h2>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <app-comments></app-comments>
     </div>
   </div>
-  <div id="sideBar">
+  <div id="sideBar" *ngIf="getScreenWidth>1023">
     <app-video-card *ngFor="let video of sugestedVideos"
                     [video_data]="video"
     ></app-video-card>

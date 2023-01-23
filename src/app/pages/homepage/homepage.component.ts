@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Video} from 'src/app/model/video';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
@@ -10,16 +10,31 @@ import {UpTubeServiceService} from "../../services/up-tube-service.service";
 export class HomepageComponent implements OnInit {
 
   videos = [] as Video[];
+  processedPage = false
+  getScreenWidth = window.innerWidth;
+
 
   constructor(private _service: UpTubeServiceService) {
   }
 
-  ngOnInit(): void {
-    this._service.getVideos().subscribe(d => {
-      this.videos = <Video[]>d
-      for (const video of this.videos) {
-        video.id_number = parseInt(video.id) //https://gifdb.com/gif/rage-comics-table-flip-qitpumendrh5b9sl.html
-      }
-    })
+  async ngOnInit(): Promise<void> {
+    this.videos = await this._service.getVideos()
+    this.processedPage = true
+    this._service.postComment()
+  }
+
+  onScroll(scrollable: HTMLDivElement) {
+    let scrollTop = scrollable.scrollTop;
+    let scrollHeight = scrollable.scrollHeight;
+    let screenHeight = window.innerHeight;
+
+    if (scrollTop >= scrollHeight - screenHeight) {
+      console.log("fim da pagina")
+    }
+  }
+
+  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
   }
 }

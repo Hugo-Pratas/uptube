@@ -11,22 +11,16 @@ import {Video} from "../../model/video";
 export class TagPageComponent implements OnInit {
   thisTag = ""
   videos_data: Video[] = []
+  processedPage = false
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(r => {
+    this.route.paramMap.subscribe(async r => {
       this.thisTag = <string>r.get('tag')
-      this.getVideosFromTag()
+      let videos_id = <number[]>await this._service.getVideosIdbyTagName(this.thisTag)
+      this.videos_data = await this._service.getVideosFromIds(videos_id)
     });
   }
-
-  async getVideosFromTag() {
-    let videos_id = <number[]>await this._service.getVideosIdbyTagName(this.thisTag)
-    for (const id of videos_id) {
-      this.videos_data.push(<Video>await this._service.getVideoData(id))
-    }
-  }
-
 }

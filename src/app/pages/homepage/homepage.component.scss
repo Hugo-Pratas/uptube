@@ -33,3 +33,15 @@ h3 {
   justify-content: flex-start;
 }
 
+@media only screen and (max-width: 1024px) {
+  .mainColumn {
+    width: 100%;
+    max-height: calc(100vh - 80px); //because of banner 80px
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .videoCards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

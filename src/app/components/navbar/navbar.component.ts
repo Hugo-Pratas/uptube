@@ -1,12 +1,12 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {
   faHouse as faHouseSolid,
   faBarsStaggered as faBarsStaggeredSolid,
   faPlay as faPlaySolid,
-  faClapperboard as faClapperboardSolid
+  faClapperboard as faClapperboardSolid,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -18,36 +18,27 @@ export class NavbarComponent implements OnInit {
   faBarsStaggeredSolid = faBarsStaggeredSolid;
   faPlaySolid = faPlaySolid;
   faClapperboardSolid = faClapperboardSolid;
+  faBars = faBars
 
-  public getScreenWidth: any;
-  public getScreenHeight: any;
   tags = [] as string[];
+  processedPage = false
+  hideRuleContent = true;
+  getScreenWidth = window.innerWidth;
 
   constructor(private _service: UpTubeServiceService) {
   }
 
-  public hideRuleContent = false;
+  async ngOnInit(): Promise<void> {
+    this.tags = await this._service.getTagsNames()
+    this.processedPage = true
+  }
 
-  toggle() {
+  toggleHidden() {
     this.hideRuleContent = !this.hideRuleContent; //toggle para esconder a navbar (nao está no html)
   }
 
-  ngOnInit(): void {
+  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
+  onWindowResize() {
     this.getScreenWidth = window.innerWidth;
-    this.getScreenHeight = window.innerHeight;
-
-    this._service.getTagsNames().then((obj) => {
-      this.tags = <string[]>obj
-    })
   }
-
-
-
-
-  /*  @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
-    onWindowResize() {
-      this.getScreenWidth = window.innerWidth;
-      this.getScreenHeight = window.innerHeight;
-      //console.log(this.getScreenWidth);
-    }*/
 }
