@@ -17,6 +17,7 @@ export class PlaylistsPageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.playlists = await this._service.getPlaylists()
+
     this.processedPage = true
   }
 

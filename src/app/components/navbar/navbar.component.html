@@ -1,31 +1,68 @@
-<div class="navbarTotal">
-  <div class="navbarLogo">
-    <a><img alt="imgLogo" src="./assets/images/upload.svg"></a>
-  </div>
-  <div class="navbarMenu">
-    <div class="navmenuLinks">
-      <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
-        <fa-icon [icon]="faHouseSolid"></fa-icon>
-        <p id="link1">Início</p>
+<div *ngIf="processedPage">
+  <div class="navbarTotal" *ngIf="getScreenWidth>1023">
+    <div class="navbarLogo">
+      <img alt="imgLogo" src="./assets/images/upload.svg" routerLink="/homepage">
+    </div>
+    <div class="navbarMenu">
+      <div class="navmenuLinks">
+        <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
+          <fa-icon [icon]="faHouseSolid"></fa-icon>
+          <p id="link1">Início</p>
+        </div>
+        <div class="links" routerLink="/channel/3" routerLinkActive="currentPage">
+          <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
+          <p id="link2">Canais</p>
+        </div>
+        <div class="links" routerLink="/thematics" routerLinkActive="currentPage">
+          <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+          <p id="link3">Temáticas</p>
+        </div>
+        <div class="links" routerLink="/playlists" routerLinkActive="currentPage">
+          <fa-icon [icon]="faPlaySolid"></fa-icon>
+          <p id="link4">Playlists</p>
+        </div>
       </div>
-      <div class="links" routerLink="/channel/3" routerLinkActive="currentPage">
-        <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
-        <p id="link2">Canais</p>
-      </div>
-      <div class="links" routerLink="/thematics" routerLinkActive="currentPage">
-        <fa-icon [icon]="faClapperboardSolid"></fa-icon>
-        <p id="link3">Temáticas</p>
-      </div>
-      <div class="links" routerLink="/playlists" routerLinkActive="currentPage">
-        <fa-icon [icon]="faPlaySolid"></fa-icon>
-        <p id="link4">Playlists</p>
+      <div class="containerTags">
+        <p class="headerTags">TAGS</p>
+        <div *ngFor="let tag of tags" class="navbarTags">
+          <a href="tags/{{tag}}">{{tag}}</a>
+        </div>
       </div>
     </div>
-    <div class="containerTags">
-      <p class="headerTags">TAGS</p>
-      <div *ngFor="let tag of tags" class="navbarTags">
-        <a href="tags/{{tag}}">{{tag}}</a>
+  </div>
+  <div class="mobileContainer" *ngIf="getScreenWidth<=1023">
+    <div class="navbarLogo mobile">
+      <fa-icon [icon]="faBars" class="icon" (click)="toggleHidden()"></fa-icon>
+      <span><img alt="imgLogo" src="./assets/images/upload.svg" routerLink="/homepage"></span>
+    </div>
+    <div class="navbarTotal mobile" [hidden]="hideRuleContent">
+      <div class="navbarMenu mobile">
+        <div class="navmenuLinks">
+          <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
+            <fa-icon [icon]="faHouseSolid"></fa-icon>
+            <p id="link1">Início</p>
+          </div>
+          <div class="links" routerLink="/channel/3" routerLinkActive="currentPage">
+            <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
+            <p id="link2">Canais</p>
+          </div>
+          <div class="links" routerLink="/thematics" routerLinkActive="currentPage">
+            <fa-icon [icon]="faClapperboardSolid"></fa-icon>
+            <p id="link3">Temáticas</p>
+          </div>
+          <div class="links" routerLink="/playlists" routerLinkActive="currentPage">
+            <fa-icon [icon]="faPlaySolid"></fa-icon>
+            <p id="link4">Playlists</p>
+          </div>
+        </div>
+        <div class="containerTags">
+          <p class="headerTags">TAGS</p>
+          <div *ngFor="let tag of tags" class="navbarTags">
+            <a href="tags/{{tag}}">{{tag}}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
 </div>

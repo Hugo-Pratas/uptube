@@ -9,16 +9,6 @@ import {Channel} from "../model/channel";
 import {Tag} from '../model/tag';
 import {Playlist} from "../model/playlist";
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
-const playlist_favourite: Playlist = {
-  title: 'Favourites',
-  category: 'Favourites',
-  id: 'favourites',
-  videos: '',
-  image: '../../assets/images/favourite_logo.png',
-  thumbnail: '../../assets/images/thumbnail_fav.png',
-  id_number: 0,
-  videos_id: []
-}
 
 
 
@@ -269,6 +259,16 @@ export class UpTubeServiceService {
         for (let playlist of playlists) {
           playlist = this.sanitizePlaylist(playlist)
         }
+        const playlist_favourite: Playlist = { //just a mockup to get the visuals for Favourites in playlist
+          title: 'Favourites',
+          category: 'Favourites',
+          id: 'favourites',
+          videos: '',
+          image: '../../assets/images/favourite_logo.png',
+          thumbnail: '../../assets/images/thumbnail_fav.png',
+          id_number: 0,
+          videos_id: []
+        }
         playlists.push(playlist_favourite)
         resolve(playlists)
       })
@@ -316,7 +316,6 @@ export class UpTubeServiceService {
   }
 
   //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
-
   getFavouritesFromLocal() {
     let favourites = localStorage.getItem("Favourites")
     if (favourites !== null) {

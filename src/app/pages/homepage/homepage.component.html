@@ -1,5 +1,5 @@
-<div class="global">
-  <div class="mainColumn">
+<div class="global" *ngIf="processedPage">
+  <div class="mainColumn" #scrollable (scroll)="onScroll(scrollable)">
     <h3>Últimos Vídeos</h3>
     <div class="videoCards">
       <div class="card" *ngFor="let video of videos">
@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="menusRight">
+  <div class="menusRight" *ngIf="getScreenWidth>1023">
     <div class="menuTopRight">
       <app-suggested-channels></app-suggested-channels>
     </div>
