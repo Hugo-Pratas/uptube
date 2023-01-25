@@ -1,40 +1,40 @@
-<div class="containerInputs">
+<div class="containerInputs" *ngIf="processedPage">
   <h4>Comentários</h4>
   <div class="inputTotal">
-    <div class="userLogoComment" *ngFor="let channel of channels">
+    <div class="userLogoComment">
       <app-user-logo
-        [src]="apiRoute + channel.logo"
+        [src]=postLogo.logo
       >
       </app-user-logo>
     </div>
     <div class="inputFields">
-      <form>
+      <form [formGroup]="userForm">
         <span>
-          <input placeholder="Nome" id="inputName" type="text">
-          <input placeholder="E-mail" id="inputEmail" type="text">
+          <input placeholder="Nome" id="inputName" type="text" formControlName="inputName">
+          <input placeholder="E-mail" id="inputEmail" type="text" formControlName="inputEmail">
         </span>
-        <textarea placeholder="Mensagem" id="inputMessage"></textarea>
+        <textarea placeholder="Mensagem" id="inputMessage" formControlName="inputMessage"></textarea>
       </form>
     </div>
   </div>
   <div class="submitButton">
-    <button>Submeter Comentário</button>
+    <button (click)="postComment()">Submeter Comentário</button>
   </div>
-  <div class="containerPosted">
-    <div class="userLogoCommented" *ngFor="let channel of channels">
+  <div class="containerPosted" *ngFor="let comment of comments">
+    <div class="userLogoCommented">
       <app-user-logo
-        [src]="apiRoute + channel.logo"
+        [src]=comment.logo
       >
       </app-user-logo>
     </div>
     <div>
       <div class="commentDetails">
-        <p class="commentUsername">Fábio Duarte</p> <p class="commentTime">há 5 minutos</p>
+        <p class="commentUsername">{{comment.username}}</p>
+        <p class="commentTime">{{comment.date}}</p>
       </div>
       <div class="commentText">
         <p>
-          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-          Lorem ipsum Lorem ipsum Lorem ipsum
+          {{comment.body}}
         </p>
       </div>
     </div>

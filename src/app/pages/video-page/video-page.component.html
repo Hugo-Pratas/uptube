@@ -34,7 +34,10 @@
     </div>
     <p id="description">{{videoData.description}}</p>
     <div>
-      <app-comments></app-comments>
+      <app-comments
+        [id]="videoData.id_number"
+        type="video"
+      ></app-comments>
     </div>
   </div>
   <div id="sideBar" *ngIf="getScreenWidth>1023">

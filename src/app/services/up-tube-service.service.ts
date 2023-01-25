@@ -8,6 +8,7 @@ import {Video} from '../model/video';
 import {Channel} from "../model/channel";
 import {Tag} from '../model/tag';
 import {Playlist} from "../model/playlist";
+import {Comment} from "../model/comment";
 
 const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
 
@@ -285,6 +286,36 @@ export class UpTubeServiceService {
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----COMMENTS----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  getCommentDefaultImages(): string[] {
+    const logoPaths = ["./assets/images/User_logos/0.jpg",
+      "./assets/images/User_logos/1.jpg",
+      "./assets/images/User_logos/2.jpg",
+      "./assets/images/User_logos/3.jpg",
+      "./assets/images/User_logos/4.jpg",
+      "./assets/images/User_logos/5.jpg",
+      "./assets/images/User_logos/6.jpg",
+      "./assets/images/User_logos/7.jpg",
+      "./assets/images/User_logos/8.jpg"];
+    return logoPaths
+  }
+
+  async getComments(type: string, id: number): Promise<Comment[]> {
+    if (type === "video") {
+      type = "comment_video"
+    } else if (type === "channel") {
+
+    } else {
+      throw new Error("type value not valid")
+    }
+
+    return new Promise((resolve) => {
+      this.http.get(BASE_URL + "/api/" + type + "/" + id).subscribe(d => {
+        let date = <Comment[]>d
+        resolve(date)
+      })
+    })
+  }
+
   getSessionToken(): Promise<string> {
     return new Promise((resolve) => {
       return this.http.get(BASE_URL + "/session/token", {responseType: 'text'}).subscribe(d => {
@@ -294,23 +325,33 @@ export class UpTubeServiceService {
     })
   }
 
-  async postComment() {
+  async postComment(type: string, id: number, username: string, email: string, comment_body: string): Promise<void> {
+    let field_name = "";
+    let comment_type = "";
+
+    if (type === "video") {
+      field_name = "field_video_comment";
+      comment_type = "video_comment";
+    } else if (type === "channel") {
+      field_name = "";
+      comment_type = "";
+    } else {
+      throw new Error("type value not valid")
+    }
+
     let token = await this.getSessionToken()
     const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
     const body = {
-      "entity_id": [{"target_id": 14}], // id do conteúdo para onde vai o comentário
-      "entity_type": [{"value": "media"}], // tipo de entidade (node ou media)
-      "comment_type": [{"target_id": "comment"}], // nome máquina do tipo de comentário
-      "field_name": [{"value": "field_comments"}], // nome máquina do campo de comentário no tipo de conteúdo
-      "field_email": [{"value": "hernaniborgesdefreitas@gmail.com"}],
-      "field_date": [{"value": "fgdgd"}],
-      "field_logo": [{"value": "fdg"}],
-      "field_username": [{"value": "ghdfg"}],
-      "comment_body": [{"value": "O comentario foi posted", "format": "plain_text"}],
+      "entity_id": [{"target_id": id}],
+      "entity_type": [{"value": "media"}],
+      "comment_type": [{"target_id": comment_type}],
+      "field_name": [{"value": field_name}],
+      "field_email": [{"value": email}],
+      "field_username": [{"value": username}],
+      "comment_body": [{"value": comment_body, "format": "plain_text"}],
     }
 
-    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body).subscribe(d => {
-      console.log(d)
+    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body, {headers}).subscribe(d => {
     })
   }
 

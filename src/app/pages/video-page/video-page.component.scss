@@ -3,6 +3,7 @@
 }
 
 .mainBar {
+
   width: 70%;
   padding-inline: 2vw;
 
@@ -120,6 +121,7 @@
 }
 
 #sideBar {
+  max-height: 100vh;
   width: 22%;
   display: grid;
   gap: 1em;

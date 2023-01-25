@@ -21,6 +21,7 @@ import {ChannelLayoutComponent} from './components/channel-layout/channel-layout
 import {PlaylistsPageComponent} from './pages/playlists-page/playlists-page.component';
 import {PlaylistComponent} from './pages/playlist/playlist.component';
 import {FavouritesComponent} from './pages/favourites/favourites.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {FavouritesComponent} from './pages/favourites/favourites.component';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

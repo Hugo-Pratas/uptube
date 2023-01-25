@@ -38,19 +38,19 @@
     <div class="navbarTotal mobile" [hidden]="hideRuleContent">
       <div class="navbarMenu mobile">
         <div class="navmenuLinks">
-          <div class="links" routerLink="/homepage" routerLinkActive="currentPage">
+          <div class="links" routerLink="/homepage" routerLinkActive="currentPage" (click)="toggleHidden()">
             <fa-icon [icon]="faHouseSolid"></fa-icon>
             <p id="link1">Início</p>
           </div>
-          <div class="links" routerLink="/channel/3" routerLinkActive="currentPage">
+          <div class="links" routerLink="/channel/3" routerLinkActive="currentPage" (click)="toggleHidden()">
             <fa-icon [icon]="faBarsStaggeredSolid"></fa-icon>
             <p id="link2">Canais</p>
           </div>
-          <div class="links" routerLink="/thematics" routerLinkActive="currentPage">
+          <div class="links" routerLink="/thematics" routerLinkActive="currentPage" (click)="toggleHidden()">
             <fa-icon [icon]="faClapperboardSolid"></fa-icon>
             <p id="link3">Temáticas</p>
           </div>
-          <div class="links" routerLink="/playlists" routerLinkActive="currentPage">
+          <div class="links" routerLink="/playlists" routerLinkActive="currentPage" (click)="toggleHidden()">
             <fa-icon [icon]="faPlaySolid"></fa-icon>
             <p id="link4">Playlists</p>
           </div>
