@@ -28,9 +28,11 @@
           </div>
         </div>
         <div id="likeContent">
-          <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
+          <fa-icon class="thumbs" (click)="postLike()" [icon]="thumbsUp"></fa-icon>
+          <p>{{likes}}</p>
           <p>&#124;</p>
-          <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
+          <p>{{dislikes}}</p>
+          <fa-icon class="thumbs" (click)="postDislike()" [icon]="thumbsDown"></fa-icon>
         </div>
       </div>
       <p id="description">{{videoData.description}}</p>

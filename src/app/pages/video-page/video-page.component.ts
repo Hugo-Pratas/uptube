@@ -1,10 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {faBookmark} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
@@ -25,9 +22,13 @@ export class VideoPageComponent implements OnInit {
   channelData = {} as Channel;
   id_video = -1;
   bookmark = {} as IconProp
+  thumbsUp = {} as IconProp
+  thumbsDown = {} as IconProp
   processedPage = false;
   getScreenWidth = window.innerWidth;
   clickSubject: Subject<any> = new Subject();
+  likes = 0
+  dislikes = 0
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
@@ -38,10 +39,14 @@ export class VideoPageComponent implements OnInit {
       let paramsData = <string>r.get('id_video')
       this.id_video = parseInt(paramsData)
       this.bookmark = this._service.icone_favorito(this.id_video)
+      this.thumbsUp = this._service.getThumbsUp(this.id_video)
+      this.thumbsDown = this._service.getThumbsDown(this.id_video)
       this.videoData = await this._service.getVideo(this.id_video)
       let channels = await this._service.getChannelbyId(this.videoData.channel) //api gives me channel[] bc of relationship with videos
       this.channelData = channels[0]  //I only need channel data for this purpose
       this.sugestedVideos = await this._service.getSugestedVideos()
+      this.likes = parseInt(await this._service.getLikes(this.id_video))
+      this.dislikes = parseInt(await this._service.getDisLikes(this.id_video))
       this.processedPage = true
     });
   }
@@ -52,9 +57,26 @@ export class VideoPageComponent implements OnInit {
     console.log(id_video)
   }
 
-  marked_icon(isMarked?: boolean) {
-    //needs fixing
-    return isMarked ? solidThumbsUp : faThumbsUp;
+  postLike() {
+    if (this._service.isLike(this.id_video))
+      return
+    if (this._service.isDislike(this.id_video))
+      return
+    this._service.postLike(this.id_video)
+    this._service.addLikeToLocal(this.id_video)
+    this.thumbsUp = this._service.getThumbsUp(this.id_video)
+    this.likes++
+  }
+
+  postDislike() {
+    if (this._service.isDislike(this.id_video))
+      return
+    if (this._service.isLike(this.id_video))
+      return
+    this._service.postDislike(this.id_video)
+    this._service.addDislikeToLocal(this.id_video)
+    this.thumbsDown = this._service.getThumbsDown(this.id_video)
+    this.dislikes++
   }
 
   @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação

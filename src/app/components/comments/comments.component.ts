@@ -38,7 +38,7 @@ export class CommentsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.randomizeLogo(this.postLogo)
     this.comments = await this._service.getComments(this.type, this.id, this.page)
-    if (this.comments[0].date.length === 0) { //o drupal retorna um array com objecto com campos vazios se não tiver comentarios 😂
+    if (this.comments[0].date.length === 0) { //o drupal retorna um array com objecto com campos vazios se não tiver comentarios
       this.comments = []                     //meter o array novamente vazio para nao correr os for e dar um "comentario fantasma"
     }
     for (const comment of this.comments) {
@@ -108,7 +108,7 @@ export class CommentsComponent implements OnInit {
     if (!this.finalPage) {
       this.page++
       let newComments = await this._service.getComments(this.type, this.id, this.page)
-      if (newComments.length < 10 || newComments[0].date.length === 0) { //a api retorna objectos vazios qd n tem mais comentarios
+      if (newComments.length < 10 || newComments[0].date.length === 0) { //a api às vezes retorna objectos vazios qd n tem mais comentarios
         this.finalPage = true
         return;
       }

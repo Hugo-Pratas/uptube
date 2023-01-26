@@ -1,8 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
-import {faBookmark as solidBookmark, faThumbsUp as solidThumbsUp} from "@fortawesome/free-solid-svg-icons";
-import {faBookmark, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
+import {
+  faBookmark as solidBookmark,
+  faThumbsUp as solidThumbsUp,
+  faThumbsDown as solidThumbsDown
+} from "@fortawesome/free-solid-svg-icons";
+import {faBookmark, faThumbsUp, faThumbsDown} from "@fortawesome/free-regular-svg-icons";
 import {iThematic} from "../model/thematics";
 import {Video} from '../model/video';
 import {Channel} from "../model/channel";
@@ -285,6 +289,108 @@ export class UpTubeServiceService {
     })
   }
 
+  // <<<<<<<<<<<<<<<<<<<<<<<-----Likes & Dislikes----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  async getLikes(video_id: number): Promise<string> {
+    return new Promise(resolve => {
+      this.http.get(BASE_URL + "/api/likes/" + video_id).subscribe(d => {
+        // @ts-ignore
+        if (d[0] === undefined) { //sim, o drupal não é capaz de dizer que o video tem 0 likes
+          resolve("0")
+        } else {
+          // @ts-ignore
+          resolve(d[0].likes)
+        }
+      })
+    })
+  }
+
+  async getDisLikes(video_id: number): Promise<string> {
+    return new Promise(resolve => {
+      this.http.get(BASE_URL + "/api/dislikes/" + video_id).subscribe(d => {
+        // @ts-ignore
+        if (d[0] === undefined) { //sim, o drupal não é capaz de dizer que o video tem 0 dislikes
+          resolve("0")
+        } else {
+          // @ts-ignore
+          resolve(d[0].dislikes)
+        }
+      })
+    })
+  }
+
+  async postLike(video_id: number): Promise<void> {
+    let token = await this.getSessionToken()
+    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+    const body = {
+      "entity_id": [video_id],
+      "entity_type": ["media"],
+      "flag_id": [{"target_id": "like", "target_type:": "flag"}],
+      "uid": ["0"]
+    }
+
+    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+    })
+  }
+
+  async postDislike(video_id: number): Promise<void> {
+    let token = await this.getSessionToken()
+    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+    const body = {
+      "entity_id": [video_id],
+      "entity_type": ["media"],
+      "flag_id": [{"target_id": "dislike", "target_type:": "flag"}],
+      "uid": ["0"]
+    }
+
+    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+    })
+  }
+
+  getLikeFromLocal() {
+    let likes = localStorage.getItem("Likes")
+    if (likes !== null) {
+      return JSON.parse(likes)
+    }
+    return []
+  }
+
+  addLikeToLocal(id_video: number) {
+    let likes = this.getLikeFromLocal()
+    likes.push(id_video)
+    localStorage.setItem("Likes", JSON.stringify(likes))
+  }
+
+  getThumbsUp(id_video: number) {
+    return this.isLike(id_video) ? solidThumbsUp : faThumbsUp;
+  }
+
+  isLike(id_video: number): boolean {
+    return this.getLikeFromLocal().includes(id_video);
+  }
+
+  // <<<<<<<<<<<<<<<<<<<<<<<-----Dislikes----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  getDislikeFromLocal() {
+    let dislikes = localStorage.getItem("Dislikes")
+    if (dislikes !== null) {
+      return JSON.parse(dislikes)
+    }
+    return []
+  }
+
+  addDislikeToLocal(id_video: number) {
+    let dislikes = this.getDislikeFromLocal()
+    dislikes.push(id_video)
+    localStorage.setItem("Dislikes", JSON.stringify(dislikes))
+  }
+
+  getThumbsDown(id_video: number) {
+    return this.isDislike(id_video) ? solidThumbsDown : faThumbsDown;
+  }
+
+  isDislike(id_video: number): boolean {
+    return this.getDislikeFromLocal().includes(id_video);
+  }
+
   // <<<<<<<<<<<<<<<<<<<<<<<-----COMMENTS----->>>>>>>>>>>>>>>>>>>>>>>>>>
   getCommentDefaultImages(): string[] {
     const logoPaths = ["./assets/images/User_logos/0.jpg",
@@ -328,13 +434,16 @@ export class UpTubeServiceService {
   async postComment(type: string, id: number, username: string, email: string, comment_body: string): Promise<void> {
     let field_name = "";
     let comment_type = "";
+    let entity_type = "";
 
     if (type === "video") {
       field_name = "field_video_comment";
       comment_type = "video_comment";
+      entity_type = "media"
     } else if (type === "channel") {
       field_name = "field_channel_comment";
       comment_type = "channel_comment";
+      entity_type = "node"
     } else {
       throw new Error("type value not valid")
     }
@@ -343,7 +452,7 @@ export class UpTubeServiceService {
     const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
     const body = {
       "entity_id": [{"target_id": id}],
-      "entity_type": [{"value": "media"}],
+      "entity_type": [{"value": entity_type}],
       "comment_type": [{"target_id": comment_type}],
       "field_name": [{"value": field_name}],
       "field_email": [{"value": email}],
@@ -351,7 +460,7 @@ export class UpTubeServiceService {
       "comment_body": [{"value": comment_body, "format": "plain_text"}],
     }
 
-    this.http.post<any>('https://dev-testeuptube.pantheonsite.io/comment', body, {headers}).subscribe(d => {
+    this.http.post<any>(BASE_URL + 'comment', body, {headers}).subscribe(d => {
     })
   }
 
