@@ -3,10 +3,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {
   faBookmark as solidBookmark,
-  faThumbsUp as solidThumbsUp,
-  faThumbsDown as solidThumbsDown
+  faThumbsDown as solidThumbsDown,
+  faThumbsUp as solidThumbsUp
 } from "@fortawesome/free-solid-svg-icons";
-import {faBookmark, faThumbsUp, faThumbsDown} from "@fortawesome/free-regular-svg-icons";
+import {faBookmark, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {iThematic} from "../model/thematics";
 import {Video} from '../model/video';
 import {Channel} from "../model/channel";
@@ -318,6 +318,7 @@ export class UpTubeServiceService {
     })
   }
 
+  // <<<<<<<<<<<<<<<<<<<<<<<-----Likes----->>>>>>>>>>>>>>>>>>>>>>>>>>
   async postLike(video_id: number): Promise<void> {
     let token = await this.getSessionToken()
     const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
@@ -325,20 +326,6 @@ export class UpTubeServiceService {
       "entity_id": [video_id],
       "entity_type": ["media"],
       "flag_id": [{"target_id": "like", "target_type:": "flag"}],
-      "uid": ["0"]
-    }
-
-    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
-    })
-  }
-
-  async postDislike(video_id: number): Promise<void> {
-    let token = await this.getSessionToken()
-    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
-    const body = {
-      "entity_id": [video_id],
-      "entity_type": ["media"],
-      "flag_id": [{"target_id": "dislike", "target_type:": "flag"}],
       "uid": ["0"]
     }
 
@@ -369,6 +356,20 @@ export class UpTubeServiceService {
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----Dislikes----->>>>>>>>>>>>>>>>>>>>>>>>>>
+  async postDislike(video_id: number): Promise<void> {
+    let token = await this.getSessionToken()
+    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+    const body = {
+      "entity_id": [video_id],
+      "entity_type": ["media"],
+      "flag_id": [{"target_id": "dislike", "target_type:": "flag"}],
+      "uid": ["0"]
+    }
+
+    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+    })
+  }
+
   getDislikeFromLocal() {
     let dislikes = localStorage.getItem("Dislikes")
     if (dislikes !== null) {
@@ -393,7 +394,7 @@ export class UpTubeServiceService {
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----COMMENTS----->>>>>>>>>>>>>>>>>>>>>>>>>>
   getCommentDefaultImages(): string[] {
-    const logoPaths = ["./assets/images/User_logos/0.jpg",
+    return ["./assets/images/User_logos/0.jpg",
       "./assets/images/User_logos/1.jpg",
       "./assets/images/User_logos/2.jpg",
       "./assets/images/User_logos/3.jpg",
@@ -401,8 +402,7 @@ export class UpTubeServiceService {
       "./assets/images/User_logos/5.jpg",
       "./assets/images/User_logos/6.jpg",
       "./assets/images/User_logos/7.jpg",
-      "./assets/images/User_logos/8.jpg"];
-    return logoPaths
+      "./assets/images/User_logos/8.jpg"]
   }
 
   async getComments(type: string, id: number, page: number): Promise<Comment[]> {
@@ -536,5 +536,4 @@ export class UpTubeServiceService {
   isSubscribe(id_channel: number): boolean {
     return this.getSubscribeFromLocal().includes(id_channel);
   }
-
 }

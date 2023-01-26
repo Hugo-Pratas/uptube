@@ -1,8 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
-import {faThumbsDown} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
 import {Channel} from "../../model/channel";

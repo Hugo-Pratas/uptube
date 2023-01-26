@@ -1,8 +1,8 @@
-<div *ngIf="processedPage">
+<div class="navbarTags" *ngIf="processedPage">
   <div *ngFor="let tag of tagsName">
     <p routerLink="/tags/{{tag}}"
        (click)="$event.stopPropagation()">
-      #{{tag}}
+      #{{tag}}&nbsp;&nbsp;
     </p>
   </div>
 </div>
