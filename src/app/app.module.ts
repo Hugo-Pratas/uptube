@@ -16,11 +16,13 @@ import {SuggestedChannelsComponent} from "./components/suggested-channels/sugges
 import {SuggestedThematicsComponent} from './components/suggested-thematics/suggested-thematics.component';
 import {ThematicPageComponent} from './pages/thematic-page/thematic-page.component';
 import {ChannelComponent} from "./pages/channel/channel.component";
+import { AllChannelsComponent } from './pages/all-channels/all-channels.component';
 import {CommentsComponent} from './components/comments/comments.component';
 import {ChannelLayoutComponent} from './components/channel-layout/channel-layout.component';
 import {PlaylistsPageComponent} from './pages/playlists-page/playlists-page.component';
 import {PlaylistComponent} from './pages/playlist/playlist.component';
 import {FavouritesComponent} from './pages/favourites/favourites.component';
+import { SubscribedChannelsComponent } from './pages/subscribed-channels/subscribed-channels.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
@@ -38,11 +40,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     SuggestedChannelsComponent,
     ThematicPageComponent,
     ChannelComponent,
+    AllChannelsComponent,
     CommentsComponent,
     ChannelLayoutComponent,
     PlaylistsPageComponent,
     PlaylistComponent,
     FavouritesComponent,
+    SubscribedChannelsComponent,
   ],
   imports: [
     BrowserModule,

@@ -49,6 +49,7 @@ export class VideoPageComponent implements OnInit {
   toggleFavorito(id_video: number) {
     this._service.toggleFavorito(id_video)
     this.bookmark = this._service.icone_favorito(id_video)
+    console.log(id_video)
   }
 
   marked_icon(isMarked?: boolean) {

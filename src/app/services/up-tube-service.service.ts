@@ -392,4 +392,36 @@ export class UpTubeServiceService {
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
   }
+  //<<<<<<<<<<<<<<<<<<<<<<<Subscribe>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  toggleFavoritochannel(id_channel: number) {
+    if (this.isSubscribe(id_channel)) {
+      this.removeSubscribeFromLocal(id_channel)
+    } else {
+      this.addChannelToLocal(id_channel)
+    }
+  }
+  addChannelToLocal(id_channel: number) {
+    let subscribe = this.getSubscribeFromLocal()
+    subscribe.push(id_channel)
+    localStorage.setItem("Subscribed", JSON.stringify(subscribe))
+  }
+  getSubscribeFromLocal() {
+    let subscribe = localStorage.getItem("Subscribed")
+    if (subscribe !== null) {
+      return JSON.parse(subscribe)
+    }
+    return []
+  }
+  removeSubscribeFromLocal(id_channel: number) {
+    let subscribe = this.getSubscribeFromLocal()
+    let indice = subscribe.indexOf(id_channel)
+    subscribe.splice(indice, 1)
+    localStorage.setItem("Subscribed", JSON.stringify(subscribe))
+  }
+
+  isSubscribe(id_channel: number): boolean {
+    return this.getSubscribeFromLocal().includes(id_channel);
+  }
+
 }

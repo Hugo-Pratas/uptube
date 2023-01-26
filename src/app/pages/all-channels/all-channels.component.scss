@@ -1,0 +1,98 @@
+.Header{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2vh 2vw;
+  margin-right: 1.5vw;
+  .mainClass{
+    display:grid;
+
+  }
+  .main{
+    display: flex;
+    justify-content: center;
+
+  }
+  .texto{
+    font-size: 10px;
+    text-align: center;
+    h2{
+      cursor: default;
+    }
+  }
+
+  .logo{
+    max-width: 10vw;
+    cursor: pointer;
+
+  }
+  .submitSub{
+    display: flex;
+    justify-content: center;
+    .green {
+      background-color: green;
+    }
+    button{
+      color: white;
+      background-color: #E52421;
+      cursor: pointer;
+      border-radius: 10%;
+    }
+    button:active{
+      transform: translateY(4px);
+
+    }
+    .red:hover{
+      background-color: #650e0f;
+    }
+    .green:hover{
+      background-color: #085708;
+    }
+
+  }
+
+
+}
+.titulo{
+  margin-left: 5%;
+  font-size: 20px;
+}
+@media only screen and (max-width: 1024px) {
+  .Header {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .titulo{
+    font-size: 15px;
+  }
+  .texto{
+    font-size: 15px;
+  }
+  .logo{
+    min-width: 100px;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .Header {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .titulo{
+    font-size: 10px;
+  }
+  .texto{
+    font-size: 1px;
+  }
+  .logo{
+    min-width: 70px;
+  }
+}
+@media only screen and (max-width: 580px) {
+  .Header {
+    margin-left: 5px;
+  }
+}
+
+
+
+
+
+
