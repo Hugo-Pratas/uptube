@@ -1,5 +1,5 @@
 <div class="titulo">
-  <h1>Canais</h1>
+  <h1>Canais </h1>
 </div>
 <div class="Header" *ngIf="processedPage">
   <div *ngFor="let channel of channels" class="mainClass">
@@ -11,8 +11,10 @@
     <div class="texto">
       <h2> {{channel.name}} </h2>
     </div>
-    <div class="submitSub" (click)="toggleFavoritochannel(id_channel)">
-      <button>Subscrever</button>
+    <div class="submitSub" (click)="toggleFavoritochannel(channel)" >
+      <button  class="red"
+               [ngClass]="{'green': channel.isSubscribed}">
+        {{channel.isSubscribed ? 'Subscrito' : 'Subscrever'}}</button>
     </div>
   </div>
 

@@ -124,6 +124,7 @@ export class UpTubeServiceService {
   sanitizeChannel(channel: Channel): Channel {
     channel.logo = this.addBase_Route(channel.logo)
     channel.banner = this.addBase_Route(channel.banner)
+    channel.isSubscribed= this.isSubscribe(channel.id)
     return channel
   }
 
@@ -353,30 +354,31 @@ export class UpTubeServiceService {
     return this.getFavouritesFromLocal().includes(id_video);
   }
   toggleFavoritochannel(id_channel: number) {
-    if (this.isFavourite(id_channel)) {
-      this.removeFavouriteFromLocal(id_channel)
+    if (this.isSubscribe(id_channel)) {
+      this.removeSubscribeFromLocal(id_channel)
     } else {
-      this.addFavouriteToLocal(id_channel)
+      this.addChannelToLocal(id_channel)
     }
   }
   addChannelToLocal(id_channel: number) {
-    let subscribe = this.getFavouritesFromLocal()
+    let subscribe = this.getSubscribeFromLocal()
     subscribe.push(id_channel)
-    localStorage.setItem("Subscritos", JSON.stringify(subscribe))
+    localStorage.setItem("Subscribed", JSON.stringify(subscribe))
   }
   getSubscribeFromLocal() {
-    let subscribe = localStorage.getItem("Subscribe")
+    let subscribe = localStorage.getItem("Subscribed")
     if (subscribe !== null) {
       return JSON.parse(subscribe)
     }
     return []
   }
   removeSubscribeFromLocal(id_channel: number) {
-    let subscribe = this.getFavouritesFromLocal()
+    let subscribe = this.getSubscribeFromLocal()
     let indice = subscribe.indexOf(id_channel)
     subscribe.splice(indice, 1)
-    localStorage.setItem("Subscritos", JSON.stringify(subscribe))
+    localStorage.setItem("Subscribed", JSON.stringify(subscribe))
   }
+
   isSubscribe(id_channel: number): boolean {
     return this.getSubscribeFromLocal().includes(id_channel);
   }

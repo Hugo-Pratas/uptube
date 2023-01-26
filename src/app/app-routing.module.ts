@@ -10,6 +10,7 @@ import {PlaylistsPageComponent} from "./pages/playlists-page/playlists-page.comp
 import {PlaylistComponent} from "./pages/playlist/playlist.component";
 import {FavouritesComponent} from "./pages/favourites/favourites.component";
 import {AllChannelsComponent} from "./pages/all-channels/all-channels.component";
+import {SubscribedChannelsComponent} from "./pages/subscribed-channels/subscribed-channels.component";
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'playlists', component: PlaylistsPageComponent},
   {path: 'playlist/favourites', component: FavouritesComponent},
   {path: 'playlist/:id_playlist', component: PlaylistComponent},
-  {path: 'channels', component: AllChannelsComponent }
+  {path: 'channels', component: AllChannelsComponent },
+  {path: 'subscribed', component:SubscribedChannelsComponent},
 ];
 
 @NgModule({

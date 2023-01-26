@@ -19,10 +19,9 @@ export class AllChannelsComponent implements OnInit {
       this.channels = await this._service.getChannels()
       this.processedPage = true
     }
-  toggleFavoritochannel(id_channel: number) {
-    this._service.toggleFavorito(id_channel)
-    console.log(id_channel)
-
+  toggleFavoritochannel(channel: Channel) {
+    this._service.toggleFavoritochannel(channel.id)
+    channel.isSubscribed= !channel.isSubscribed
   }
 
 
