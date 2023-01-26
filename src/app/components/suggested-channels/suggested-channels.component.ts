@@ -27,7 +27,6 @@ export class SuggestedChannelsComponent implements OnInit {
     this.channels = spliceChannels.splice(0, 3)
     this.showText = 'MOSTRAR MAIS'
     this.processedPage = true
-    console.log(this.channels)
   }
 
   showMore() {

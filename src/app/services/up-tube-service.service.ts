@@ -128,6 +128,7 @@ export class UpTubeServiceService {
   sanitizeChannel(channel: Channel): Channel {
     channel.logo = this.addBase_Route(channel.logo)
     channel.banner = this.addBase_Route(channel.banner)
+    channel.isSubscribed = this.isSubscribe(channel.id)
     return channel
   }
 
@@ -460,7 +461,7 @@ export class UpTubeServiceService {
       "comment_body": [{"value": comment_body, "format": "plain_text"}],
     }
 
-    this.http.post<any>(BASE_URL + 'comment', body, {headers}).subscribe(d => {
+    this.http.post<any>(BASE_URL + '/comment', body, {headers}).subscribe(d => {
     })
   }
 

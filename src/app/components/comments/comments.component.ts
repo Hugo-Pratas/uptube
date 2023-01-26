@@ -36,6 +36,7 @@ export class CommentsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.randomizeLogo(this.postLogo)
     this.comments = await this._service.getComments(this.type, this.id, this.page)
     if (this.comments[0].date.length === 0) { //o drupal retorna um array com objecto com campos vazios se não tiver comentarios
