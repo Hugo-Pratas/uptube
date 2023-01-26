@@ -4,7 +4,7 @@
 <div class="Header" *ngIf="processedPage">
   <div *ngFor="let channel of channels" class="mainClass">
     <div class="main">
-      <div class="logo">
+      <div class="logo" routerLink="/channel/{{channel.id}}">
         <app-user-logo [src]="channel.logo"></app-user-logo>
       </div>
     </div>
