@@ -4,7 +4,8 @@ import {
   faBarsStaggered as faBarsStaggeredSolid,
   faPlay as faPlaySolid,
   faClapperboard as faClapperboardSolid,
-  faBars
+  faBars,
+  faHeart as faHeartSolid
 } from "@fortawesome/free-solid-svg-icons";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 
@@ -18,7 +19,9 @@ export class NavbarComponent implements OnInit {
   faBarsStaggeredSolid = faBarsStaggeredSolid;
   faPlaySolid = faPlaySolid;
   faClapperboardSolid = faClapperboardSolid;
-  faBars = faBars
+  faBars = faBars;
+  faHeartSolid = faHeartSolid;
+
 
   tags = [] as string[];
   processedPage = false
