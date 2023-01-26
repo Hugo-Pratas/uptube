@@ -9,6 +9,7 @@ import {faThumbsDown as solidThumbsDown} from "@fortawesome/free-solid-svg-icons
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {Video} from "../../model/video";
 import {Channel} from "../../model/channel";
+import {Subject} from 'rxjs';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class VideoPageComponent implements OnInit {
   bookmark = {} as IconProp
   processedPage = false;
   getScreenWidth = window.innerWidth;
+  clickSubject: Subject<any> = new Subject();
 
 
   constructor(private route: ActivatedRoute, private _service: UpTubeServiceService) {
@@ -57,6 +59,16 @@ export class VideoPageComponent implements OnInit {
   @HostListener('window:resize', ['$event']) //verificar tamanho ecrã a cada modificação
   onWindowResize() {
     this.getScreenWidth = window.innerWidth;
+  }
+
+  onScroll(scrollable: HTMLDivElement) {
+    let scrollTop = scrollable.scrollTop;
+    let scrollHeight = scrollable.scrollHeight;
+    let screenHeight = window.innerHeight;
+
+    if (scrollTop >= scrollHeight - screenHeight) {
+      this.clickSubject.next(1);
+    }
   }
 }
 

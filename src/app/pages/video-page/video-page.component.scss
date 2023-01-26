@@ -2,8 +2,13 @@
   margin-bottom: 2vh;
 }
 
-.mainBar {
+.globalContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
 
+.mainBar {
   width: 70%;
   padding-inline: 2vw;
 

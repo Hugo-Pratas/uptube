@@ -299,7 +299,7 @@ export class UpTubeServiceService {
     return logoPaths
   }
 
-  async getComments(type: string, id: number): Promise<Comment[]> {
+  async getComments(type: string, id: number, page: number): Promise<Comment[]> {
     if (type === "video") {
       type = "comment_video"
     } else if (type === "channel") {
@@ -309,7 +309,7 @@ export class UpTubeServiceService {
     }
 
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/" + type + "/" + id).subscribe(d => {
+      this.http.get(BASE_URL + "/api/" + type + "/" + id + "?page=" + page).subscribe(d => {
         let date = <Comment[]>d
         resolve(date)
       })
@@ -333,8 +333,8 @@ export class UpTubeServiceService {
       field_name = "field_video_comment";
       comment_type = "video_comment";
     } else if (type === "channel") {
-      field_name = "";
-      comment_type = "";
+      field_name = "field_channel_comment";
+      comment_type = "channel_comment";
     } else {
       throw new Error("type value not valid")
     }

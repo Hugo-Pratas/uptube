@@ -26,14 +26,28 @@
       width: 48%;
       margin-bottom: 10px;
     }
+
+    input:hover {
+      box-shadow: 0 0 10px #ded4d4;
+    }
   }
+
+  .bounce {
+    outline: 0;
+    border-color: red;
+    animation-name: bounce;
+    animation-duration: .5s;
+    animation-delay: 0.25s;
+    box-shadow: 0 0 10px #832222;
+  }
+
 }
 
 .inputFields form {
   flex: 1;
 }
 
-input[type=text] {
+input {
   border: none;
   border-bottom: 2px solid gray;
   background: none;
@@ -52,6 +66,9 @@ textarea::placeholder {
   font-family: Poppins, serif;
 }
 
+textarea:hover {
+  box-shadow: 0 0 10px #ded4d4;
+}
 
 #inputMessage {
   width: 100%;
@@ -106,8 +123,43 @@ button {
       color: gray;
     }
   }
+
   .commentText {
     font-size: 12px;
   }
 }
 
+@keyframes bounce {
+  0% {
+    transform: translateX(0px);
+    timing-function: ease-in;
+  }
+  37% {
+    transform: translateX(5px);
+    timing-function: ease-out;
+  }
+  55% {
+    transform: translateX(-5px);
+    timing-function: ease-in;
+  }
+  73% {
+    transform: translateX(4px);
+    timing-function: ease-out;
+  }
+  82% {
+    transform: translateX(-4px);
+    timing-function: ease-in;
+  }
+  91% {
+    transform: translateX(2px);
+    timing-function: ease-out;
+  }
+  96% {
+    transform: translateX(-2px);
+    timing-function: ease-in;
+  }
+  100% {
+    transform: translateX(0px);
+    timing-function: ease-in;
+  }
+}

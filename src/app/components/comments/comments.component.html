@@ -10,10 +10,13 @@
     <div class="inputFields">
       <form [formGroup]="userForm">
         <span>
-          <input placeholder="Nome" id="inputName" type="text" formControlName="inputName">
-          <input placeholder="E-mail" id="inputEmail" type="text" formControlName="inputEmail">
+          <input [ngClass]="{'bounce': errorName }" placeholder="Nome" id="inputName" type="text"
+                 formControlName="inputName">
+          <input [ngClass]="{'bounce': errorEmail }" placeholder="E-mail" id="inputEmail" type="email"
+                 formControlName="inputEmail">
         </span>
-        <textarea placeholder="Mensagem" id="inputMessage" formControlName="inputMessage"></textarea>
+        <textarea [ngClass]="{'bounce': errorMessage }" placeholder="Mensagem" id="inputMessage"
+                  formControlName="inputMessage"></textarea>
       </form>
     </div>
   </div>

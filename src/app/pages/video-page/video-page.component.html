@@ -1,52 +1,54 @@
-<div class="mainBar" *ngIf="processedPage">
-  <div id="header">
-    <div id="title">
-      <h1>{{videoData.name}}</h1>
-      <app-tags [tags]="videoData.tags_arr"></app-tags>
-    </div>
-    <div (click)="toggleFavorito(id_video)" id="favourite">
-      <fa-icon [icon]="bookmark"></fa-icon>
+<div class="globalContainer" #scrollable (scroll)="onScroll(scrollable)">
+  <div class="mainBar" *ngIf="processedPage">
+    <div id="header">
+      <div id="title">
+        <h1>{{videoData.name}}</h1>
+        <app-tags [tags]="videoData.tags_arr"></app-tags>
+      </div>
+      <div (click)="toggleFavorito(id_video)" id="favourite">
+        <fa-icon [icon]="bookmark"></fa-icon>
+      </div>
     </div>
   </div>
-</div>
-<div id="container" *ngIf="processedPage">
-  <div class="mainBar">
-    <iframe
-      [src]="videoData.safe_url">
-    </iframe>
-    <div id="video_description">
-      <div id="user">
+  <div id="container" *ngIf="processedPage">
+    <div class="mainBar">
+      <iframe
+        [src]="videoData.safe_url">
+      </iframe>
+      <div id="video_description">
+        <div id="user">
       <span id="img" routerLink="/channel/{{channelData.id}}">
         <app-user-logo
           [src]="channelData.logo"
         ></app-user-logo>
       </span>
-        <div id="text">
-          <h1 routerLink="/channel/{{channelData.id}}">{{channelData.name}}</h1>
-          <h2>{{videoData.date}}</h2>
+          <div id="text">
+            <h1 routerLink="/channel/{{channelData.id}}">{{channelData.name}}</h1>
+            <h2>{{videoData.date}}</h2>
+          </div>
+        </div>
+        <div id="likeContent">
+          <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
+          <p>&#124;</p>
+          <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
         </div>
       </div>
-      <div id="likeContent">
-        <fa-icon class="thumbs" [icon]="marked_icon(true)"></fa-icon>
-        <p>&#124;</p>
-        <fa-icon class="thumbs" [icon]="marked_icon(false)"></fa-icon>
+      <p id="description">{{videoData.description}}</p>
+      <div>
+        <app-comments
+          [id]="videoData.id_number"
+          type="video"
+          [clickSubject]="clickSubject"
+        ></app-comments>
       </div>
     </div>
-    <p id="description">{{videoData.description}}</p>
-    <div>
-      <app-comments
-        [id]="videoData.id_number"
-        type="video"
-      ></app-comments>
+    <div id="sideBar" *ngIf="getScreenWidth>1023">
+      <app-video-card *ngFor="let video of sugestedVideos"
+                      [video_data]="video"
+      ></app-video-card>
     </div>
   </div>
-  <div id="sideBar" *ngIf="getScreenWidth>1023">
-    <app-video-card *ngFor="let video of sugestedVideos"
-                    [video_data]="video"
-    ></app-video-card>
-  </div>
 </div>
-
 
 
 
