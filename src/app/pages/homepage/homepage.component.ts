@@ -13,22 +13,35 @@ export class HomepageComponent implements OnInit {
   processedPage = false
   getScreenWidth = window.innerWidth;
 
+  currentPage = 0;
+  endPage = false;
 
   constructor(private _service: UpTubeServiceService) {
   }
 
   async ngOnInit(): Promise<void> {
-    this.videos = await this._service.getVideos()
+    this.videos = await this._service.getVideos(this.currentPage)
     this.processedPage = true
+    //this._service.postComment()
   }
 
-  onScroll(scrollable: HTMLDivElement) {
+  async onScroll(scrollable: HTMLDivElement) {
     let scrollTop = scrollable.scrollTop;
     let scrollHeight = scrollable.scrollHeight;
     let screenHeight = window.innerHeight;
 
-    if (scrollTop >= scrollHeight - screenHeight) {
-      console.log("fim da pagina")
+    if (scrollTop >= scrollHeight - screenHeight - 10) {
+      if (!this.endPage) {
+        this.currentPage++
+        this.endPage = true
+        let newVideos = await this._service.getVideos(this.currentPage)
+        this.videos = [...this.videos, ...newVideos]
+        if (newVideos.length == 10) {
+          setTimeout(() => {
+            this.endPage = false
+          }, 2000);
+        }
+      }
     }
   }
 

@@ -5,7 +5,6 @@
 
 .banner {
   height: 100%;
-  min-width: 190px;
 }
 
 .topText {
@@ -34,11 +33,13 @@
   p {
     margin-left: 10px;
     font-size: 0.6rem;
+    cursor: pointer;
   }
 
   .logocanal {
     min-width: 40px;
     width: 10%;
+    cursor: pointer;
   }
 }
 

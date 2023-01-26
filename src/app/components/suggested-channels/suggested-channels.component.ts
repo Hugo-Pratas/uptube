@@ -27,12 +27,13 @@ export class SuggestedChannelsComponent implements OnInit {
     this.channels = spliceChannels.splice(0, 3)
     this.showText = 'MOSTRAR MAIS'
     this.processedPage = true
+    console.log(this.channels)
   }
 
   showMore() {
     if (this.showText == 'MOSTRAR MAIS') {
       let spliceChannels = this.allChannels.slice()
-      this.channels = spliceChannels.splice(0, 10)
+      this.channels = spliceChannels.splice(0, 6)
       this.showText = 'MOSTRAR MENOS'
     } else {
       this.showLess()

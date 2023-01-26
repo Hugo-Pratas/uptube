@@ -41,6 +41,7 @@
   .themesLogo {
     width: 60px;
     min-width: 40px;
+    cursor: pointer;
   }
 }
 
@@ -54,6 +55,7 @@
 
   #thematicTitle {
     font-size: 0.8rem;
+    cursor: pointer;
   }
 
   #thematicTeaser {
@@ -70,4 +72,5 @@
   background-size: cover;
   aspect-ratio: 3/2;
   border-radius: 10px;
+  cursor: pointer;
 }

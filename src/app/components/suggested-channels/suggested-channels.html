@@ -8,10 +8,11 @@
         <div class="logocanal">
           <app-user-logo
             [src]="channel.logo"
+            routerLink="/channel/{{channel.id}}"
           >
           </app-user-logo>
         </div>
-        <p>{{channel.name}}</p>
+        <p routerLink="/channel/{{channel.id}}">{{channel.name}}</p>
       </div>
     </div>
     <div class="bottomText" (click)="showMore()">
