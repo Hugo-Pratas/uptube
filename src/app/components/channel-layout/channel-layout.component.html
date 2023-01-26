@@ -1,26 +1,31 @@
-<div class="globalContainer">
-  <div class="header">
-    <div class="banner">
-      <img alt="Channel Image" [src]="channel.banner" class="faded-image">
-      <div class="logo">
-        <app-user-logo [src]="channel.logo"></app-user-logo>
+<div *ngIf="processedPage">
+  <div class="globalContainer" #scrollable (scroll)="onScroll(scrollable)">
+    <div class="header">
+      <div class="banner">
+        <img alt="Channel Image" [src]="channel.banner" class="faded-image">
+        <div class="logo">
+          <app-user-logo [src]="channel.logo"></app-user-logo>
+        </div>
+      </div>
+      <div class="texto">
+        <h2>{{channel.name}} </h2>
+        <p>{{channel.description}}</p>
       </div>
     </div>
-    <div class="texto">
-      <h2>{{channel.name}} </h2>
-      <p>{{channel.description}}</p>
+    <div id="videoCards">
+      <div class="card" *ngFor="let video of videos">
+        <app-video-card
+          [video_data]="video"
+          [ischannelView]="isChannelView"
+        ></app-video-card>
+      </div>
     </div>
-  </div>
-  <div id="videoCards">
-    <div class="card" *ngFor="let video of videos">
-      <app-video-card
-        [video_data]="video"
-        [ischannelView]="isChannelView"
-      ></app-video-card>
+    <div class="comentario" *ngIf="channel !== undefined">
+      <app-comments
+        type="channel"
+        [id]="channel.id"
+        [clickSubject]="clickSubject">
+      </app-comments>
     </div>
-  </div>
-  <div class="comentario">
-    <app-comments>
-    </app-comments>
   </div>
 </div>

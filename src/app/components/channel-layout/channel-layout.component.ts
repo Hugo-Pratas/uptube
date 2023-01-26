@@ -3,6 +3,7 @@ import {Channel} from "../../model/channel";
 import {Video} from "../../model/video";
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {iThematic} from "../../model/thematics";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-channel-layout',
@@ -15,6 +16,8 @@ export class ChannelLayoutComponent implements OnInit {
   @Input() thematic = {} as iThematic
   isChannelView = true
   processedPage = false
+  clickSubject: Subject<any> = new Subject();
+
 
   constructor(private _service: UpTubeServiceService) {
   }
@@ -29,6 +32,16 @@ export class ChannelLayoutComponent implements OnInit {
       this.isChannelView = false
     }
     this.processedPage = true
+  }
+
+  onScroll(scrollable: HTMLDivElement) {
+    let scrollTop = scrollable.scrollTop;
+    let scrollHeight = scrollable.scrollHeight;
+    let screenHeight = window.innerHeight;
+
+    if (scrollTop >= scrollHeight - screenHeight) {
+      this.clickSubject.next(1);
+    }
   }
 
 }

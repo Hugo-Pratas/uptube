@@ -303,7 +303,7 @@ export class UpTubeServiceService {
     if (type === "video") {
       type = "comment_video"
     } else if (type === "channel") {
-
+      type = "comment_channel"
     } else {
       throw new Error("type value not valid")
     }
@@ -392,6 +392,7 @@ export class UpTubeServiceService {
   isFavourite(id_video: number): boolean {
     return this.getFavouritesFromLocal().includes(id_video);
   }
+
   //<<<<<<<<<<<<<<<<<<<<<<<Subscribe>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   toggleFavoritochannel(id_channel: number) {
@@ -401,11 +402,13 @@ export class UpTubeServiceService {
       this.addChannelToLocal(id_channel)
     }
   }
+
   addChannelToLocal(id_channel: number) {
     let subscribe = this.getSubscribeFromLocal()
     subscribe.push(id_channel)
     localStorage.setItem("Subscribed", JSON.stringify(subscribe))
   }
+
   getSubscribeFromLocal() {
     let subscribe = localStorage.getItem("Subscribed")
     if (subscribe !== null) {
@@ -413,6 +416,7 @@ export class UpTubeServiceService {
     }
     return []
   }
+
   removeSubscribeFromLocal(id_channel: number) {
     let subscribe = this.getSubscribeFromLocal()
     let indice = subscribe.indexOf(id_channel)
