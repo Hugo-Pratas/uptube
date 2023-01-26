@@ -1,7 +1,10 @@
-.gridContainer {
+.globalContainer {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
+}
+
+.gridContainer {
   margin-left: 1vw;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
