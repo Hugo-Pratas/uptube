@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit,} from '@angular/core';
 import {UpTubeServiceService} from "../../services/up-tube-service.service";
 import {Comment} from "../../model/comment";
 import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Subject} from 'rxjs';
+import {faFlag} from "@fortawesome/free-regular-svg-icons";
+import {faFlag as faFlagSolid} from "@fortawesome/free-solid-svg-icons";
 
 
 @Component({
@@ -15,6 +17,8 @@ export class CommentsComponent implements OnInit {
   @Input() id!: number
   @Input() type!: string
   @Input('clickSubject') clickSubject!: Subject<any>;
+
+  faFlag = faFlagSolid
 
   userForm: FormGroup; // variable is created of type FormGroup is created
   comments = [] as Comment[];
@@ -118,5 +122,9 @@ export class CommentsComponent implements OnInit {
       }
       this.comments.push.apply(this.comments, newComments)
     }
+  }
+
+  reportComment () {
+    alert("Confirmamos o report. A nossa equipa vai analisar o conteúdo deste comentário. Obrigado pela contribuição!")
   }
 }

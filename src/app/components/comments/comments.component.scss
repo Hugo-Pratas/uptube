@@ -112,6 +112,17 @@ button {
     align-items: center;
     width: 100%;
 
+    .reportIcon {
+      position: absolute;
+      left: 97%;
+      cursor: pointer;
+    }
+
+    .reported {
+      color: red;
+    }
+
+
     .commentUsername {
       margin-right: 5px;
       font-size: 15px;
