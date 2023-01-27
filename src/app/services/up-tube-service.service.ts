@@ -46,13 +46,15 @@ export class UpTubeServiceService {
     })
   }
 
-  getSugestedVideos(): Promise<Video[]> {
+  getSugestedVideos(tags: string, id_video: number): Promise<Video[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/SugestedVideos").subscribe(videos => {
+      tags = tags.replace(/ /g, '')
+      this.http.get(BASE_URL + "/api/SugestedVideos/" + tags).subscribe(d => {
+        let videos = <Video[]>d
         for (let video of <Video[]>videos) {
           video = this.sanitizeVideo(video)
         }
-        resolve(<Video[]>videos)
+        resolve(<Video[]>videos.filter((video) => video.id_number != id_video)) //remover video repetido
       })
     })
   }

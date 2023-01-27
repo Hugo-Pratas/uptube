@@ -42,7 +42,7 @@ export class VideoPageComponent implements OnInit {
       this.videoData = await this._service.getVideo(this.id_video)
       let channels = await this._service.getChannelbyId(this.videoData.channel) //api gives me channel[] bc of relationship with videos
       this.channelData = channels[0]  //I only need channel data for this purpose
-      this.sugestedVideos = await this._service.getSugestedVideos()
+      this.sugestedVideos = await this._service.getSugestedVideos(this.videoData.tags, this.videoData.id_number)
       this.likes = parseInt(await this._service.getLikes(this.id_video))
       this.dislikes = parseInt(await this._service.getDisLikes(this.id_video))
       this.processedPage = true

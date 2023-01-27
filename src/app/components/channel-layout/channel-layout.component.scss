@@ -37,6 +37,7 @@
           width: 75px;
         }
       }
+
     }
 
     .texto {
@@ -67,7 +68,7 @@
 
   #videoCards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 2vh 2vw;
     margin-right: 1.5vw;
     margin-top: 10.2px;
@@ -75,6 +76,18 @@
 
     .card {
       max-width: 500px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    #videoCards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media only screen and (max-width: 426px) {
+    #videoCards {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 

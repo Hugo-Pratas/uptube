@@ -126,9 +126,10 @@
 }
 
 #sideBar {
-  max-height: 100vh;
+  max-height: calc(100vh - 10px);
   width: 22%;
   display: grid;
+  grid-template-rows: auto auto 1fr 1fr 1fr auto auto;
   gap: 1em;
 }
 

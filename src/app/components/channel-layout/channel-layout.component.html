@@ -20,7 +20,7 @@
         ></app-video-card>
       </div>
     </div>
-    <div class="comentario" *ngIf="channel !== undefined">
+    <div class="comentario" *ngIf="isChannelView">
       <app-comments
         type="channel"
         [id]="channel.id"
