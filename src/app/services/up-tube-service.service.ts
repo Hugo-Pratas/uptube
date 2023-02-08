@@ -14,7 +14,8 @@ import {Tag} from '../model/tag';
 import {Playlist} from "../model/playlist";
 import {Comment} from "../model/comment";
 
-const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
+//const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
+const BASE_URL = "localhost:3000";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class UpTubeServiceService {
   // <<<<<<<<<<<<<<<<<<<<<<<----- VIDEOS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
   getVideos(page: number): Promise<Video[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/videos?page=" + page).subscribe(videos => {
+      this.http.get(BASE_URL + "/videos?page=" + page).subscribe(videos => {
         for (let video of <Video[]>videos) {
           video = this.sanitizeVideo(video)
         }
@@ -49,7 +50,7 @@ export class UpTubeServiceService {
   getSugestedVideos(tags: string, id_video: number): Promise<Video[]> {
     return new Promise((resolve) => {
       tags = tags.replace(/ /g, '')
-      this.http.get(BASE_URL + "/api/SugestedVideos/" + tags).subscribe(d => {
+      this.http.get(BASE_URL + "/videos/suggested/" + tags).subscribe(d => {
         let videos = <Video[]>d
         for (let video of <Video[]>videos) {
           video = this.sanitizeVideo(video)
@@ -97,7 +98,7 @@ export class UpTubeServiceService {
 
   getVideo(id_video: number): Promise<Video> {
     return new Promise((resolve) => {
-      return this.http.get(BASE_URL + "/api/video/" + id_video).subscribe(apiJson => {
+      return this.http.get(BASE_URL + "/video/" + id_video).subscribe(apiJson => {
         let data_arr = <Video[]>apiJson;
         let video = this.sanitizeVideo(data_arr[0])
         resolve(video);
@@ -108,7 +109,7 @@ export class UpTubeServiceService {
   getVideosFromIds(ids_videos: number[]): Promise<Video[]> { //need this to get video ordered by date from db
     return new Promise((resolve) => {
       let ids_string = ids_videos.join(",")
-      this.http.get(BASE_URL + "/api/video/" + ids_string).subscribe(apiJson => {
+      this.http.get(BASE_URL + "/video/" + ids_string).subscribe(apiJson => {
         let videos = <Video[]>apiJson
         for (let video of videos) {
           video = this.sanitizeVideo(video)
@@ -136,7 +137,7 @@ export class UpTubeServiceService {
 
   getSugestedChannels(): Promise<Channel[]> {
     return new Promise((resolve, reject) => {
-      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => { //api dos sugeridos não está a funcionar no drupal
+      this.http.get(BASE_URL + "/channels/").subscribe(jsonData => { //api dos sugeridos não está a funcionar no drupal
         let channels = <Channel[]>jsonData
         for (let channel of channels) {
           channel = this.sanitizeChannel(channel)
@@ -148,7 +149,7 @@ export class UpTubeServiceService {
 
   getChannelbyId(id: number): Promise<Channel[]> { //retorna array de channels por causa de varios videos ids
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/channel/" + id).subscribe(channels => {
+      this.http.get(BASE_URL + "/channel/" + id).subscribe(channels => {
         for (let channel of <Channel[]>channels) {
           channel = this.sanitizeChannel(channel)
         }
@@ -159,7 +160,7 @@ export class UpTubeServiceService {
 
   getChannels(): Promise<Channel[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/channels").subscribe(jsonData => {
+      this.http.get(BASE_URL + "/channels").subscribe(jsonData => {
         let channels = <Channel[]>jsonData
         for (let channel of channels) {
           channel = this.sanitizeChannel(channel)
@@ -173,7 +174,7 @@ export class UpTubeServiceService {
 
 
   getTags() {
-    return this.http.get(BASE_URL + "/api/tags")
+    return this.http.get(BASE_URL + "/tags")
   }
 
   getTagsNames(): Promise<string[]> {
@@ -211,7 +212,7 @@ export class UpTubeServiceService {
 
   getThematics(): Promise<iThematic[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/thematics").subscribe(apiJson => {
+      this.http.get(BASE_URL + "/thematics").subscribe(apiJson => {
         let thematics = <iThematic[]>apiJson
         for (let thematic of thematics) {
           thematic = this.sanitizeThematics(thematic)
@@ -223,7 +224,7 @@ export class UpTubeServiceService {
 
   getThematicsById(id_thematic: number): Promise<iThematic> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/thematics/" + id_thematic).subscribe(apiJson => {
+      this.http.get(BASE_URL + "/thematics/" + id_thematic).subscribe(apiJson => {
         let thematics = <iThematic[]>apiJson
         let theme = this.sanitizeThematics(thematics[0])
         resolve(theme)
@@ -233,7 +234,7 @@ export class UpTubeServiceService {
 
   getSuggestedThematic(): Promise<iThematic> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/suggestedthematics").subscribe(apiJson => {
+      this.http.get(BASE_URL + "/thematics/suggested").subscribe(apiJson => {
         let thematics = <iThematic[]>apiJson
         resolve(thematics[0])
       })
@@ -261,7 +262,7 @@ export class UpTubeServiceService {
 
   getPlaylists(): Promise<Playlist[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/playlists").subscribe(d => {
+      this.http.get(BASE_URL + "/playlists").subscribe(d => {
         let playlists = <Playlist[]>d
         for (let playlist of playlists) {
           playlist = this.sanitizePlaylist(playlist)
@@ -284,7 +285,7 @@ export class UpTubeServiceService {
 
   getPlaylistById(id_playlist: number): Promise<Playlist> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/playlist/" + id_playlist).subscribe(d => {
+      this.http.get(BASE_URL + "/playlist/" + id_playlist).subscribe(d => {
         let playlists = <Playlist[]>d
         let playlist = this.sanitizePlaylist(playlists[0])
         resolve(playlist)
@@ -295,7 +296,7 @@ export class UpTubeServiceService {
   // <<<<<<<<<<<<<<<<<<<<<<<-----Likes & Dislikes----->>>>>>>>>>>>>>>>>>>>>>>>>>
   async getLikes(video_id: number): Promise<string> {
     return new Promise(resolve => {
-      this.http.get(BASE_URL + "/api/likes/" + video_id).subscribe(d => {
+      this.http.get(BASE_URL + "/like/" + video_id).subscribe(d => {
         // @ts-ignore
         if (d[0] === undefined) { //sim, o drupal não é capaz de dizer que o video tem 0 likes
           resolve("0")
@@ -309,7 +310,7 @@ export class UpTubeServiceService {
 
   async getDisLikes(video_id: number): Promise<string> {
     return new Promise(resolve => {
-      this.http.get(BASE_URL + "/api/dislikes/" + video_id).subscribe(d => {
+      this.http.get(BASE_URL + "/dislike/" + video_id).subscribe(d => {
         // @ts-ignore
         if (d[0] === undefined) { //sim, o drupal não é capaz de dizer que o video tem 0 dislikes
           resolve("0")
