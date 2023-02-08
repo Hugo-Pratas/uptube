@@ -15,7 +15,7 @@ import {Playlist} from "../model/playlist";
 import {Comment} from "../model/comment";
 
 //const BASE_URL = "https://dev-testeuptube.pantheonsite.io";
-const BASE_URL = "localhost:3000";
+const BASE_URL = "http://localhost:3000";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class UpTubeServiceService {
   }
 
   addBase_Route(link: string) {
-    return BASE_URL + link
+    return "https://dev-testeuptube.pantheonsite.io" + link
   }
 
   getApiRoute() {
@@ -98,7 +98,7 @@ export class UpTubeServiceService {
 
   getVideo(id_video: number): Promise<Video> {
     return new Promise((resolve) => {
-      return this.http.get(BASE_URL + "/video/" + id_video).subscribe(apiJson => {
+      return this.http.get(BASE_URL + "/videos/" + id_video).subscribe(apiJson => {
         let data_arr = <Video[]>apiJson;
         let video = this.sanitizeVideo(data_arr[0])
         resolve(video);
@@ -149,7 +149,7 @@ export class UpTubeServiceService {
 
   getChannelbyId(id: number): Promise<Channel[]> { //retorna array de channels por causa de varios videos ids
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/channel/" + id).subscribe(channels => {
+      this.http.get(BASE_URL + "/channels/" + id).subscribe(channels => {
         for (let channel of <Channel[]>channels) {
           channel = this.sanitizeChannel(channel)
         }
@@ -243,7 +243,7 @@ export class UpTubeServiceService {
 
   getThematicTagsById(id: number): Promise<number[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/thematics/" + id).subscribe(thematic => {
+      this.http.get(BASE_URL + "/thematics/" + id).subscribe(thematic => {
         let thematicData = <iThematic[]>thematic
         let tags = thematicData[0].tags.split(",").map(Number) //as tags vêm em string da api....
         resolve(tags)
