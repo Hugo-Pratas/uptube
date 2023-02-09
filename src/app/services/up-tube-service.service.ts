@@ -50,6 +50,7 @@ export class UpTubeServiceService {
   getSugestedVideos(tags: string, id_video: number): Promise<Video[]> {
     return new Promise((resolve) => {
       tags = tags.replace(/ /g, '')
+      console.log(BASE_URL + "/videos/suggested/" + tags)
       this.http.get(BASE_URL + "/videos/suggested/" + tags).subscribe(d => {
         let videos = <Video[]>d
         for (let video of <Video[]>videos) {
@@ -263,7 +264,7 @@ export class UpTubeServiceService {
 
   getPlaylists(): Promise<Playlist[]> {
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/playlists").subscribe(d => {
+      this.http.get(BASE_URL + "/playlist").subscribe(d => {
         let playlists = <Playlist[]>d
         for (let playlist of playlists) {
           playlist = this.sanitizePlaylist(playlist)
@@ -325,16 +326,21 @@ export class UpTubeServiceService {
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----Likes----->>>>>>>>>>>>>>>>>>>>>>>>>>
   async postLike(video_id: number): Promise<void> {
-    let token = await this.getSessionToken()
-    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
-    const body = {
-      "entity_id": [video_id],
-      "entity_type": ["media"],
-      "flag_id": [{"target_id": "like", "target_type:": "flag"}],
-      "uid": ["0"]
-    }
+    //let token = await this.getSessionToken()
+    //drupal
+    /*    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+        const body = {
+          "entity_id": [video_id],
+          "entity_type": ["media"],
+          "flag_id": [{"target_id": "like", "target_type:": "flag"}],
+          "uid": ["0"]
+        }
 
-    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+        this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+        })*/
+
+    //node
+    this.http.post<any>(BASE_URL + '/like/' + video_id, "").subscribe(d => {
     })
   }
 
@@ -362,16 +368,18 @@ export class UpTubeServiceService {
 
   // <<<<<<<<<<<<<<<<<<<<<<<-----Dislikes----->>>>>>>>>>>>>>>>>>>>>>>>>>
   async postDislike(video_id: number): Promise<void> {
-    let token = await this.getSessionToken()
-    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
-    const body = {
-      "entity_id": [video_id],
-      "entity_type": ["media"],
-      "flag_id": [{"target_id": "dislike", "target_type:": "flag"}],
-      "uid": ["0"]
-    }
+    //let token = await this.getSessionToken()
+    /*    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+        const body = {
+          "entity_id": [video_id],
+          "entity_type": ["media"],
+          "flag_id": [{"target_id": "dislike", "target_type:": "flag"}],
+          "uid": ["0"]
+        }
 
-    this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+        this.http.post<any>(BASE_URL + '/entity/flagging', body, {headers}).subscribe(d => {
+        })*/
+    this.http.post<any>(BASE_URL + '/dislike/' + video_id, "").subscribe(d => {
     })
   }
 
@@ -443,31 +451,53 @@ export class UpTubeServiceService {
     let entity_type = "";
 
     if (type === "video") {
+      const body = {
+        "entity_id": [{"target_id": id}],
+        "entity_type": [{"value": entity_type}],
+        "comment_type": [{"target_id": comment_type}],
+        "field_name": [{"value": field_name}],
+        "field_email": [{"value": email}],
+        "field_username": [{"value": username}],
+        "comment_body": [{"value": comment_body, "format": "plain_text"}],
+      }
+      this.http.post<any>(BASE_URL + '/comment_video/' + id, body).subscribe(d => {
+      })
       field_name = "field_video_comment";
       comment_type = "video_comment";
       entity_type = "media"
     } else if (type === "channel") {
+      const body = {
+        "entity_id": [{"target_id": id}],
+        "entity_type": [{"value": entity_type}],
+        "comment_type": [{"target_id": comment_type}],
+        "field_name": [{"value": field_name}],
+        "field_email": [{"value": email}],
+        "field_username": [{"value": username}],
+        "comment_body": [{"value": comment_body, "format": "plain_text"}],
+      }
+      this.http.post<any>(BASE_URL + '/comment_channel/' + id, body).subscribe(d => {
+      })
       field_name = "field_channel_comment";
       comment_type = "channel_comment";
       entity_type = "node"
     } else {
       throw new Error("type value not valid")
     }
+//drupal
+    /*    let token = await this.getSessionToken()
+        const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
+        const body = {
+          "entity_id": [{"target_id": id}],
+          "entity_type": [{"value": entity_type}],
+          "comment_type": [{"target_id": comment_type}],
+          "field_name": [{"value": field_name}],
+          "field_email": [{"value": email}],
+          "field_username": [{"value": username}],
+          "comment_body": [{"value": comment_body, "format": "plain_text"}],
+        }
 
-    let token = await this.getSessionToken()
-    const headers = new HttpHeaders().set('Accept', 'application/vnd.api+jason').set('X-CSRF-Token', token);
-    const body = {
-      "entity_id": [{"target_id": id}],
-      "entity_type": [{"value": entity_type}],
-      "comment_type": [{"target_id": comment_type}],
-      "field_name": [{"value": field_name}],
-      "field_email": [{"value": email}],
-      "field_username": [{"value": username}],
-      "comment_body": [{"value": comment_body, "format": "plain_text"}],
-    }
-
-    this.http.post<any>(BASE_URL + '/comment', body, {headers}).subscribe(d => {
-    })
+        this.http.post<any>(BASE_URL + '/comment', body, {headers}).subscribe(d => {
+        })*/
   }
 
   //<<<<<<<<<<<<<<<<<<<<<<<Local Storage and Favourites>>>>>>>>>>>>>>>>>>>>>>>>>>
