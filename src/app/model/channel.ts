@@ -5,5 +5,5 @@ export interface Channel {
   logo: string;
   banner: string;
   video_id: number;
-  isSubscribed:boolean;
+  isSubscribed: boolean;
 }

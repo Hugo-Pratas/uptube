@@ -32,7 +32,7 @@ export class UpTubeServiceService {
   }
 
   getApiRoute() {
-    return BASE_URL;
+    return "https://dev-testeuptube.pantheonsite.io";
   }
 
   // <<<<<<<<<<<<<<<<<<<<<<<----- VIDEOS ----->>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -74,7 +74,7 @@ export class UpTubeServiceService {
 
   getVideosIdbyTagName(tag_name: string): Promise<number[]> {
     return new Promise((resolve, reject) => {
-      this.http.get(BASE_URL + "/api/tag/" + tag_name).subscribe(tagsData => {
+      this.http.get(BASE_URL + "/videos/tag/" + tag_name).subscribe(tagsData => {
         let videos_id: number[] = [];
         for (const tag of <any[]>tagsData) {
           videos_id.push(tag.video_id)
@@ -86,7 +86,7 @@ export class UpTubeServiceService {
 
   getVideosIdbyTagId(tag_id: number): Promise<number[]> {
     return new Promise((resolve, reject) => {
-      this.http.get(BASE_URL + "/api/tagid/" + tag_id).subscribe(tagsData => {
+      this.http.get(BASE_URL + "/videos/tagid/" + tag_id).subscribe(tagsData => {
         let videos_id: number[] = [];
         for (const tag of <any[]>tagsData) {
           videos_id.push(tag.video_id)
@@ -109,7 +109,7 @@ export class UpTubeServiceService {
   getVideosFromIds(ids_videos: number[]): Promise<Video[]> { //need this to get video ordered by date from db
     return new Promise((resolve) => {
       let ids_string = ids_videos.join(",")
-      this.http.get(BASE_URL + "/video/" + ids_string).subscribe(apiJson => {
+      this.http.get(BASE_URL + "/videos/" + ids_string).subscribe(apiJson => {
         let videos = <Video[]>apiJson
         for (let video of videos) {
           video = this.sanitizeVideo(video)
@@ -236,6 +236,7 @@ export class UpTubeServiceService {
     return new Promise((resolve) => {
       this.http.get(BASE_URL + "/thematics/suggested").subscribe(apiJson => {
         let thematics = <iThematic[]>apiJson
+
         resolve(thematics[0])
       })
     })
@@ -409,17 +410,18 @@ export class UpTubeServiceService {
       "./assets/images/User_logos/8.jpg"]
   }
 
+  // @ts-ignore
   async getComments(type: string, id: number, page: number): Promise<Comment[]> {
     if (type === "video") {
-      type = "comment_video"
+      type = "/comment_video"
     } else if (type === "channel") {
-      type = "comment_channel"
+      type = "/comment_channel"
     } else {
       throw new Error("type value not valid")
     }
 
     return new Promise((resolve) => {
-      this.http.get(BASE_URL + "/api/" + type + "/" + id + "?page=" + page).subscribe(d => {
+      this.http.get(BASE_URL + type + "/" + id + "?page=" + page).subscribe(d => {
         let date = <Comment[]>d
         resolve(date)
       })
