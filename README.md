@@ -1,6 +1,7 @@
 # ProjectoFinal
 
-Este projecto foi o último desafio do nosso curso. Foi idealizado para utilizar uma API desenvolvida em DRUPAL. 
+Este projecto foi o último desafio do nosso curso. Foi idealizado para utilizar uma API desenvolvida em DRUPAL.
+
 **Importante!** -> O último commit que utiliza drupal como API é o 850f409f72d2541df105050de86df68ac1c09300 refente a 27/JAN deverá utilizar este commit para vizualizar o projecto em ambiente de teste ANGULAR com o comando NG SERVE. Posterior a esta versão o projecto foi mudado para executar com o node.js que podem encontrar no seguinte arquivo -> https://github.com/Kis121/node-Projecto
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
